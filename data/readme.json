@@ -1,0 +1,402 @@
+{
+    "title": "前端笔记",
+    "keywords": [
+        "前端",
+        "初级",
+        "前端开发",
+        "前端学习入门笔记",
+        "前端面试题",
+        "前端框架"
+    ],
+    "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+    "cover": "",
+    "order": "1,",
+    "mode": "home",
+    "body": "",
+    "count": 2,
+    "pageSize": 10,
+    "list": [
+        [
+            {
+                "title": "写在前面的话",
+                "keywords": [
+                    "前端",
+                    "初级",
+                    "教程"
+                ],
+                "desc": "我是一个前端开发者，而且是干了很长时间的前端。现在终于开始动手总结一下自己的学习经验了，出发点很简单，也许能帮到一个人，就算只帮到一个也算是完成了他的意义，自己这么多年的经验没有白费了",
+                "cover": "",
+                "publishDate": "2020-06-02T21:23:12.000Z",
+                "recommend": true,
+                "body": "<p>我是一个前端开发者，而且是干了很长时间的前端。现在终于开始动手总结一下自己的学习经验了，出发点很简单，也许能帮到一个人，就算只帮到一个也算是完成了他的意义，自己这么多年的经验没有白费了。而且我已经36岁了，干这个还不知道能干多久，自己也没有啥上进心，老婆、孩子、父母分隔两地，加上现在一顿叫嚣的程序员35岁的门槛。生活还得继续下去，也是趁机给自己一个了断吧。</p>\n<p>我给自己的学习过程定义是2个词：“草根派”和“跟随者”。所谓的草根就是从实践中一点一滴探索出来，以项目落地为目标。学习过程中缺乏系统思维和全局观。对应的反面就是学院派，学院派是更好的方式，最大的好处就是学院派能拿到更好的、高薪的offer。但是对于我自己而言这条路子不太适合我这种记吃不记打的性子。所以在后面的文章中，大部分是以真实的需求和代码来表达。代码肯定是经过验证的。再说说第二个词，跟随者。对于老前辈来说，应该都经历过jquery，prototype，dojo，mootools，extjs等一系列小伙子都没听过的框架，然后到现在vue和react横行天下。其实在一个时代创造这些流行的框架的大神们，才是真正的创造者，而对于我这样的人来说，用的最多的就是拿来主义，跟随流行去走，用这些大牛们创造的框架来解决实际的业务问题而已。而在实际业务中，人们所称赞的点，唯快而已，而快的真谛就是“庖丁解牛，唯手熟尔”。</p>\n<p>我最早的职业是“网页设计师”，所以在写代码的过程中，会看到大量的写法只是为了整齐和好看而已，但是从某个角度来说就是我理解的代码规范，加上eslint，尤其看不得黑框里面跑红字。顺便补充一句就是，如果熟练掌握了PS技能，也是提速的一个法门。</p>\n<p>然后说一点学习过程吧。这里东西肯定会更适合一些代码基础的朋友，比如知道怎么写css，怎么写html，会写一点点js。不同的人有不同的学习方式，有人喜欢看书，有人喜欢看视频，有人喜欢看代码，有人喜欢报一个培训班，但是写代码就和啪啪啪一样，看尽日本动作片，不如自己实操一回，感觉大不一样。所以最好的方式还是老老实实拿起电脑敲代码。现代的IDE，越来越只能，只需要输入2-3个字母，就是出来你想要的东西，但是一旦离开了IDE就记不住了，我建议的方法就是用记事本来敲代码，敲上一个月，最起码常用的80%的功能能记住了，另外的20%估计很少用到，用到再说也行。分离出常用的属性并且记住，也是提升效率的一大法宝。</p>\n<p>也有人推荐去看源码，但是能看懂源码的人，本身就已经是高级工程师，专家级别了。反正我是看不懂，一看就发懵。感觉就像大家都知道学习英语有用，如果能把牛津大字典背全，那就更牛逼了。但是我这样的的普通人，没毅力，没志气，所以到现在也只能懂一点点，能猜一猜文档的意思而已。网上推荐的犀牛书，高级JavaScript设计，JavaScript详解第三版，我都买了，只不过现在还带着包装在书架上吃灰。</p>\n<p>由此看来，我写的这些个玩意不一定都对，但是我尽量挑我有把握的写，每次一个点，一段代码。不对的地方，请指出来，说不定我就改了，说不定也不改。管他呢，谁在乎呢？只是思维模式不同而已，看待事物的角度不同而已。</p>\n<p>完了！！</p>\n",
+                "navigation": [],
+                "filename": "xie-zai-qian-mian-de-hua",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "frontend",
+                    "css"
+                ]
+            },
+            {
+                "title": "说说什么是前端",
+                "keywords": [
+                    "前端",
+                    "浏览器",
+                    "node"
+                ],
+                "desc": "首先我说的是一家之言，我也不是专家教授，意思就是这个是我这么认为，没有什么好反驳的，也没啥好辩论的，没意思，还不如去看几页金庸的武侠小说。",
+                "cover": "",
+                "publishDate": "2020-04-15T23:20:12.000Z",
+                "recommend": true,
+                "body": "<p>首先我说的是一家之言，我也不是专家教授，意思就是这个是我这么认为，没有什么好反驳的，也没啥好辩论的，没意思，还不如去看几页金庸的武侠小说。</p>\n<p>最近几年流行一个叫法叫“大前端”，也不知道咋想的，一直不停的在拓展前端开发的边界。大致上说凡是能在屏幕上看到的都是大前端的范畴，因为凡是能看到的都能用js来实现，服务端跑个node，eletron生成个桌面应用，react native，weex生成的app，基本上前端，js能干掉一切。想不通，是嫌弃自己的加班时间不够长吗？</p>\n<p>回归到个人的成长经验来看，前端实际上只是连接设计和数据的一座桥，介于感性和理性之间。再简单点就只是基于BS架构的程序而已，十几年从未变化。所有看到的一切都需要跑在浏览器里面。由此得出第一个结论，js需要运行在一个容器里面，这里为毛只说js，不说css和html，那就要结合webpack来看，所有的东西最后都可以打包成js，万物皆js。补一句就是nodejs，就是js运行在node环境里面。开发nodejs就得装一个node，就像你要看网页，就需要先装一个浏览器。electron大约是封装了一个开源的chromium进去了。</p>\n<p>最后，js大部分时间是运行在浏览器和node中，现在大部分的前端是基于浏览器开发，node是作为辅助工具来使用，这个后面再详细说。</p>\n<p>下一站说说html，css，js这个三者的关系，这个最喜欢，复制粘贴就行，我最擅长的就是基于cv开发。（ctrl+从，ctrl+v开发）。</p>\n<p>这两篇为啥要说这些乱七八糟的东西呢？是因为对话交流的过程首先要有共识，跟学语文，学英语一样，首先得认汉字，认字母。先有一个大概的共识，目标是啥，怎么做，怎么做更好。基本上已经把前端开发包含的东西说出来。<code>js</code>，<code>html</code>，<code>css</code>，<code>webpack</code>，<code>node</code>，<code>vue</code>，<code>react</code>，<code>angular</code>（这个是硬凑数），<code>typescript</code>（这个重要吗？不知道），<code>chrome</code></p>\n",
+                "navigation": [],
+                "filename": "shuo-shuo-shi-mo-shi-qian-duan",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "frontend",
+                    "css"
+                ]
+            }
+        ],
+        [
+            {
+                "title": "中午呢1",
+                "keywords": [
+                    "前端",
+                    "初级",
+                    "教程"
+                ],
+                "desc": "这份HTML初级教程假设你没有任何HTML和CSS的知识背景。学习基本的HTML十分容易，只要你能从头到尾按照每一步骤来实践。最后我们会将每一步综合起来，以便我们继续学习CSS初级指南。",
+                "cover": "",
+                "publishDate": "2020-08-30T19:46:12.000Z",
+                "recommend": false,
+                "body": "<h2 id=\"%E5%88%86%E7%B1%BB1\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB1\">¶</a> 分类1</h2>\n<pre><code class=\"language-javascript\">const a = 1;\nconsole.log(a)\n</code></pre>\n<h2 id=\"%E5%88%86%E7%B1%BB2\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB2\">¶</a> 分类2</h2>\n<h3 id=\"%E5%88%86%E7%B1%BB3\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB3\">¶</a> 分类3</h3>\n",
+                "navigation": [
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB1",
+                        "title": "分类1"
+                    },
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB2",
+                        "title": "分类2"
+                    },
+                    {
+                        "tag": "h3",
+                        "slug": "%E5%88%86%E7%B1%BB3",
+                        "title": "分类3"
+                    }
+                ],
+                "filename": "zhong-wu-ni-1",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "zhong-wen"
+                ]
+            },
+            {
+                "title": "html标签学习",
+                "keywords": [
+                    "前端",
+                    "初级",
+                    "教程"
+                ],
+                "desc": "这份HTML初级教程假设你没有任何HTML和CSS的知识背景。学习基本的HTML十分容易，只要你能从头到尾按照每一步骤来实践。最后我们会将每一步综合起来，以便我们继续学习CSS初级指南。",
+                "cover": "",
+                "publishDate": "2020-08-30T19:46:12.000Z",
+                "recommend": false,
+                "body": "<h2 id=\"%E5%88%86%E7%B1%BB1\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB1\">¶</a> 分类1</h2>\n<pre><code class=\"language-javascript\">const a = 1;\nconsole.log(a)\n</code></pre>\n<h2 id=\"%E5%88%86%E7%B1%BB2\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB2\">¶</a> 分类2</h2>\n<h3 id=\"%E5%88%86%E7%B1%BB3\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB3\">¶</a> 分类3</h3>\n",
+                "navigation": [
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB1",
+                        "title": "分类1"
+                    },
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB2",
+                        "title": "分类2"
+                    },
+                    {
+                        "tag": "h3",
+                        "slug": "%E5%88%86%E7%B1%BB3",
+                        "title": "分类3"
+                    }
+                ],
+                "filename": "test",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "frontend",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "html标签学习2",
+                "keywords": [
+                    "前端2",
+                    "初级2",
+                    "教程2"
+                ],
+                "desc": "这份HTML初级教程假设你没有任何HTML和CSS的知识背景。学习基本的HTML十分容易，只要你能从头到尾按照每一步骤来实践。最后我们会将每一步综合起来，以便我们继续学习CSS初级指南。",
+                "cover": "",
+                "publishDate": "2020-08-30T19:46:12.000Z",
+                "recommend": false,
+                "body": "<h2 id=\"%E5%88%86%E7%B1%BB11\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB11\">¶</a> 分类11</h2>\n<pre><code class=\"language-javascript\">const a = 1;\nconsole.log(a)\n</code></pre>\n<h2 id=\"%E5%88%86%E7%B1%BB22\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB22\">¶</a> 分类22</h2>\n<h3 id=\"%E5%88%86%E7%B1%BB32\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB32\">¶</a> 分类32</h3>\n",
+                "navigation": [
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB11",
+                        "title": "分类11"
+                    },
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB22",
+                        "title": "分类22"
+                    },
+                    {
+                        "tag": "h3",
+                        "slug": "%E5%88%86%E7%B1%BB32",
+                        "title": "分类32"
+                    }
+                ],
+                "filename": "test2",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "frontend",
+                    "javascript"
+                ]
+            },
+            {
+                "title": "html标签学习----",
+                "keywords": [
+                    "前端",
+                    "初级",
+                    "教程"
+                ],
+                "desc": "这份HTML初级教程假设你没有任何HTML和CSS的知识背景。学习基本的HTML十分容易，只要你能从头到尾按照每一步骤来实践。最后我们会将每一步综合起来，以便我们继续学习CSS初级指南。",
+                "cover": "",
+                "publishDate": "2020-08-30T19:46:12.000Z",
+                "recommend": false,
+                "orderIndex": 3,
+                "body": "<h2 id=\"%E5%88%86%E7%B1%BB1\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB1\">¶</a> 分类1</h2>\n<pre><code class=\"language-javascript\">const a = 1;\nconsole.log(a)\n</code></pre>\n<h2 id=\"%E5%88%86%E7%B1%BB2\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB2\">¶</a> 分类2</h2>\n<h3 id=\"%E5%88%86%E7%B1%BB3\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB3\">¶</a> 分类3</h3>\n",
+                "navigation": [
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB1",
+                        "title": "分类1"
+                    },
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB2",
+                        "title": "分类2"
+                    },
+                    {
+                        "tag": "h3",
+                        "slug": "%E5%88%86%E7%B1%BB3",
+                        "title": "分类3"
+                    }
+                ],
+                "filename": "test",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "frontend",
+                    "html"
+                ]
+            },
+            {
+                "title": "html标签学习2",
+                "keywords": [
+                    "前端2",
+                    "初级2",
+                    "教程2"
+                ],
+                "desc": "这份HTML初级教程假设你没有任何HTML和CSS的知识背景。学习基本的HTML十分容易，只要你能从头到尾按照每一步骤来实践。最后我们会将每一步综合起来，以便我们继续学习CSS初级指南。",
+                "cover": "",
+                "publishDate": "2020-08-30T19:46:12.000Z",
+                "recommend": false,
+                "body": "<h2 id=\"%E5%88%86%E7%B1%BB11\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB11\">¶</a> 分类11</h2>\n<pre><code class=\"language-javascript\">const a = 1;\nconsole.log(a)\n</code></pre>\n<h2 id=\"%E5%88%86%E7%B1%BB22\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB22\">¶</a> 分类22</h2>\n<h3 id=\"%E5%88%86%E7%B1%BB32\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB32\">¶</a> 分类32</h3>\n",
+                "navigation": [
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB11",
+                        "title": "分类11"
+                    },
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB22",
+                        "title": "分类22"
+                    },
+                    {
+                        "tag": "h3",
+                        "slug": "%E5%88%86%E7%B1%BB32",
+                        "title": "分类32"
+                    }
+                ],
+                "filename": "test2",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "frontend",
+                    "html"
+                ]
+            },
+            {
+                "title": "html标签学习2",
+                "keywords": [
+                    "前端2",
+                    "初级2",
+                    "教程2"
+                ],
+                "desc": "这份HTML初级教程假设你没有任何HTML和CSS的知识背景。学习基本的HTML十分容易，只要你能从头到尾按照每一步骤来实践。最后我们会将每一步综合起来，以便我们继续学习CSS初级指南。",
+                "cover": "",
+                "publishDate": "2020-08-30T19:46:12.000Z",
+                "recommend": false,
+                "body": "<h2 id=\"%E5%88%86%E7%B1%BB11\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB11\">¶</a> 分类11</h2>\n<pre><code class=\"language-javascript\">const a = 1;\nconsole.log(a)\n</code></pre>\n<h2 id=\"%E5%88%86%E7%B1%BB22\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB22\">¶</a> 分类22</h2>\n<h3 id=\"%E5%88%86%E7%B1%BB32\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB32\">¶</a> 分类32</h3>\n",
+                "navigation": [
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB11",
+                        "title": "分类11"
+                    },
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB22",
+                        "title": "分类22"
+                    },
+                    {
+                        "tag": "h3",
+                        "slug": "%E5%88%86%E7%B1%BB32",
+                        "title": "分类32"
+                    }
+                ],
+                "filename": "test00",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "frontend",
+                    "css"
+                ]
+            },
+            {
+                "title": "html标签学习----",
+                "keywords": [
+                    "前端",
+                    "初级",
+                    "教程"
+                ],
+                "desc": "这份HTML初级教程假设你没有任何HTML和CSS的知识背景。学习基本的HTML十分容易，只要你能从头到尾按照每一步骤来实践。最后我们会将每一步综合起来，以便我们继续学习CSS初级指南。",
+                "cover": "",
+                "publishDate": "2020-08-30T19:46:12.000Z",
+                "recommend": false,
+                "orderIndex": 3,
+                "body": "<h2 id=\"%E5%88%86%E7%B1%BB1\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB1\">¶</a> 分类1</h2>\n<pre><code class=\"language-javascript\">const a = 1;\nconsole.log(a)\n</code></pre>\n<h2 id=\"%E5%88%86%E7%B1%BB2\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB2\">¶</a> 分类2</h2>\n<h3 id=\"%E5%88%86%E7%B1%BB3\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB3\">¶</a> 分类3</h3>\n",
+                "navigation": [
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB1",
+                        "title": "分类1"
+                    },
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB2",
+                        "title": "分类2"
+                    },
+                    {
+                        "tag": "h3",
+                        "slug": "%E5%88%86%E7%B1%BB3",
+                        "title": "分类3"
+                    }
+                ],
+                "filename": "test11",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "frontend",
+                    "css"
+                ]
+            },
+            {
+                "title": "html标签学习2",
+                "keywords": [
+                    "前端2",
+                    "初级2",
+                    "教程2"
+                ],
+                "desc": "这份HTML初级教程假设你没有任何HTML和CSS的知识背景。学习基本的HTML十分容易，只要你能从头到尾按照每一步骤来实践。最后我们会将每一步综合起来，以便我们继续学习CSS初级指南。",
+                "cover": "",
+                "publishDate": "2020-08-30T19:46:12.000Z",
+                "recommend": false,
+                "body": "<h2 id=\"%E5%88%86%E7%B1%BB11\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB11\">¶</a> 分类11</h2>\n<pre><code class=\"language-javascript\">const a = 1;\nconsole.log(a)\n</code></pre>\n<h2 id=\"%E5%88%86%E7%B1%BB22\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB22\">¶</a> 分类22</h2>\n<h3 id=\"%E5%88%86%E7%B1%BB32\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB32\">¶</a> 分类32</h3>\n",
+                "navigation": [
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB11",
+                        "title": "分类11"
+                    },
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB22",
+                        "title": "分类22"
+                    },
+                    {
+                        "tag": "h3",
+                        "slug": "%E5%88%86%E7%B1%BB32",
+                        "title": "分类32"
+                    }
+                ],
+                "filename": "test22",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "frontend",
+                    "css"
+                ]
+            },
+            {
+                "title": "html标签学习----",
+                "keywords": [
+                    "前端",
+                    "初级",
+                    "教程"
+                ],
+                "desc": "这份HTML初级教程假设你没有任何HTML和CSS的知识背景。学习基本的HTML十分容易，只要你能从头到尾按照每一步骤来实践。最后我们会将每一步综合起来，以便我们继续学习CSS初级指南。",
+                "cover": "",
+                "publishDate": "2020-08-30T19:46:12.000Z",
+                "recommend": false,
+                "orderIndex": 3,
+                "body": "<h2 id=\"%E5%88%86%E7%B1%BB1\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB1\">¶</a> 分类1</h2>\n<pre><code class=\"language-javascript\">const a = 1;\nconsole.log(a)\n</code></pre>\n<h2 id=\"%E5%88%86%E7%B1%BB2\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB2\">¶</a> 分类2</h2>\n<h3 id=\"%E5%88%86%E7%B1%BB3\"><a class=\"header-anchor\" href=\"#%E5%88%86%E7%B1%BB3\">¶</a> 分类3</h3>\n",
+                "navigation": [
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB1",
+                        "title": "分类1"
+                    },
+                    {
+                        "tag": "h2",
+                        "slug": "%E5%88%86%E7%B1%BB2",
+                        "title": "分类2"
+                    },
+                    {
+                        "tag": "h3",
+                        "slug": "%E5%88%86%E7%B1%BB3",
+                        "title": "分类3"
+                    }
+                ],
+                "filename": "test33",
+                "mode": "normal",
+                "order": 999,
+                "filepath": [
+                    "frontend",
+                    "css"
+                ]
+            }
+        ]
+    ],
+    "filepath": []
+}

@@ -1,0 +1,308 @@
+{
+    "list": [
+        {
+            "_id": "frontend",
+            "title": "前端笔记",
+            "keywords": [
+                "前端",
+                "初级",
+                "前端开发",
+                "前端学习入门笔记",
+                "前端面试题",
+                "前端框架"
+            ],
+            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+            "cover": "",
+            "order": 1,
+            "body": "",
+            "mode": "normal",
+            "count": 0,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "frontend"
+            ],
+            "children": [
+                {
+                    "_id": "frontend/javascript",
+                    "title": "javascript",
+                    "keywords": [
+                        "js",
+                        "es6",
+                        "基础入门",
+                        "手册",
+                        "javascript"
+                    ],
+                    "desc": "我自己学习JavaScript的笔记，主要内容参考自《JavaScript权威指南》，部分内容来自互联网。",
+                    "cover": "",
+                    "order": 1,
+                    "mode": "normal",
+                    "body": "",
+                    "count": 0,
+                    "pageSize": 10,
+                    "list": [],
+                    "filepath": [
+                        "frontend",
+                        "javascript"
+                    ],
+                    "children": [
+                        {
+                            "_id": "frontend/javascript/zhong-wen",
+                            "title": "前端笔记",
+                            "keywords": [
+                                "前端",
+                                "初级",
+                                "前端开发",
+                                "前端学习入门笔记",
+                                "前端面试题",
+                                "前端框架"
+                            ],
+                            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+                            "cover": "",
+                            "order": 1,
+                            "body": "",
+                            "mode": "normal",
+                            "count": 0,
+                            "pageSize": 10,
+                            "list": [],
+                            "filepath": [
+                                "frontend",
+                                "javascript",
+                                "zhong-wen"
+                            ],
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "_id": "frontend/css",
+                    "title": "CSS笔记",
+                    "keywords": [
+                        "CSS",
+                        "CSS3",
+                        "学习CSS",
+                        "CSS规则",
+                        "CSS教程"
+                    ],
+                    "desc": "一些css基础学习笔记，也会收藏一些经典的CSS使用技巧。",
+                    "cover": "",
+                    "order": 2,
+                    "body": "",
+                    "mode": "normal",
+                    "count": 0,
+                    "pageSize": 10,
+                    "list": [],
+                    "filepath": [
+                        "frontend",
+                        "css"
+                    ],
+                    "children": []
+                },
+                {
+                    "_id": "frontend/html",
+                    "title": "html",
+                    "keywords": [
+                        "html5",
+                        "html",
+                        "html教程",
+                        "html模板",
+                        "html表单"
+                    ],
+                    "desc": "了解HTML基础知识、HTML代码规范、HTML标签列表。学习HTML5新版本特性，使用 HTML 来建立自己的 WEB 站点。",
+                    "cover": "",
+                    "order": 3,
+                    "body": "",
+                    "mode": "normal",
+                    "count": 0,
+                    "pageSize": 10,
+                    "list": [],
+                    "filepath": [
+                        "frontend",
+                        "html"
+                    ],
+                    "children": []
+                }
+            ]
+        },
+        {
+            "_id": "zhong-wen",
+            "title": "前端笔记",
+            "keywords": [
+                "前端",
+                "初级",
+                "前端开发",
+                "前端学习入门笔记",
+                "前端面试题",
+                "前端框架"
+            ],
+            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+            "cover": "",
+            "order": 1,
+            "body": "",
+            "mode": "normal",
+            "count": 0,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "zhong-wen"
+            ],
+            "children": []
+        }
+    ],
+    "maps": {
+        "homepage": {
+            "title": "前端笔记",
+            "keywords": [
+                "前端",
+                "初级",
+                "前端开发",
+                "前端学习入门笔记",
+                "前端面试题",
+                "前端框架"
+            ],
+            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+            "cover": "",
+            "order": "1,",
+            "mode": "home",
+            "body": "",
+            "count": 0,
+            "pageSize": 10,
+            "list": [],
+            "filepath": []
+        },
+        "frontend": {
+            "title": "前端笔记",
+            "keywords": [
+                "前端",
+                "初级",
+                "前端开发",
+                "前端学习入门笔记",
+                "前端面试题",
+                "前端框架"
+            ],
+            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+            "cover": "",
+            "order": 1,
+            "body": "",
+            "mode": "normal",
+            "count": 0,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "frontend"
+            ]
+        },
+        "zhong-wen": {
+            "title": "前端笔记",
+            "keywords": [
+                "前端",
+                "初级",
+                "前端开发",
+                "前端学习入门笔记",
+                "前端面试题",
+                "前端框架"
+            ],
+            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+            "cover": "",
+            "order": 1,
+            "body": "",
+            "mode": "normal",
+            "count": 0,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "zhong-wen"
+            ]
+        },
+        "frontend/css": {
+            "title": "CSS笔记",
+            "keywords": [
+                "CSS",
+                "CSS3",
+                "学习CSS",
+                "CSS规则",
+                "CSS教程"
+            ],
+            "desc": "一些css基础学习笔记，也会收藏一些经典的CSS使用技巧。",
+            "cover": "",
+            "order": 2,
+            "body": "",
+            "mode": "normal",
+            "count": 0,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "frontend",
+                "css"
+            ]
+        },
+        "frontend/html": {
+            "title": "html",
+            "keywords": [
+                "html5",
+                "html",
+                "html教程",
+                "html模板",
+                "html表单"
+            ],
+            "desc": "了解HTML基础知识、HTML代码规范、HTML标签列表。学习HTML5新版本特性，使用 HTML 来建立自己的 WEB 站点。",
+            "cover": "",
+            "order": 3,
+            "body": "",
+            "mode": "normal",
+            "count": 0,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "frontend",
+                "html"
+            ]
+        },
+        "frontend/javascript": {
+            "title": "javascript",
+            "keywords": [
+                "js",
+                "es6",
+                "基础入门",
+                "手册",
+                "javascript"
+            ],
+            "desc": "我自己学习JavaScript的笔记，主要内容参考自《JavaScript权威指南》，部分内容来自互联网。",
+            "cover": "",
+            "order": 1,
+            "mode": "normal",
+            "body": "",
+            "count": 0,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "frontend",
+                "javascript"
+            ]
+        },
+        "frontend/javascript/zhong-wen": {
+            "title": "前端笔记",
+            "keywords": [
+                "前端",
+                "初级",
+                "前端开发",
+                "前端学习入门笔记",
+                "前端面试题",
+                "前端框架"
+            ],
+            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+            "cover": "",
+            "order": 1,
+            "body": "",
+            "mode": "normal",
+            "count": 0,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "frontend",
+                "javascript",
+                "zhong-wen"
+            ]
+        }
+    }
+}
