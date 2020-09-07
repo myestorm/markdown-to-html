@@ -1,0 +1,83 @@
+{
+    "about.html": {
+        "scripts": [
+            "scripts/vendor-37d1ec7c43183a0b1bcb.js",
+            "scripts/about-37d1ec7c43183a0b1bcb.js"
+        ],
+        "styles": [
+            "styles/vendor-9.37d1ec7c43183a0b1bcb.css"
+        ]
+    },
+    "categories.html": {
+        "scripts": [
+            "scripts/vendor-37d1ec7c43183a0b1bcb.js",
+            "scripts/categories-37d1ec7c43183a0b1bcb.js"
+        ],
+        "styles": [
+            "styles/vendor-9.37d1ec7c43183a0b1bcb.css"
+        ]
+    },
+    "collection_list.html": {
+        "scripts": [
+            "scripts/vendor-37d1ec7c43183a0b1bcb.js",
+            "scripts/collection_list-37d1ec7c43183a0b1bcb.js"
+        ],
+        "styles": [
+            "styles/vendor-9.37d1ec7c43183a0b1bcb.css"
+        ]
+    },
+    "collection.html": {
+        "scripts": [
+            "scripts/vendor-37d1ec7c43183a0b1bcb.js",
+            "scripts/collection-37d1ec7c43183a0b1bcb.js"
+        ],
+        "styles": [
+            "styles/vendor-9.37d1ec7c43183a0b1bcb.css"
+        ]
+    },
+    "detail.html": {
+        "scripts": [
+            "scripts/vendor-37d1ec7c43183a0b1bcb.js",
+            "scripts/detail-37d1ec7c43183a0b1bcb.js"
+        ],
+        "styles": [
+            "styles/vendor-9.37d1ec7c43183a0b1bcb.css"
+        ]
+    },
+    "index.html": {
+        "scripts": [
+            "scripts/vendor-37d1ec7c43183a0b1bcb.js",
+            "scripts/index-37d1ec7c43183a0b1bcb.js"
+        ],
+        "styles": [
+            "styles/vendor-9.5970c2899e7af07b9239.css"
+        ]
+    },
+    "search.html": {
+        "scripts": [
+            "scripts/vendor-37d1ec7c43183a0b1bcb.js",
+            "scripts/search-37d1ec7c43183a0b1bcb.js"
+        ],
+        "styles": [
+            "styles/vendor-9.37d1ec7c43183a0b1bcb.css"
+        ]
+    },
+    "tags.html": {
+        "scripts": [
+            "scripts/vendor-37d1ec7c43183a0b1bcb.js",
+            "scripts/tags-37d1ec7c43183a0b1bcb.js"
+        ],
+        "styles": [
+            "styles/vendor-9.37d1ec7c43183a0b1bcb.css"
+        ]
+    },
+    "timeline.html": {
+        "scripts": [
+            "scripts/vendor-37d1ec7c43183a0b1bcb.js",
+            "scripts/timeline-37d1ec7c43183a0b1bcb.js"
+        ],
+        "styles": [
+            "styles/vendor-9.37d1ec7c43183a0b1bcb.css"
+        ]
+    }
+}

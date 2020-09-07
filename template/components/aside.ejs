@@ -1,0 +1,40 @@
+<aside class="totonoo--aside">
+  <div class="side-nav aside-item">
+    <h2><i class="iconfont icon-file-open"></i>文章分类 <small>Category</small></h2>
+    <nav class="side-nav-list">
+      <%
+      const _categories = aside.categories || []
+      const html = []
+      const forEachTree = (data = [], level = 0) => {
+        html.push('<ul>')
+        data.forEach(item => {
+          html.push(`<li><a href="${global.mkArticleLink(item.filepath, 'index')}" class="${level == 0 ? 'first-level' : ''}">${item.title}</a>`)
+          if (item.children && item.children.length > 0){
+            forEachTree(item.children, level++)
+          }
+          html.push('</li>')
+        })
+        html.push('</ul>')
+      }
+      forEachTree(_categories)
+      %>
+      <%- html.join('') %>
+    </nav>
+  </div>
+  <div class="side-nav aside-item">
+    <h2><i class="iconfont icon-discount"></i>文章标签 <small>Tags</small></h2>
+    <div class="side-tag-list">
+      <% 
+      const _tags = aside.tags || []
+      const maxLen = _tags.length > 20 ? 20 : _tags.length
+      for (let i = 0; i < maxLen; i++) {
+        const item = _tags[i]
+      %>
+      <a href="<%= global.mkArticleLink(item.filepath, item.filename) %>"><%= item.title %> <small><%= item.count %></small></a>
+      <% } %>
+    </div>
+  </div>
+  <div class="gongzonghao">
+    <img src="./assets/resource/images/qrcode.png">
+  </div>
+</aside>

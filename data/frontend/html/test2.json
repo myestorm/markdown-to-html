@@ -33,5 +33,6 @@
     "filepath": [
         "frontend",
         "html"
-    ]
+    ],
+    "catalogueName": "html"
 }

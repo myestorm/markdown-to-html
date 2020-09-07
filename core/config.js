@@ -1,7 +1,9 @@
 const config = {
   host: '/', // 网站
   sitename: 'totonoo 前端笔记', // 站点名称
+  beian: '粤ICP备12041241号', // 备案号
   www: 'www', // 站点根目录
+  assets: 'assets', // 静态资源目录
   data: 'data', // 数据存储目录
   documents: 'documents', // markdown文档目录
   defaultMD: 'readme.md', // 目录的配置文件

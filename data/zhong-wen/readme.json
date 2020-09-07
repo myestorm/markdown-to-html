@@ -1,5 +1,5 @@
 {
-    "title": "前端笔记",
+    "title": "前端笔记22",
     "keywords": [
         "前端",
         "初级",
@@ -50,7 +50,8 @@
             "order": 999,
             "filepath": [
                 "zhong-wen"
-            ]
+            ],
+            "catalogueName": "前端笔记22"
         }
     ],
     "filepath": [

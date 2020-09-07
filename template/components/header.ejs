@@ -1,0 +1,47 @@
+<header class="totonoo--top-header">
+  <div class="logo">
+    <a href="/">
+      <i class="logo-icon"></i>
+      <h1>Totonoo<small>.com</small></h1>
+    </a>
+  </div>
+  <nav class="totonoo--top-nav">
+    <ul>
+      <%
+        const navs = [{
+          title: '首页',
+          path: '/',
+          icon: 'icon-home'
+        }, {
+          title: '文集',
+          path: '/collection_list.html',
+          icon: 'icon-docs'
+        }, {
+          title: '时光轴',
+          path: '/timeline.html',
+          icon: 'icon-time'
+        }, {
+          title: '关于我',
+          path: '/about.html',
+          icon: 'icon-share'
+        }]
+        navs.forEach((item, index) => {
+      %>
+      <li class="item<%= index == header.current ? ' current' : '' %>">
+        <a href="<%= item.path %>">
+          <i class="iconfont <%= item.icon %>"></i>
+          <%= item.title %>
+        </a>
+      </li>
+      <% 
+        })
+      %>
+    </ul>
+  </nav>
+  <div class="totonoo--top-search" onclick="window.location.href = 'search.html'">
+    <form>
+      <input type="text" placeholder="试试搜索功能">
+      <i class="iconfont icon-search"></i>
+    </form>
+  </div>
+</header>

@@ -8,8 +8,20 @@ const pinyin = require('../utils/pinyin')
 const config = require('../config')
 const docRoot = joinPath(getRoot(), config.documents)
 
+// 所有分类信息
+let tree = null
 const allArticle = []
 const allTags = {}
+/**
+ * 读取分类信息
+ */
+// 读取数据
+const readTreeData = () => {
+  return src([`${config.data}/tree.json`])
+    .pipe(transformPipe((file) => {
+      tree = JSON.parse(file.contents.toString())
+    }))
+}
 /**
  * 生成所有文章的数据
  */
@@ -44,6 +56,7 @@ const generateArticle = () => {
         data.order = 999
       }
       data.filepath = arr
+      data.catalogueName = tree.maps[arr.join('/')].title
       allArticle.push(data)
       file.dirname = config.documents + '/' + arr.join('/')
       file.basename = data.filename
@@ -154,6 +167,7 @@ const generateTagsData = () => {
 }
 
 module.exports = series(
+  readTreeData,
   generateArticle,
   parallel(
     updateCatalogue,

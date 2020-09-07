@@ -1,5 +1,5 @@
 {
-    "title": "javascript",
+    "title": "javascript444",
     "keywords": [
         "js",
         "es6",
@@ -50,7 +50,8 @@
             "filepath": [
                 "frontend",
                 "javascript"
-            ]
+            ],
+            "catalogueName": "javascript444"
         },
         {
             "title": "html标签学习2",
@@ -87,7 +88,8 @@
             "filepath": [
                 "frontend",
                 "javascript"
-            ]
+            ],
+            "catalogueName": "javascript444"
         },
         {
             "title": "中午呢1",
@@ -125,7 +127,8 @@
                 "frontend",
                 "javascript",
                 "zhong-wen"
-            ]
+            ],
+            "catalogueName": "前端笔记555"
         }
     ],
     "filepath": [

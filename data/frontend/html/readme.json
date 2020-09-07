@@ -51,7 +51,8 @@
             "filepath": [
                 "frontend",
                 "html"
-            ]
+            ],
+            "catalogueName": "html"
         },
         {
             "title": "html标签学习2",
@@ -88,7 +89,8 @@
             "filepath": [
                 "frontend",
                 "html"
-            ]
+            ],
+            "catalogueName": "html"
         }
     ],
     "filepath": [

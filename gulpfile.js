@@ -4,6 +4,7 @@ const config = require('./core/config')
 
 const generateCatalogueTask = require('./core/tasks/generateCatalogue')
 const generateArticleTask = require('./core/tasks/generateArticle')
+const generateHtmlTask = require('./core/tasks/generateHtml')
 
 // 删除所有的生成目录
 const delDirTask = () => {
@@ -15,5 +16,8 @@ exports.default = series(
   series(
     generateCatalogueTask,
     generateArticleTask
+  ),
+  parallel(
+    generateHtmlTask
   )
 )
