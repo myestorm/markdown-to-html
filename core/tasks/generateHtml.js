@@ -89,7 +89,7 @@ const generateIndexHtml = () => {
       file.contents = Buffer.from(html)
     }))
     .pipe(rename({ extname: '.html' }))
-    // .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(dest(`${config.www}/`))
 }
 module.exports = series(

@@ -58,12 +58,12 @@
               %>
               <div class="item">
                 <h3 class="title">
-                  <a href="/detail.html"><%= item.title%></a>
+                  <a href="<%= global.mkArticleLink(item.filepath, item.filename) %>"><%= item.title%></a>
                 </h3>
                 <p class="desc"><%= item.desc%>...</p>
                 <div class="info">
                   <ul>
-                    <li><i class="iconfont icon-folder-close"></i><a href="/categories.html">基础教程</a></li>
+                    <li><i class="iconfont icon-folder-close"></i><a href="<%= global.mkArticleLink(item.filepath, 'index') %>"><%= item.catalogueName %></a></li>
                     <li><i class="iconfont icon-time"></i><%= global.formatDatetime(item.publishDate) %></li>
                     <li>
                       <i class="iconfont icon-discount"></i>
@@ -71,7 +71,7 @@
                       const _keywords = item.keywords || []
                       _keywords.forEach(keyword => {
                       %>
-                      <a href="/tags.html"><%= keyword %></a>
+                      <a href="<%= global.mkTagsLink(keyword) %>"><%= keyword %></a>
                       <% }) %>                      
                     </li>
                   </ul>

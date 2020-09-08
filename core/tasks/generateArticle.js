@@ -120,9 +120,9 @@ const updateCatalogue = () => {
     let res = []
     if (filepath.length === 0) { // 首页
       const recommend = allArticle.filter(item => item.recommend)
-      const newest = allArticle.slice(0, 9)
-      res[0] = recommend
-      res[1] = newest
+      const newest = allArticle.slice(0, 10)
+      res[1] = recommend
+      res[0] = newest
     } else {
       const str = '\/\/\/'
       filepath = filepath.join(str) 
@@ -133,14 +133,48 @@ const updateCatalogue = () => {
     }
     return res
   }
+  const findTreeListByFilepath = (filepath) => {
+    let res = tree.list
+    let len = filepath.length
+    if (len === 1) {
+      res = res.find(item => item._id === filepath[0])
+    } else {
+      for (let i = 0; i < len; i++) {
+        if (i === 0) {
+          res = res.find(item => item._id === filepath[0]).children
+        } else if (i === len - 1) {
+          res = res.find(item => item._id === filepath.join('/'))
+        } else {
+          res = res.find(item => item._id === filepath.slice(0, i+1).join('/')).children
+        }
+      }
+    }
+    return res
+  }
   return src(`${config.data}/**/${filename}`)
     .pipe(transformPipe((file) => {
       const contents = JSON.parse(file.contents.toString())
       const list = findArticleByPath(contents.filepath)
       contents.list = list
       contents.count = list.length
+      if (contents.filepath.length > 0) {
+        tree.maps[contents.filepath.join('/')].count = contents.count
+        findTreeListByFilepath(contents.filepath).count = contents.count
+      }
       file.contents = Buffer.from(stringify(contents))
     }))
+    .pipe(dest(`./${config.data}`))
+}
+
+/**
+ * 更新tree数据
+ */
+const updateTreeData = () => {
+  // console.log(tree)
+  return addVinylFiles([{
+    path: 'tree.json', 
+    contents: stringify(tree)
+  }])
     .pipe(dest(`./${config.data}`))
 }
 
@@ -173,5 +207,6 @@ module.exports = series(
     updateCatalogue,
     generateAllData,
     generateTagsData
-  )
+  ),
+  updateTreeData
 )
