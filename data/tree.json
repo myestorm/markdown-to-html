@@ -1,166 +1,113 @@
 {
     "list": [
         {
-            "_id": "frontend",
-            "title": "前端笔记333",
+            "_id": "essay",
+            "title": "散文",
             "keywords": [
-                "前端",
-                "初级",
-                "前端开发",
-                "前端学习入门笔记",
-                "前端面试题",
-                "前端框架"
+                "散文",
+                "散文网",
+                "散文在线",
+                "爱情散文",
+                "散文诗"
             ],
-            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+            "desc": "《辞海》认为：中国六朝以来，为区别韵文与骈文，把凡不押韵、不重排偶的散体文章(包括经传史书)，统称“散文”。后又泛指诗歌以外的所有文学体裁。",
             "cover": "",
             "order": 1,
             "body": "",
             "mode": "normal",
-            "count": 15,
+            "count": 20,
             "pageSize": 10,
             "list": [],
             "filepath": [
-                "frontend"
+                "essay"
             ],
             "children": [
                 {
-                    "_id": "frontend/javascript",
-                    "title": "javascript444",
+                    "_id": "essay/zhu-zi-qing",
+                    "title": "朱自清",
                     "keywords": [
-                        "js",
-                        "es6",
-                        "基础入门",
-                        "手册",
-                        "javascript"
+                        "朱自清",
+                        "散文",
+                        "桨声灯影里的秦淮河",
+                        "背影",
+                        "荷塘月色"
                     ],
-                    "desc": "我自己学习JavaScript的笔记，主要内容参考自《JavaScript权威指南》，部分内容来自互联网。",
+                    "desc": "朱自清早期的散文，共25篇。可分为写实议论和叙事抒情两大类。如《生命的价格-七毛钱》、《航船中的文明》、《白种人-上帝的骄子》、《阿河》、《哀韦杰三君》、《旅行杂记》等直接从现实生活取材，以夹叙夹议手法抨击黑暗社会的名篇；又如《背影》、《桨声灯影里的秦淮河》、《绿》、《荷塘月色》",
                     "cover": "",
                     "order": 1,
-                    "mode": "normal",
-                    "body": "",
-                    "count": 1,
-                    "pageSize": 10,
-                    "list": [],
-                    "filepath": [
-                        "frontend",
-                        "javascript"
-                    ],
-                    "children": [
-                        {
-                            "_id": "frontend/javascript/zhong-wen",
-                            "title": "前端笔记555",
-                            "keywords": [
-                                "前端",
-                                "初级",
-                                "前端开发",
-                                "前端学习入门笔记",
-                                "前端面试题",
-                                "前端框架"
-                            ],
-                            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
-                            "cover": "",
-                            "order": 1,
-                            "body": "",
-                            "mode": "normal",
-                            "count": 1,
-                            "pageSize": 10,
-                            "list": [],
-                            "filepath": [
-                                "frontend",
-                                "javascript",
-                                "zhong-wen"
-                            ],
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "_id": "frontend/css",
-                    "title": "CSS笔记",
-                    "keywords": [
-                        "CSS",
-                        "CSS3",
-                        "学习CSS",
-                        "CSS规则",
-                        "CSS教程"
-                    ],
-                    "desc": "一些css基础学习笔记，也会收藏一些经典的CSS使用技巧。",
-                    "cover": "",
-                    "order": 2,
                     "body": "",
                     "mode": "normal",
                     "count": 12,
                     "pageSize": 10,
                     "list": [],
                     "filepath": [
-                        "frontend",
-                        "css"
+                        "essay",
+                        "zhu-zi-qing"
                     ],
                     "children": []
                 },
                 {
-                    "_id": "frontend/html",
-                    "title": "html",
+                    "_id": "essay/lao-she",
+                    "title": "老舍",
                     "keywords": [
-                        "html5",
-                        "html",
-                        "html教程",
-                        "html模板",
-                        "html表单"
+                        "老舍",
+                        "骆驼祥子",
+                        "茶馆",
+                        "舒庆春",
+                        "四世同堂"
                     ],
-                    "desc": "了解HTML基础知识、HTML代码规范、HTML标签列表。学习HTML5新版本特性，使用 HTML 来建立自己的 WEB 站点。",
+                    "desc": "老舍是中国现当代文学史上的重要作家,故而老舍研究向来是学术研究的重点与热点",
+                    "cover": "",
+                    "order": 2,
+                    "mode": "normal",
+                    "body": "",
+                    "count": 3,
+                    "pageSize": 10,
+                    "list": [],
+                    "filepath": [
+                        "essay",
+                        "lao-she"
+                    ],
+                    "children": []
+                },
+                {
+                    "_id": "essay/he-ji",
+                    "title": "散文合集",
+                    "keywords": [
+                        "散文",
+                        "合集",
+                        "毕淑敏散文",
+                        "林语堂",
+                        "贾平凹"
+                    ],
+                    "desc": "散文合集",
                     "cover": "",
                     "order": 3,
                     "body": "",
                     "mode": "normal",
-                    "count": 2,
+                    "count": 5,
                     "pageSize": 10,
                     "list": [],
                     "filepath": [
-                        "frontend",
-                        "html"
+                        "essay",
+                        "he-ji"
                     ],
                     "children": []
                 }
             ]
-        },
-        {
-            "_id": "zhong-wen",
-            "title": "前端笔记22",
-            "keywords": [
-                "前端",
-                "初级",
-                "前端开发",
-                "前端学习入门笔记",
-                "前端面试题",
-                "前端框架"
-            ],
-            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
-            "cover": "",
-            "order": 1,
-            "body": "",
-            "mode": "normal",
-            "count": 1,
-            "pageSize": 10,
-            "list": [],
-            "filepath": [
-                "zhong-wen"
-            ],
-            "children": []
         }
     ],
     "maps": {
         "homepage": {
-            "title": "前端笔记root",
+            "title": "totonoo markdown to html",
             "keywords": [
-                "前端",
-                "初级",
-                "前端开发",
-                "前端学习入门笔记",
-                "前端面试题",
-                "前端框架"
+                "markdown",
+                "md",
+                "html",
+                "gulp",
+                "ejs"
             ],
-            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+            "desc": "totonoo-markdown-to-html是一款用gulp来实现将本地的markdown文档转换成网站。带通用的seo属性，并能通过关键字生成tag列表界面，且可搜索可分页。还提供文集模式。支持中文目录转成拼音目录。",
             "cover": "",
             "order": "1,",
             "mode": "home",
@@ -170,138 +117,91 @@
             "list": [],
             "filepath": []
         },
-        "frontend": {
-            "title": "前端笔记333",
+        "essay": {
+            "title": "散文",
             "keywords": [
-                "前端",
-                "初级",
-                "前端开发",
-                "前端学习入门笔记",
-                "前端面试题",
-                "前端框架"
+                "散文",
+                "散文网",
+                "散文在线",
+                "爱情散文",
+                "散文诗"
             ],
-            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+            "desc": "《辞海》认为：中国六朝以来，为区别韵文与骈文，把凡不押韵、不重排偶的散体文章(包括经传史书)，统称“散文”。后又泛指诗歌以外的所有文学体裁。",
             "cover": "",
             "order": 1,
             "body": "",
             "mode": "normal",
-            "count": 15,
+            "count": 20,
             "pageSize": 10,
             "list": [],
             "filepath": [
-                "frontend"
+                "essay"
             ]
         },
-        "zhong-wen": {
-            "title": "前端笔记22",
+        "essay/he-ji": {
+            "title": "散文合集",
             "keywords": [
-                "前端",
-                "初级",
-                "前端开发",
-                "前端学习入门笔记",
-                "前端面试题",
-                "前端框架"
+                "散文",
+                "合集",
+                "毕淑敏散文",
+                "林语堂",
+                "贾平凹"
             ],
-            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
+            "desc": "散文合集",
             "cover": "",
-            "order": 1,
+            "order": 3,
             "body": "",
             "mode": "normal",
-            "count": 1,
+            "count": 5,
             "pageSize": 10,
             "list": [],
             "filepath": [
-                "zhong-wen"
+                "essay",
+                "he-ji"
             ]
         },
-        "frontend/css": {
-            "title": "CSS笔记",
+        "essay/zhu-zi-qing": {
+            "title": "朱自清",
             "keywords": [
-                "CSS",
-                "CSS3",
-                "学习CSS",
-                "CSS规则",
-                "CSS教程"
+                "朱自清",
+                "散文",
+                "桨声灯影里的秦淮河",
+                "背影",
+                "荷塘月色"
             ],
-            "desc": "一些css基础学习笔记，也会收藏一些经典的CSS使用技巧。",
+            "desc": "朱自清早期的散文，共25篇。可分为写实议论和叙事抒情两大类。如《生命的价格-七毛钱》、《航船中的文明》、《白种人-上帝的骄子》、《阿河》、《哀韦杰三君》、《旅行杂记》等直接从现实生活取材，以夹叙夹议手法抨击黑暗社会的名篇；又如《背影》、《桨声灯影里的秦淮河》、《绿》、《荷塘月色》",
             "cover": "",
-            "order": 2,
+            "order": 1,
             "body": "",
             "mode": "normal",
             "count": 12,
             "pageSize": 10,
             "list": [],
             "filepath": [
-                "frontend",
-                "css"
+                "essay",
+                "zhu-zi-qing"
             ]
         },
-        "frontend/html": {
-            "title": "html",
+        "essay/lao-she": {
+            "title": "老舍",
             "keywords": [
-                "html5",
-                "html",
-                "html教程",
-                "html模板",
-                "html表单"
+                "老舍",
+                "骆驼祥子",
+                "茶馆",
+                "舒庆春",
+                "四世同堂"
             ],
-            "desc": "了解HTML基础知识、HTML代码规范、HTML标签列表。学习HTML5新版本特性，使用 HTML 来建立自己的 WEB 站点。",
+            "desc": "老舍是中国现当代文学史上的重要作家,故而老舍研究向来是学术研究的重点与热点",
             "cover": "",
-            "order": 3,
-            "body": "",
+            "order": 2,
             "mode": "normal",
-            "count": 2,
+            "body": "",
+            "count": 3,
             "pageSize": 10,
             "list": [],
             "filepath": [
-                "frontend",
-                "html"
-            ]
-        },
-        "frontend/javascript": {
-            "title": "javascript444",
-            "keywords": [
-                "js",
-                "es6",
-                "基础入门",
-                "手册",
-                "javascript"
-            ],
-            "desc": "我自己学习JavaScript的笔记，主要内容参考自《JavaScript权威指南》，部分内容来自互联网。",
-            "cover": "",
-            "order": 1,
-            "mode": "normal",
-            "body": "",
-            "count": 1,
-            "pageSize": 10,
-            "list": [],
-            "filepath": [
-                "frontend",
-                "javascript"
-            ]
-        },
-        "frontend/javascript/zhong-wen": {
-            "title": "前端笔记555",
-            "keywords": [
-                "前端",
-                "初级",
-                "前端开发",
-                "前端学习入门笔记",
-                "前端面试题",
-                "前端框架"
-            ],
-            "desc": "Web 前端开发所需的全部基本知识以及所对应的学习路径。包括流行的前端框架，VUE、React、jQuery、Angular，以及流行的前端UI框架。",
-            "cover": "",
-            "order": 1,
-            "body": "",
-            "mode": "normal",
-            "count": 1,
-            "pageSize": 10,
-            "list": [],
-            "filepath": [
-                "frontend",
-                "javascript",
-                "zhong-wen"
+                "essay",
+                "lao-she"
             ]
         }
     }

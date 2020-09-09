@@ -8,7 +8,7 @@
       const forEachTree = (data = [], level = 0) => {
         html.push('<ul>')
         data.forEach(item => {
-          html.push(`<li><a href="${global.mkArticleLink(item.filepath, 'index')}" class="${level == 0 ? 'first-level' : ''} level-${level}"><strong>${item.title}</strong> <small>${item.count}</small></a>`)
+          html.push(`<li><a href="${global.mkArticleLink(item.filepath, 'index')}" class="${level == 0 ? 'first-level' : ''} level-${level}">${item.title}</a>`)
           if (item.children && item.children.length > 0){
             forEachTree(item.children, (level + 1))
           }
@@ -30,7 +30,7 @@
       for (let i = 0; i < maxLen; i++) {
         const item = _tags[i]
       %>
-      <a href="<%= global.mkArticleLink(item.filepath, item.filename) %>"><%= item.title %> <small><%= item.count %></small></a>
+      <a href="<%= global.mkArticleLink(item.filepath, item.filename) %>"><%= item.title %></a>
       <% } %>
     </div>
   </div>
