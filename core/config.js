@@ -11,23 +11,19 @@ const config = {
   template: 'template', // 模板目录
   templateTypes: { // 模板类型
     home: { // 首页
-      fileName: 'index.ejs'
+      dir: 'index',
+      index: 'index.ejs'
+    },
+    normal: { // 通用文档
+      dir: 'normal',
+      list: 'list.ejs',
+      article: 'article.ejs'
     },
     tags: { // 标签
       fileName: 'tags.ejs'
     },
     search: { // 搜索
       fileName: 'search.ejs'
-    },
-    normal: { // 通用文档
-      list: { // 列表页模板
-        fileName: 'list.ejs',
-        data: {}
-      },
-      article: { // 文档模板
-        fileName: 'article.ejs',
-        data: {}
-      }
     },
     collection: { // 文集
       article: { // 文档模板

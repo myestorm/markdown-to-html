@@ -1,0 +1,16 @@
+<%
+const _breadcrumbs = breadcrumbs.list || []
+const _countInfo = breadcrumbs.countInfo || {}
+%>
+<div class="totonoo--breadcrumb">
+  <ul>
+    <li><a href="/"><i class="iconfont icon-home"></i></a></li>
+    <%
+    _breadcrumbs.forEach(item => {
+    %>
+    <li class="separate"><i class="iconfont icon-arrow-right"></i></li>
+    <li><a href="<%= item.path %>"><%= item.title %></a></li>
+    <% }) %>
+    <li class="count"><h1><%= _countInfo.title %></h1>下共有 <small><%= _countInfo.count %></small> 篇文章</li>
+  </ul>
+</div>

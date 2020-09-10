@@ -8,7 +8,7 @@ const transformPipe = (func) => {
     objectMode: true,
     transform: function (file, encoding, callback) {
       if (func && typeof func === 'function') {
-        func(file, encoding, callback)
+        func(file, encoding, callback, this)
       }
       callback(null, file)
     }

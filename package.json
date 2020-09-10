@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/myestorm/markdown-to-html#readme",
   "devDependencies": {
+    "browser-sync": "^2.26.12",
     "del": "^5.1.0",
     "ejs": "^3.1.5",
     "front-matter": "^4.0.2",
