@@ -125,7 +125,7 @@ const updateCatalogue = () => {
       res[0] = newest
     } else {
       const str = '\/\/\/'
-      filepath = filepath.join(str) 
+      filepath = filepath.join(str)
       res = allArticle.filter((item) => {
         const i = item.filepath.join(str)
         return new RegExp(`^${filepath}`).test(i)

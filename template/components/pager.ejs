@@ -1,0 +1,32 @@
+<%
+const _pages = pages || []
+%>
+<div class="totonoo--pagination">
+  <ul>
+    <%
+    _pages.forEach((item, index) => {
+    %>
+      <% if (index == 0) { %>
+        <% if (item.disabled) { %>
+        <li class="prev disabled"><span><i class="iconfont icon-direction-left"></i></span></li>
+        <% } else { %>
+        <li class="prev"><a href="<%= item.path %>"><i class="iconfont icon-direction-left"></i></a></li>
+        <% } %>
+      <% } else if (index == _pages.length - 1) { %>
+        <% if (item.disabled) { %>
+        <li class="next disabled"><span><i class="iconfont icon-direction-right"></i></span></li>
+        <% } else { %>
+        <li class="next"><a href="<%= item.path %>"><i class="iconfont icon-direction-right"></i></a></li>
+        <% } %>
+      <% } else { %>
+        <% if (item.isCurrent) { %>
+          <li class="current"><span><%= item.title %></span></li>
+          <% } else if (item.title == '...') { %>
+          <li class="ellipsis"><span><%= item.title %></span></li>
+          <% } else { %>
+          <li class="num"><a href="<%= item.path %>"><%= item.title %></a></li>
+          <% } %>
+      <% } %>
+    <% }) %>
+  </ul>
+</div>

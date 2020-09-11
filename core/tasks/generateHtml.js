@@ -7,14 +7,13 @@ const Vinyl = require('vinyl')
 const { path, formatDatetime, getRoot, joinPath } = require('../utils/utils')
 const transformPipe = require('../utils/transformPipe')
 const config = require('../config')
-const moment = require('moment')
 
 const readmeJson = config.defaultMD.replace('.md', '.json')
 
 let tree = null
 let tags = null
-let tagsList = []
 let templateConfig = null
+const tagsList = []
 
 // 读取数据
 const readJsonData = () => {
@@ -126,6 +125,65 @@ const mkBreadcrumbs = (filepath = []) => {
   }
   return res
 }
+// 列表分页
+const mkListPages = (total = 0, pagesize = 10, filename = 'index', ext = '.html') => {
+  const pages = []
+  const pageCount = Math.ceil(total / pagesize)
+  const sizes = 2
+  for (let i = 1; i <= pageCount; i++) {
+    let item = []
+    const prev = {
+      title: '上一页',
+      path: i - 1 === 1 ? `${filename}${ext}` : `${filename}_${i - 1}${ext}`,
+      disabled: (i === 1)
+    }
+    const next = {
+      title: '下一页',
+      path: `${filename}_${i + 1}${ext}`,
+      disabled: (i === pageCount)
+    }
+    const center = []
+
+    item.push(prev)
+
+    for (let j = 1; j <= pageCount; j++) {
+      center.push({
+        title: j,
+        path: j === 1 ? `${filename}${ext}` : `${filename}_${j}${ext}`,
+        disabled: false,
+        isCurrent: i === j
+      })
+    }
+    if (pageCount >= (sizes * 2) + 1) {
+      const ell = { title: '...', path: '', disabled: true }
+      let ss = 0
+      let se = 0
+      let es = 0
+      let ee = 0
+      if (i < (sizes * 2 + 1)) {
+        ss = (sizes * 2 + 1) + 2 - 1
+        se = pageCount - ss - 1
+        center.splice(ss, se, ell)
+      } else if (i > pageCount - sizes * 2) {
+        es = 1
+        ee = pageCount - 2 - (sizes * 2 + 1)
+        center.splice(es, ee, ell)
+      } else {
+        ss = 1
+        se = i - sizes - ss - 1
+        center.splice(ss, se, ell)
+        es = i + sizes
+        ee = pageCount - es - 1
+        center.splice(es - (se - 1), ee, ell)
+      }
+    }
+    item = item.concat(center)
+    item.push(next)
+
+    pages.push(item)
+  }
+  return pages
+}
 // 所有的列表
 const generateListsHtml = () => {
   return src([`./${config.data}/**/${readmeJson}`, `!./${config.data}/${readmeJson}`])
@@ -133,11 +191,13 @@ const generateListsHtml = () => {
       const contents = JSON.parse(file.contents.toString())
       const template = getTemplate(contents.mode, 'list')
       const assets = getAssetsConfig('categories')
-      stream.push(new Vinyl({
-        path: 'test/file.js',
-        contents: new Buffer('var x = 123')
-      }))
-      const html = renderEjs(template, {
+
+      const count = contents.count
+      const pageSize = contents.pageSize
+      const list = [...contents.list]
+      const filepath = contents.filepath.join('/')
+      const pages = mkListPages(count, pageSize, `${config.host}${filepath}/index`)
+      const data = {
         global: $g,
         head: {
           title: config.sitename,
@@ -160,24 +220,44 @@ const generateListsHtml = () => {
               count: contents.count
             }
           },
-          list: []
+          list: [],
+          pages: []
         },
         footer: {
           beian: config.beian
         },
         scripts: assets.scripts
+      }
+      pages.forEach((item, index) => {
+        let html = ''
+        data.main.list = list.splice(0, pageSize)
+        data.main.pages = item
+        html = renderEjs(template, data)
+        if (index === 0) {
+          file.basename = 'index'
+          file.contents = Buffer.from(html)
+        } else {
+          const _file = new Vinyl({
+            path: `${filepath}/index_${index + 1}.html`,
+            contents: Buffer.from(html)
+          })
+          stream.push(_file)
+        }
       })
-      file.basename = 'index'
-      file.contents = Buffer.from(html)
     }))
     .pipe(rename({ extname: '.html' }))
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(dest(`${config.www}/`))
 }
+// tags页面
+const generateTagsHtml = () => {
+  console.log(tagsList.length)
+}
 module.exports = series(
   readJsonData,
   parallel(
     generateIndexHtml,
-    generateListsHtml
+    generateListsHtml,
+    generateTagsHtml
   )
 )

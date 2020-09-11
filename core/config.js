@@ -20,7 +20,8 @@ const config = {
       article: 'article.ejs'
     },
     tags: { // 标签
-      fileName: 'tags.ejs'
+      dir: 'tags',
+      index: 'index.ejs'
     },
     search: { // 搜索
       fileName: 'search.ejs'
