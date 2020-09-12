@@ -21,7 +21,8 @@ const config = {
     },
     tags: { // 标签
       dir: 'tags',
-      index: 'index.ejs'
+      index: 'index.ejs',
+      list: 'list.ejs'
     },
     search: { // 搜索
       fileName: 'search.ejs'
@@ -62,7 +63,7 @@ const config = {
   get (key) {
     let res = config
     const arr = key.split('.')
-    for(let i in arr){
+    for (const i in arr) {
       res = res[arr[i]]
     }
     return res

@@ -6,6 +6,7 @@ const Vinyl = require('vinyl')
 
 const { path, formatDatetime, getRoot, joinPath } = require('../utils/utils')
 const transformPipe = require('../utils/transformPipe')
+const addVinylFiles = require('../utils/addVinylFiles')
 const config = require('../config')
 
 const readmeJson = config.defaultMD.replace('.md', '.json')
@@ -13,11 +14,12 @@ const readmeJson = config.defaultMD.replace('.md', '.json')
 let tree = null
 let tags = null
 let templateConfig = null
+let allData = []
 const tagsList = []
 
 // 读取数据
 const readJsonData = () => {
-  return src([`${config.data}/tree.json`, `${config.data}/tags.json`, `./template/config.json`])
+  return src([`${config.data}/tree.json`, `${config.data}/tags.json`, `${config.data}/all.json`, './template/config.json'])
     .pipe(transformPipe((file) => {
       if (file.basename === 'tree.json') {
         tree = JSON.parse(file.contents.toString())
@@ -33,6 +35,9 @@ const readJsonData = () => {
       }
       if (file.basename === 'config.json') {
         templateConfig = JSON.parse(file.contents.toString())
+      }
+      if (file.basename === 'all.json') {
+        allData = JSON.parse(file.contents.toString())
       }
     }))
 }
@@ -251,13 +256,142 @@ const generateListsHtml = () => {
 }
 // tags页面
 const generateTagsHtml = () => {
-  console.log(tagsList.length)
+  const files = []
+  const templateIndex = getTemplate('tags', 'index')
+  const assetsIndex = getAssetsConfig('tags')
+  const dataIndex = {
+    global: $g,
+    head: {
+      title: `标签聚合 - ${config.sitename}`,
+      keywords: ['标签聚合'],
+      desc: '标签聚合',
+      styles: assetsIndex.styles
+    },
+    header: {
+      current: 0
+    },
+    main: {
+      list: tagsList
+    },
+    footer: {
+      beian: config.beian
+    },
+    scripts: assetsIndex.scripts
+  }
+  const htmlIndex = renderEjs(templateIndex, dataIndex)
+  files.push({
+    path: 'index.html',
+    contents: htmlIndex
+  })
+  // tags列表
+  const template = getTemplate('tags', 'list')
+  const assets = getAssetsConfig('categories')
+  tagsList.forEach(item => {
+    const data = {
+      global: $g,
+      head: {
+        title: `${item.title} - ${config.sitename}`,
+        keywords: item.keywords || [],
+        desc: item.desc || '',
+        styles: assets.styles
+      },
+      header: {
+        current: 0
+      },
+      aside: {
+        categories: tree.list,
+        tags: tagsList
+      },
+      main: {
+        breadcrumbs: {
+          list: [{
+            title: '标签聚合',
+            path: `${config.host}tags/index.html`
+          }, {
+            title: item.title,
+            path: $g.mkArticleLink(item.filepath, item.filename)
+          }],
+          countInfo: {
+            title: item.title,
+            count: item.count
+          }
+        },
+        list: [],
+        pages: []
+      },
+      footer: {
+        beian: config.beian
+      },
+      scripts: assets.scripts
+    }
+    const pages = mkListPages(item.count, item.pageSize, `${config.host}tags/${item.filename}`)
+    pages.forEach((page, index) => {
+      let html = ''
+      data.main.list = item.list.splice(0, item.pageSize)
+      data.main.pages = page
+      html = renderEjs(template, data)
+      const file = {
+        path: index === 0 ? `${item.filename}.html` : `${item.filename}_${index + 1}.html`,
+        contents: html
+      }
+      files.push(file)
+    })
+  })
+  return addVinylFiles(files)
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(dest(`${config.www}/tags/`))
+}
+// 所有文章
+const generateArticleHtml = () => {
+  const files = []
+  const template = getTemplate('normal', 'article')
+  const assets = getAssetsConfig('detail')
+  const len = allData.length
+  allData.forEach((item, index) => {
+    const data = {
+      global: $g,
+      head: {
+        title: `${item.title} - ${config.sitename}`,
+        keywords: item.keywords || [],
+        desc: item.desc || '',
+        styles: assets.styles
+      },
+      header: {
+        current: 0
+      },
+      aside: {
+        categories: tree.list,
+        tags: tagsList
+      },
+      main: {
+        content: item,
+        related: {
+          prev: index === 0 ? allData[len - 1] : allData[index - 1],
+          next: index === len - 1 ? allData[0] : allData[index + 1]
+        }
+      },
+      footer: {
+        beian: config.beian
+      },
+      scripts: assets.scripts
+    }
+    const html = renderEjs(template, data)
+    const file = {
+      path: `${item.filepath.join('/')}/${item.filename}.html`,
+      contents: html
+    }
+    files.push(file)
+  })
+  return addVinylFiles(files)
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(dest(`${config.www}/`))
 }
 module.exports = series(
   readJsonData,
   parallel(
     generateIndexHtml,
     generateListsHtml,
-    generateTagsHtml
+    generateTagsHtml,
+    generateArticleHtml
   )
 )

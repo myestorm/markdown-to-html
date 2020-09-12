@@ -74,7 +74,8 @@ const generateArticle = () => {
         recommend: data.recommend,
         order: data.order,
         filepath: data.filepath,
-        filename: data.filename
+        filename: data.filename,
+        catalogueName: data.catalogueName
       }
       keywords.forEach(keyword => {
         if (allTags[keyword]) {
@@ -124,7 +125,7 @@ const updateCatalogue = () => {
       res[1] = recommend
       res[0] = newest
     } else {
-      const str = '\/\/\/'
+      const str = '///'
       filepath = filepath.join(str)
       res = allArticle.filter((item) => {
         const i = item.filepath.join(str)
@@ -135,7 +136,7 @@ const updateCatalogue = () => {
   }
   const findTreeListByFilepath = (filepath) => {
     let res = tree.list
-    let len = filepath.length
+    const len = filepath.length
     if (len === 1) {
       res = res.find(item => item._id === filepath[0])
     } else {
@@ -145,7 +146,7 @@ const updateCatalogue = () => {
         } else if (i === len - 1) {
           res = res.find(item => item._id === filepath.join('/'))
         } else {
-          res = res.find(item => item._id === filepath.slice(0, i+1).join('/')).children
+          res = res.find(item => item._id === filepath.slice(0, i + 1).join('/')).children
         }
       }
     }

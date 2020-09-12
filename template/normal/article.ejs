@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include(`${global.path}/components/head.ejs`, {
+      head,
+      global
+    }) %>
+  </head>
+  <body>
+    <div class="totonoo--layout">
+      <%- include(`${global.path}/components/header.ejs`, {
+        header
+      }) %>
+      <div class="totonoo--main-box">
+        <%- include(`${global.path}/components/aside.ejs`, {
+          aside
+        }) %>
+        <main class="totonoo--main">
+          <article class="totonoo--article">
+            <%
+            const content = main.content
+            %>
+            <div class="totonoo--article-title">
+              <h1><%= content.title %></h1>
+              <div class="info">
+                <ul>
+                  <li><i class="iconfont icon-time"></i><%= global.formatDatetime(content.publishDate) %></li>
+                  <li><i class="iconfont icon-folder-close"></i><a href="<%= global.mkArticleLink(content.filepath, 'index') %>"><%= content.catalogueName %></a></li>
+                  <li>
+                    <i class="iconfont icon-discount"></i>
+                    <%
+                    const _keywords = content.keywords || []
+                    _keywords.forEach(keyword => {
+                    %>
+                    <a href="<%= global.mkTagsLink(keyword) %>"><%= keyword %></a>
+                    <% }) %> 
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="totonoo--markdown-style">
+              <%- content.body %>
+            </div>
+            <div class="totonoo--article-related">
+              <ul>
+                <%
+                const prev = main.related.prev
+                const next = main.related.next
+                %>
+                <li>
+                  <a href="<%= global.mkArticleLink(prev.filepath, prev.filename) %>"><i class="iconfont icon-direction-left"></i> <%= prev.title %></a>
+                </li>
+                <li>
+                  <a href="<%= global.mkArticleLink(next.filepath, next.filename) %>"><%= next.title %> <i class="iconfont icon-direction-right"></i></a>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </main>
+      </div>
+      <%- include(`${global.path}/components/footer.ejs`, {
+        global,
+        footer
+      }) %>
+    </div>
+    <%- include(`${global.path}/components/scripts.ejs`, {
+      global,
+      scripts
+    }) %>
+  </body>
+</html>
