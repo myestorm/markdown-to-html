@@ -3,13 +3,14 @@
     <h2><i class="iconfont icon-file-open"></i>文章分类 <small>Category</small></h2>
     <nav class="side-nav-list">
       <%
+      const current = aside.current || ''
       const _categories = aside.categories || []
       const html = []
       const forEachTree = (data = [], level = 0) => {
         html.push('<ul>')
         data.forEach(item => {
-          html.push(`<li><a href="${global.mkArticleLink(item.filepath, 'index')}" class="${level == 0 ? 'first-level' : ''} level-${level}">${item.title}</a>`)
-          if (item.children && item.children.length > 0){
+          html.push(`<li><a href="${global.mkArticleLink(item.filepath, 'index')}" class="${level == 0 ? 'first-level' : ''} level-${level} ${item.filepath.join('/') == current ? 'current' : ''}">${item.title}</a>`)
+          if (item.children && item.children.length > 0) {
             forEachTree(item.children, (level + 1))
           }
           html.push('</li>')

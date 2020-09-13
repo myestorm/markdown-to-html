@@ -9,10 +9,16 @@ const config = require('./core/config')
 const generateCatalogueTask = require('./core/tasks/generateCatalogue')
 const generateArticleTask = require('./core/tasks/generateArticle')
 const generateHtmlTask = require('./core/tasks/generateHtml')
+const generateSingleHtmlTask = require('./core/tasks/generateSingleHtml')
 
 // 删除所有的生成目录
 const delDirTask = () => {
-  return delDir([`./${config.data}`])()
+  return delDir([`./${config.data}`, `./${config.www}/**/*`])()
+}
+
+const copyAssets = () => {
+  return src([`./${config.template}/assets/**/*.*`])
+    .pipe(dest(`./${config.www}/assets`))
 }
 
 /**
@@ -45,6 +51,8 @@ exports.default = series(
     generateArticleTask
   ),
   parallel(
-    generateHtmlTask
+    generateHtmlTask,
+    generateSingleHtmlTask,
+    copyAssets
   )
 )

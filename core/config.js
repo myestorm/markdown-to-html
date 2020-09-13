@@ -25,29 +25,18 @@ const config = {
       list: 'list.ejs'
     },
     search: { // 搜索
-      fileName: 'search.ejs'
+      dir: 'search',
+      index: 'index.ejs'
+    },
+    timeline: {
+      dir: 'timeline',
+      index: 'index.ejs'
+    },
+    single: {
+      dir: 'single',
+      index: 'index.ejs'
     },
     collection: { // 文集
-      article: { // 文档模板
-        fileName: 'article.ejs',
-        data: {}
-      }
-    },
-    timeline: { // 时间轴
-      list: { // 列表页模板
-        fileName: 'list.ejs',
-        data: {}
-      },
-      article: { // 文档模板
-        fileName: 'article.ejs',
-        data: {}
-      }
-    },
-    single: { // 单页面 如：关于我们
-      list: { // 列表页模板
-        fileName: 'list.ejs',
-        data: {}
-      },
       article: { // 文档模板
         fileName: 'article.ejs',
         data: {}

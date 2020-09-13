@@ -98,6 +98,7 @@ const generateIndexHtml = () => {
         },
         aside: {
           categories: tree.list,
+          current: '',
           tags: tagsList
         },
         main: {
@@ -215,6 +216,7 @@ const generateListsHtml = () => {
         },
         aside: {
           categories: tree.list,
+          current: '',
           tags: tagsList
         },
         main: {
@@ -237,6 +239,7 @@ const generateListsHtml = () => {
         let html = ''
         data.main.list = list.splice(0, pageSize)
         data.main.pages = item
+        data.aside.current = filepath
         html = renderEjs(template, data)
         if (index === 0) {
           file.basename = 'index'
@@ -268,7 +271,7 @@ const generateTagsHtml = () => {
       styles: assetsIndex.styles
     },
     header: {
-      current: 0
+      current: 2
     },
     main: {
       list: tagsList
@@ -361,6 +364,7 @@ const generateArticleHtml = () => {
       },
       aside: {
         categories: tree.list,
+        current: item.filepath.join('/'),
         tags: tagsList
       },
       main: {
@@ -386,12 +390,57 @@ const generateArticleHtml = () => {
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(dest(`${config.www}/`))
 }
+// 搜索页
+const generateSearchHtml = () => {
+  const files = []
+  const _allData = [...allData]
+  _allData.forEach(item => {
+    delete item.body
+  })
+  const template = getTemplate('search', 'index')
+  const assets = getAssetsConfig('search')
+  const data = {
+    global: $g,
+    head: {
+      title: `站内搜索 - ${config.sitename}`,
+      keywords: ['站内搜索'],
+      desc: '站内搜索',
+      styles: assets.styles
+    },
+    header: {
+      current: 0
+    },
+    aside: {
+      categories: tree.list,
+      tags: tagsList
+    },
+    main: {
+    },
+    footer: {
+      beian: config.beian
+    },
+    scripts: assets.scripts
+  }
+  const html = renderEjs(template, data)
+  files.push({
+    path: 'search.html',
+    contents: html
+  })
+  files.push({
+    path: 'all.json',
+    contents: JSON.stringify(_allData)
+  })
+  return addVinylFiles(files)
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(dest(`${config.www}/`))
+}
 module.exports = series(
   readJsonData,
   parallel(
     generateIndexHtml,
     generateListsHtml,
     generateTagsHtml,
-    generateArticleHtml
+    generateArticleHtml,
+    generateSearchHtml
   )
 )

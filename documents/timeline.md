@@ -1,0 +1,23 @@
+---
+title: 时光轴
+keywords: [时光轴, 时间轴]
+desc: 时间为记录方式的一种网络布局形式。
+order: 1
+mode: timeline
+timeline: 
+  - publishDate: 2020-09-13 21:23:12
+    title: 黑云翻墨未遮山，白雨跳珠乱入船。
+    image: 
+
+  - publishDate: 2020-09-12 21:23:12
+    title: 竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。
+    image: 
+
+  - publishDate: 2020-09-11 21:23:12
+    title: 竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。
+    image: /assets/resource/images/demo.jpg
+
+  - publishDate: 2020-09-10 21:23:12
+    title: 卢家少妇郁金香，海燕双栖玳瑁梁。
+    image: /assets/resource/images/demo.jpg
+---

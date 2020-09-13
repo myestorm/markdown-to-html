@@ -67,12 +67,11 @@ const generateCatalogue = () => {
 }
 
 const generateCatalogueTree = () => {
-  const list = []
   const _treeData = { ...treeData.maps }
   delete _treeData.homepage
 
   const findByLen = (len) => {
-    let res = []
+    const res = []
     Object.keys(_treeData).forEach(key => {
       const item = _treeData[key]
       if (item.filepath.length === len) {
@@ -89,11 +88,11 @@ const generateCatalogueTree = () => {
   const findParent = (filepath = []) => {
     let res = treeData.list
     filepath.forEach((item, index) => {
-      let target = []
+      const target = []
       for (let i = 0; i < index; i++) {
         target[i] = filepath[i]
       }
-      let idx = res.findIndex(sub => {
+      const idx = res.findIndex(sub => {
         return JSON.stringify(target) === JSON.stringify(sub.filepath)
       })
       if (idx > -1) {
@@ -102,7 +101,7 @@ const generateCatalogueTree = () => {
     })
     return res
   }
-  for (let i=1; i<=maxLevel; i++) {
+  for (let i = 1; i <= maxLevel; i++) {
     const list = findByLen(i)
     if (i === 1) {
       treeData.list = list
@@ -127,7 +126,7 @@ const generateCatalogueTree = () => {
   sortCatalogue(treeData.list)
 
   return addVinylFiles([{
-    path: 'tree.json', 
+    path: 'tree.json',
     contents: stringify(treeData)
   }])
     .pipe(dest(`./${config.data}`))

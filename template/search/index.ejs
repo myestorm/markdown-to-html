@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include(`${global.path}/components/head.ejs`, {
+      head,
+      global
+    }) %>
+  </head>
+  <body>
+    <div class="totonoo--layout">
+      <%- include(`${global.path}/components/header.ejs`, {
+        header
+      }) %>
+      <div class="totonoo--search-main" id="search-box"></div>
+      <%- include(`${global.path}/components/footer.ejs`, {
+        global,
+        footer
+      }) %>
+    </div>
+    <%- include(`${global.path}/components/scripts.ejs`, {
+      global,
+      scripts
+    }) %>
+  </body>
+</html>

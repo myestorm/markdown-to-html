@@ -26,7 +26,7 @@ const readTreeData = () => {
  * 生成所有文章的数据
  */
 const generateArticle = () => {
-  const files = [`${docRoot}/**/*.md`, `!${docRoot}/**/${config.defaultMD}`]
+  const files = [`${docRoot}/**/*.md`, `!${docRoot}/**/${config.defaultMD}`, `!${docRoot}/about.md`, `!${docRoot}/timeline.md`]
   return src(files)
     .pipe(transformPipe((file) => {
       let arr = []
@@ -42,7 +42,7 @@ const generateArticle = () => {
       // 处理文件名
       const basename = file.basename.replace(file.extname, '').trim()
       data.filename = pinyin(basename)
-      arr = filepath.split(/[\/|\\]/)
+      arr = filepath.split(/[/|\\]/)
       arr.pop()
       // 处理中文目录
       arr.forEach((item, index) => {
@@ -173,7 +173,7 @@ const updateCatalogue = () => {
 const updateTreeData = () => {
   // console.log(tree)
   return addVinylFiles([{
-    path: 'tree.json', 
+    path: 'tree.json',
     contents: stringify(tree)
   }])
     .pipe(dest(`./${config.data}`))
@@ -184,7 +184,7 @@ const updateTreeData = () => {
  */
 const generateAllData = () => {
   return addVinylFiles([{
-    path: 'all.json', 
+    path: 'all.json',
     contents: stringify(allArticle)
   }])
     .pipe(dest(`./${config.data}`))
@@ -195,7 +195,7 @@ const generateAllData = () => {
  */
 const generateTagsData = () => {
   return addVinylFiles([{
-    path: 'tags.json', 
+    path: 'tags.json',
     contents: stringify(allTags)
   }])
     .pipe(dest(`./${config.data}`))
