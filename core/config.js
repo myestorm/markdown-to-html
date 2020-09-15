@@ -6,6 +6,7 @@ const config = {
   assets: 'assets', // 静态资源目录
   data: 'data', // 数据存储目录
   documents: 'documents', // markdown文档目录
+  collection: 'collection', // 文集目录
   defaultMD: 'readme.md', // 目录的配置文件
   pageSize: 10, // 列表分页大小
   template: 'template', // 模板目录
