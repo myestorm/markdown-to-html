@@ -38,10 +38,10 @@ const config = {
       index: 'index.ejs'
     },
     collection: { // 文集
-      article: { // 文档模板
-        fileName: 'article.ejs',
-        data: {}
-      }
+      dir: 'collection',
+      index: 'index.ejs',
+      list: 'cover.ejs',
+      article: 'article.ejs'
     }
   },
   markdownItAnchor: { // markdown 右侧导航配置

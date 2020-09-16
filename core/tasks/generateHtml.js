@@ -195,63 +195,120 @@ const generateListsHtml = () => {
   return src([`./${config.data}/**/${readmeJson}`, `!./${config.data}/${readmeJson}`])
     .pipe(transformPipe((file, encoding, callback, stream) => {
       const contents = JSON.parse(file.contents.toString())
-      const template = getTemplate(contents.mode, 'list')
-      const assets = getAssetsConfig('categories')
+      // 非文集类型
+      if (contents.mode !== 'collection') {
+        const template = getTemplate(contents.mode, 'list')
+        const assets = getAssetsConfig('categories')
 
-      const count = contents.count
-      const pageSize = contents.pageSize
-      const list = [...contents.list]
-      const filepath = contents.filepath.join('/')
-      const pages = mkListPages(count, pageSize, `${config.host}${filepath}/index`)
-      const data = {
-        global: $g,
-        head: {
-          title: config.sitename,
-          keywords: contents.keywords || [],
-          desc: contents.desc || '',
-          styles: assets.styles
-        },
-        header: {
-          current: 0
-        },
-        aside: {
-          categories: tree.list,
-          current: '',
-          tags: tagsList
-        },
-        main: {
-          breadcrumbs: {
-            list: mkBreadcrumbs(contents.filepath),
-            countInfo: {
-              title: contents.title,
-              count: contents.count
-            }
+        const count = contents.count
+        const pageSize = contents.pageSize
+        const list = [...contents.list]
+        const filepath = contents.filepath.join('/')
+        const pages = mkListPages(count, pageSize, `${config.host}${filepath}/index`)
+        const data = {
+          global: $g,
+          head: {
+            title: config.sitename,
+            keywords: contents.keywords || [],
+            desc: contents.desc || '',
+            styles: assets.styles
           },
-          list: [],
-          pages: []
-        },
-        footer: {
-          beian: config.beian
-        },
-        scripts: assets.scripts
-      }
-      pages.forEach((item, index) => {
-        let html = ''
-        data.main.list = list.splice(0, pageSize)
-        data.main.pages = item
-        data.aside.current = filepath
-        html = renderEjs(template, data)
-        if (index === 0) {
+          header: {
+            current: 0
+          },
+          aside: {
+            categories: tree.list,
+            current: '',
+            tags: tagsList
+          },
+          main: {
+            breadcrumbs: {
+              list: mkBreadcrumbs(contents.filepath),
+              countInfo: {
+                title: contents.title,
+                count: contents.count
+              }
+            },
+            list: [],
+            pages: []
+          },
+          footer: {
+            beian: config.beian
+          },
+          scripts: assets.scripts
+        }
+        pages.forEach((item, index) => {
+          let html = ''
+          data.main.list = list.splice(0, pageSize)
+          data.main.pages = item
+          data.aside.current = filepath
+          html = renderEjs(template, data)
+          if (index === 0) {
+            file.basename = 'index'
+            file.contents = Buffer.from(html)
+          } else {
+            const _file = new Vinyl({
+              path: `${filepath}/index_${index + 1}.html`,
+              contents: Buffer.from(html)
+            })
+            stream.push(_file)
+          }
+        })
+      } else {
+        const _filedir = path.relative(path.join(getRoot(), 'data'), file.dirname)
+        if (_filedir === config.collection) { // 文集首页
+          const template = getTemplate(contents.mode, 'index')
+          const assets = getAssetsConfig('collection_list')
+          const list = tree.list.find(item => item._id === config.collection)
+          const data = {
+            global: $g,
+            head: {
+              title: config.sitename,
+              keywords: contents.keywords || [],
+              desc: contents.desc || '',
+              styles: assets.styles
+            },
+            header: {
+              current: 1
+            },
+            main: {
+              list: list ? list.children : []
+            },
+            footer: {
+              beian: config.beian
+            },
+            scripts: assets.scripts
+          }
+          const html = renderEjs(template, data)
           file.basename = 'index'
           file.contents = Buffer.from(html)
-        } else {
-          const _file = new Vinyl({
-            path: `${filepath}/index_${index + 1}.html`,
-            contents: Buffer.from(html)
-          })
-          stream.push(_file)
+        } else { // 文集列表
+          const template = getTemplate(contents.mode, 'list')
+          const assets = getAssetsConfig('collection')
+          const data = {
+            global: $g,
+            head: {
+              title: config.sitename,
+              keywords: contents.keywords || [],
+              desc: contents.desc || '',
+              styles: assets.styles
+            },
+            header: {
+              current: 1
+            },
+            main: {
+              contents
+            },
+            footer: {
+              beian: config.beian
+            },
+            scripts: assets.scripts
+          }
+          const html = renderEjs(template, data)
+          file.basename = 'index'
+          file.contents = Buffer.from(html)
         }
-      })
+      }
     }))
     .pipe(rename({ extname: '.html' }))
     .pipe(htmlmin({ collapseWhitespace: true }))
@@ -347,44 +404,75 @@ const generateTagsHtml = () => {
 // 所有文章
 const generateArticleHtml = () => {
   const files = []
-  const template = getTemplate('normal', 'article')
-  const assets = getAssetsConfig('detail')
   const len = allData.length
   allData.forEach((item, index) => {
-    const data = {
-      global: $g,
-      head: {
-        title: `${item.title} - ${config.sitename}`,
-        keywords: item.keywords || [],
-        desc: item.desc || '',
-        styles: assets.styles
-      },
-      header: {
-        current: 0
-      },
-      aside: {
-        categories: tree.list,
-        current: item.filepath.join('/'),
-        tags: tagsList
-      },
-      main: {
-        content: item,
-        related: {
-          prev: index === 0 ? allData[len - 1] : allData[index - 1],
-          next: index === len - 1 ? allData[0] : allData[index + 1]
-        }
-      },
-      footer: {
-        beian: config.beian
-      },
-      scripts: assets.scripts
+    const template = getTemplate(item.mode, 'article')
+    if (item.mode !== 'collection') {
+      const assets = getAssetsConfig('detail')
+      const data = {
+        global: $g,
+        head: {
+          title: `${item.title} - ${config.sitename}`,
+          keywords: item.keywords || [],
+          desc: item.desc || '',
+          styles: assets.styles
+        },
+        header: {
+          current: 0
+        },
+        aside: {
+          categories: tree.list,
+          current: item.filepath.join('/'),
+          tags: tagsList
+        },
+        main: {
+          content: item,
+          related: {
+            prev: index === 0 ? allData[len - 1] : allData[index - 1],
+            next: index === len - 1 ? allData[0] : allData[index + 1]
+          }
+        },
+        footer: {
+          beian: config.beian
+        },
+        scripts: assets.scripts
+      }
+      const html = renderEjs(template, data)
+      const file = {
+        path: `${item.filepath.join('/')}/${item.filename}.html`,
+        contents: html
+      }
+      files.push(file)
+    } else {
+      const assets = getAssetsConfig('collection')
+      const catData = require(`${path.join(getRoot(), `data/${item.filepath.join('/')}/${readmeJson}`)}`)
+      item.catInfo = catData
+      const data = {
+        global: $g,
+        head: {
+          title: `${item.title} - ${config.sitename}`,
+          keywords: item.keywords || [],
+          desc: item.desc || '',
+          styles: assets.styles
+        },
+        header: {
+          current: 0
+        },
+        main: {
+          contents: item
+        },
+        footer: {
+          beian: config.beian
+        },
+        scripts: assets.scripts
+      }
+      const html = renderEjs(template, data)
+      const file = {
+        path: `${item.filepath.join('/')}/${item.filename}.html`,
+        contents: html
+      }
+      files.push(file)
     }
-    const html = renderEjs(template, data)
-    const file = {
-      path: `${item.filepath.join('/')}/${item.filename}.html`,
-      contents: html
-    }
-    files.push(file)
   })
   return addVinylFiles(files)
     .pipe(htmlmin({ collapseWhitespace: true }))
@@ -393,9 +481,20 @@ const generateArticleHtml = () => {
 // 搜索页
 const generateSearchHtml = () => {
   const files = []
-  const _allData = [...allData]
-  _allData.forEach(item => {
-    delete item.body
+  const _allData = []
+  allData.forEach(item => {
+    _allData.push({
+      title: item.title,
+      keywords: item.keywords,
+      desc: item.desc,
+      cover: item.cover,
+      publishDate: item.publishDate,
+      order: item.order,
+      mode: item.mode,
+      filename: item.filename,
+      filepath: item.filepath,
+      catalogueName: item.catalogueName
+    })
   })
   const template = getTemplate('search', 'index')
   const assets = getAssetsConfig('search')

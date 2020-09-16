@@ -1,6 +1,54 @@
 {
     "list": [
         {
+            "_id": "collection",
+            "title": "文集",
+            "keywords": [
+                "儿童文学",
+                "名家",
+                "猪八戒",
+                "神笔马良",
+                "童话"
+            ],
+            "desc": "文集归档",
+            "cover": "",
+            "order": 1,
+            "mode": "collection",
+            "body": "",
+            "count": 5,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "collection"
+            ],
+            "children": [
+                {
+                    "_id": "collection/wu-shi-nian-er-tong-wen-xue-ming-zuo",
+                    "title": "五十年儿童文学名作",
+                    "keywords": [
+                        "儿童文学",
+                        "名家",
+                        "猪八戒",
+                        "神笔马良",
+                        "童话"
+                    ],
+                    "desc": "中国五十年儿童文学名家作品选",
+                    "cover": "",
+                    "order": 1,
+                    "mode": "collection",
+                    "body": "<p>封面</p>\n",
+                    "count": 5,
+                    "pageSize": 10,
+                    "list": [],
+                    "filepath": [
+                        "collection",
+                        "wu-shi-nian-er-tong-wen-xue-ming-zuo"
+                    ],
+                    "children": []
+                }
+            ]
+        },
+        {
             "_id": "essay",
             "title": "散文",
             "keywords": [
@@ -117,6 +165,27 @@
             "list": [],
             "filepath": []
         },
+        "collection": {
+            "title": "文集",
+            "keywords": [
+                "儿童文学",
+                "名家",
+                "猪八戒",
+                "神笔马良",
+                "童话"
+            ],
+            "desc": "文集归档",
+            "cover": "",
+            "order": 1,
+            "mode": "collection",
+            "body": "",
+            "count": 5,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "collection"
+            ]
+        },
         "essay": {
             "title": "散文",
             "keywords": [
@@ -136,6 +205,28 @@
             "list": [],
             "filepath": [
                 "essay"
+            ]
+        },
+        "collection/wu-shi-nian-er-tong-wen-xue-ming-zuo": {
+            "title": "五十年儿童文学名作",
+            "keywords": [
+                "儿童文学",
+                "名家",
+                "猪八戒",
+                "神笔马良",
+                "童话"
+            ],
+            "desc": "中国五十年儿童文学名家作品选",
+            "cover": "",
+            "order": 1,
+            "mode": "collection",
+            "body": "<p>封面</p>\n",
+            "count": 5,
+            "pageSize": 10,
+            "list": [],
+            "filepath": [
+                "collection",
+                "wu-shi-nian-er-tong-wen-xue-ming-zuo"
             ]
         },
         "essay/he-ji": {

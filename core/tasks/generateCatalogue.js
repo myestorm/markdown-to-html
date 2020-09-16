@@ -30,7 +30,7 @@ const generateCatalogue = () => {
         cover: '' // 头图
       }, parseMarkdown(file))
       const filepath = path.relative(docRoot, file.path)
-      arr = filepath.split(/[\/|\\]/)
+      arr = filepath.split(/[/|\\]/)
       arr.pop()
       // 处理中文目录
       arr.forEach((item, index) => {

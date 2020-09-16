@@ -10,15 +10,23 @@ const generateCatalogueTask = require('./core/tasks/generateCatalogue')
 const generateArticleTask = require('./core/tasks/generateArticle')
 const generateHtmlTask = require('./core/tasks/generateHtml')
 const generateSingleHtmlTask = require('./core/tasks/generateSingleHtml')
+const copyContentResTask = require('./core/tasks/copyContentRes')
 
 // 删除所有的生成目录
 const delDirTask = () => {
   return delDir([`./${config.data}`, `./${config.www}/**/*`])()
 }
 
+// 复制样式
 const copyAssets = () => {
   return src([`./${config.template}/assets/**/*.*`])
     .pipe(dest(`./${config.www}/assets`))
+}
+
+// 复制 favicon
+const copyFavicon = () => {
+  return src([`./${config.template}/favicon.ico`])
+    .pipe(dest(`./${config.www}/`))
 }
 
 /**
@@ -53,6 +61,8 @@ exports.default = series(
   parallel(
     generateHtmlTask,
     generateSingleHtmlTask,
-    copyAssets
+    copyAssets,
+    copyFavicon,
+    copyContentResTask
   )
 )
