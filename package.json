@@ -29,7 +29,7 @@
     "browser-sync": "^2.26.12",
     "del": "^5.1.0",
     "ejs": "^3.1.5",
-    "eslint": "^7.7.0",
+    "eslint": "^7.9.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.0",
@@ -40,9 +40,9 @@
     "gulp": "^4.0.2",
     "gulp-htmlmin": "^5.0.1",
     "gulp-rename": "^2.0.0",
-    "markdown-it": "^11.0.0",
+    "markdown-it": "^11.0.1",
     "markdown-it-anchor": "^5.3.0",
-    "moment": "^2.27.0",
+    "moment": "^2.28.0",
     "pinyin": "^2.9.1",
     "readable-stream": "^3.6.0"
   }
