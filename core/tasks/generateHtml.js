@@ -214,7 +214,7 @@ const generateListsHtml = () => {
             styles: assets.styles
           },
           header: {
-            current: 0
+            current: 1
           },
           aside: {
             categories: tree.list,
@@ -269,7 +269,7 @@ const generateListsHtml = () => {
               styles: assets.styles
             },
             header: {
-              current: 1
+              current: 2
             },
             aside: {
               categories: tree.list,
@@ -298,7 +298,7 @@ const generateListsHtml = () => {
               styles: assets.styles
             },
             header: {
-              current: 1
+              current: 2
             },
             aside: {
               categories: tree.list,
@@ -336,7 +336,7 @@ const generateTagsHtml = () => {
       styles: assetsIndex.styles
     },
     header: {
-      current: 2
+      current: 3
     },
     aside: {
       categories: tree.list,
@@ -430,7 +430,7 @@ const generateArticleHtml = () => {
           styles: assets.styles
         },
         header: {
-          current: 0
+          current: 1
         },
         aside: {
           categories: tree.list,
@@ -468,7 +468,7 @@ const generateArticleHtml = () => {
           styles: assets.styles
         },
         header: {
-          current: 0
+          current: 2
         },
         aside: {
           categories: tree.list,

@@ -71,7 +71,7 @@ const generateSingleHtml = () => {
           styles: assets.styles
         },
         header: {
-          current: 4
+          current: 5
         },
         aside: {
           categories: tree.list,
@@ -109,7 +109,7 @@ const generateTimelineHtml = () => {
           styles: assets.styles
         },
         header: {
-          current: 3
+          current: 4
         },
         aside: {
           categories: tree.list,

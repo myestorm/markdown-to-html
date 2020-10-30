@@ -1,6 +1,6 @@
-const { series, parallel, src, dest } = require('gulp')
+const { src, dest } = require('gulp')
 
-const { getRoot, joinPath, stringify, path, formatDatetime } = require('../utils/utils')
+const { getRoot, path } = require('../utils/utils')
 
 const transformPipe = require('../utils/transformPipe')
 const pinyin = require('../utils/pinyin')
