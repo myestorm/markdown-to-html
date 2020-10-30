@@ -7,55 +7,60 @@
     }) %>
   </head>
   <body>
-    <div class="totonoo--layout">
+    <div class="totonoo--layout totonoo--categories">
       <%- include(`${global.path}/components/header.ejs`, {
-        header
+        header,
+        aside
       }) %>
       <div class="totonoo--main-box">
-        <%- include(`${global.path}/components/aside.ejs`, {
-          aside
-        }) %>
-        <main class="totonoo--main">
-          <%- include(`${global.path}/components/breadcrumb.ejs`, {
-            breadcrumbs: main.breadcrumbs
-          }) %>
-          <div class="totonoo--post-list">
-            <%
-            const _list = main.list || []
-            _list.forEach(item => {
-            %>
-            <div class="item">
-              <h3 class="title">
-                <a href="<%= global.mkArticleLink(item.filepath, item.filename) %>"><%= item.title%></a>
-              </h3>
-              <p class="desc"><%= item.desc%>...</p>
-              <div class="info">
-                <ul>
-                  <li><i class="iconfont icon-folder-close"></i><a href="<%= global.mkArticleLink(item.filepath, 'index') %>"><%= item.catalogueName %></a></li>
-                  <li><i class="iconfont icon-time"></i><%= global.formatDatetime(item.publishDate) %></li>
-                  <li>
-                    <i class="iconfont icon-discount"></i>
-                    <%
-                    const _keywords = item.keywords || []
-                    _keywords.forEach(keyword => {
-                    %>
-                    <a href="<%= global.mkTagsLink(keyword) %>"><%= keyword %></a>
-                    <% }) %>                      
-                  </li>
-                </ul>
+        <div class="totonoo--main-scroll">
+          <div class="totonoo--main-layout">
+            <%- include(`${global.path}/components/aside.ejs`, {
+              aside
+            }) %>
+            <main class="main">
+              <%- include(`${global.path}/components/breadcrumb.ejs`, {
+                breadcrumbs: main.breadcrumbs
+              }) %>
+              <div class="totonoo--post-list">
+                <%
+                const _list = main.list || []
+                _list.forEach(item => {
+                %>
+                <div class="item">
+                  <h3 class="title">
+                    <a href="<%= global.mkArticleLink(item.filepath, item.filename) %>"><%= item.title%></a>
+                  </h3>
+                  <p class="desc"><%= item.desc%>...</p>
+                  <div class="info">
+                    <ul>
+                      <li><i class="iconfont icon-folder-close"></i><a href="<%= global.mkArticleLink(item.filepath, 'index') %>"><%= item.catalogueName %></a></li>
+                      <li><i class="iconfont icon-time"></i><%= global.formatDatetime(item.publishDate) %></li>
+                      <li>
+                        <i class="iconfont icon-discount"></i>
+                        <%
+                        const _keywords = item.keywords || []
+                        _keywords.forEach(keyword => {
+                        %>
+                        <a href="<%= global.mkTagsLink(keyword) %>"><%= keyword %></a>
+                        <% }) %>                      
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <% }) %>
               </div>
-            </div>
-            <% }) %>
+              <%- include(`${global.path}/components/pager.ejs`, {
+                pages: main.pages
+              }) %>
+            </main>
           </div>
-          <%- include(`${global.path}/components/pager.ejs`, {
-            pages: main.pages
+          <%- include(`${global.path}/components/footer.ejs`, {
+            global,
+            footer
           }) %>
-        </main>
+        </div>
       </div>
-      <%- include(`${global.path}/components/footer.ejs`, {
-        global,
-        footer
-      }) %>
     </div>
     <%- include(`${global.path}/components/scripts.ejs`, {
       global,

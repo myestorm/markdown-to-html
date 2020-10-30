@@ -9,12 +9,17 @@ const config = require('../config')
 const docRoot = joinPath(getRoot(), config.documents)
 
 let templateConfig = null
+let tree = null
 
 // 读取数据
 const readJsonData = () => {
-  return src(['./template/config.json'])
+  return src([`${config.data}/tree.json`, './template/config.json'])
     .pipe(transformPipe((file) => {
-      templateConfig = JSON.parse(file.contents.toString())
+      if (file.basename === 'tree.json') {
+        tree = JSON.parse(file.contents.toString())
+      } else {
+        templateConfig = JSON.parse(file.contents.toString())
+      }
     }))
 }
 
@@ -23,6 +28,9 @@ const $g = {
   assets: config.assets,
   path: path.resolve(__dirname, '../../template/'),
   formatDatetime,
+  mkArticleLink (filepath, filename) {
+    return `${config.host}${filepath.join('/')}/${filename}.html`
+  },
   mkAssetsLink (str) {
     return `${config.host}${config.assets}/${str}`
   }
@@ -65,6 +73,10 @@ const generateSingleHtml = () => {
         header: {
           current: 4
         },
+        aside: {
+          categories: tree.list,
+          current: ''
+        },
         main: {
           content
         },
@@ -98,6 +110,10 @@ const generateTimelineHtml = () => {
         },
         header: {
           current: 3
+        },
+        aside: {
+          categories: tree.list,
+          current: ''
         },
         main: {
           list: content.timeline

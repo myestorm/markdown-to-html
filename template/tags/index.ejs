@@ -7,27 +7,32 @@
     }) %>
   </head>
   <body>
-    <div class="totonoo--layout">
+    <div class="totonoo--layout totonoo--tags">
       <%- include(`${global.path}/components/header.ejs`, {
-        header
+        header,
+        aside
       }) %>
-      <div class="totonoo--tags-main">
-        <%
-        const _list = main.list || []
-        // 返回一个指定范围的随机数
-        const randomRange = (lowerVal, upperVal) => {
-          const choices = upperVal - lowerVal + 1
-          return Math.floor(Math.random() * choices + lowerVal)
-        }
-        _list.forEach(item => {
-        %>
-        <a href="<%= `${global.host}tags/${item.filename}.html` %>" class="bg-<%= randomRange(1, 12)%>"><%= item.title %></a>
-        <% }) %>        
+      <div class="totonoo--main-box">
+        <div class="totonoo--main-scroll">
+          <div class="tags-list">
+            <%
+            const _list = main.list || []
+            // 返回一个指定范围的随机数
+            const randomRange = (lowerVal, upperVal) => {
+              const choices = upperVal - lowerVal + 1
+              return Math.floor(Math.random() * choices + lowerVal)
+            }
+            _list.forEach(item => {
+            %>
+            <a href="<%= `${global.host}tags/${item.filename}.html` %>" class="bg-<%= randomRange(1, 12)%>"><%= item.title %></a>
+            <% }) %>
+          </div>
+          <%- include(`${global.path}/components/footer.ejs`, {
+            global,
+            footer
+          }) %>
+        </div>
       </div>
-      <%- include(`${global.path}/components/footer.ejs`, {
-        global,
-        footer
-      }) %>
     </div>
     <%- include(`${global.path}/components/scripts.ejs`, {
       global,

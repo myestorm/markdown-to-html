@@ -4,6 +4,8 @@
   "description": "利用gulp，通过本地markdown文档生成静态网站。",
   "main": "index.js",
   "scripts": {
+    "serve": "gulp serve",
+    "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,23 +28,23 @@
   },
   "homepage": "https://github.com/myestorm/markdown-to-html#readme",
   "devDependencies": {
-    "browser-sync": "^2.26.12",
+    "browser-sync": "^2.26.13",
     "del": "^5.1.0",
     "ejs": "^3.1.5",
-    "eslint": "^7.9.0",
+    "eslint": "^7.12.1",
     "eslint-config-standard": "^14.1.1",
     "eslint-loader": "^4.0.2",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.2",
     "front-matter": "^4.0.2",
     "gulp": "^4.0.2",
     "gulp-htmlmin": "^5.0.1",
     "gulp-rename": "^2.0.0",
     "markdown-it": "^11.0.1",
     "markdown-it-anchor": "^5.3.0",
-    "moment": "^2.28.0",
+    "moment": "^2.29.1",
     "pinyin": "^2.9.1",
     "readable-stream": "^3.6.0"
   }

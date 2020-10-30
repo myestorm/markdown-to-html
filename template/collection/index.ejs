@@ -7,32 +7,37 @@
     }) %>
   </head>
   <body>
-    <div class="totonoo--layout">
+    <div class="totonoo--layout totonoo--collection-list">
       <%- include(`${global.path}/components/header.ejs`, {
-        header
+        header,
+        aside
       }) %>
-      <div class="totonoo--bookshelf">
-        <div class="image-text">
-          <ul>
-            <%
-            const list = main.list || []
-            %>
-            <% list.forEach(item => { %>
-            <li class="item">
-              <a href="<%= `${global.host}${item._id}/index.html` %>">
-                <img src="<%= item.cover %>" alt="<%= item.title %>">
-                <p><%= item.desc %></p>
-                <h3><%= item.title %></h3>
-              </a>
-            </li>
-            <% }) %>            
-          </ul>
+      <div class="totonoo--main-box">
+        <div class="totonoo--main-scroll">
+          <div class="totonoo--bookshelf">
+            <div class="image-text">
+              <ul>
+                <%
+                const list = main.list || []
+                %>
+                <% list.forEach(item => { %>
+                <li class="item">
+                  <a href="<%= `${global.host}${item._id}/index.html` %>">
+                    <img src="<%= item.cover %>" alt="<%= item.title %>">
+                    <p><%= item.desc %></p>
+                    <h3><%= item.title %></h3>
+                  </a>
+                </li>
+                <% }) %>            
+              </ul>
+            </div>
+          </div>
+          <%- include(`${global.path}/components/footer.ejs`, {
+            global,
+            footer
+          }) %>
         </div>
       </div>
-      <%- include(`${global.path}/components/footer.ejs`, {
-        global,
-        footer
-      }) %>
     </div>
     <%- include(`${global.path}/components/scripts.ejs`, {
       global,

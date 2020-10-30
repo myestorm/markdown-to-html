@@ -9,14 +9,15 @@
   <body>
     <div class="totonoo--layout-collection">
       <%- include(`${global.path}/components/header.ejs`, {
-        header
+        header,
+        aside
       }) %>
       <div class="collection-box" id="totonoo--box">
         <%
         const contents = main.contents
         %>
         <div class="collection-list" id="totonoo--list">
-          <h2><%=contents.catInfo.title%> 目录</h2>
+          <h2>【<%=contents.catInfo.title%>】 目录</h2>
           <nav class="catalog-box">
             <ul>
               <li><a href="<%= global.mkArticleLink(contents.filepath, 'index') %>">封面</a></li>

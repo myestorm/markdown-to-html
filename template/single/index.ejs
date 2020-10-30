@@ -6,37 +6,51 @@
       global
     }) %>
   </head>
-  <body>
-    <div class="totonoo--layout">
+  <body class="line-numbers">
+    <div class="totonoo--layout totonoo--about">
       <%- include(`${global.path}/components/header.ejs`, {
-        header
+        header,
+        aside
       }) %>
-      <div class="totonoo--about-main">
-        <%
-        const content = main.content
-        const navigation = main.content.navigation || []
-        %>
-        <div class="totonoo--markdown-style" id="totonoo--article">
-          <%- content.body %>
+      <div class="totonoo--main-box">
+        <div class="totonoo--main-scroll">
+          <div class="totonoo--main-layout" id="detail-layout">
+            <main class="main" id="detail-main">
+              <div class="detail-main">
+                <article class="detail-article" id="detail-article">
+                  <div class="totonoo--article-title">
+                    <h1>关于我们</h1>
+                  </div>
+                  <%
+                  const content = main.content
+                  const navigation = main.content.navigation || []
+                  %>
+                  <div class="totonoo--markdown-style" id="totonoo--article">
+                    <%- content.body %>
+                  </div>
+                </article>
+                <% if (navigation.length > 0 ) { %>
+                  <div class="article-nav" id="article-nav">
+                  <ul>
+                    <%
+                    navigation.forEach((item, index) => {
+                    %>
+                    <li class="<%= item.tag %><%= index == 0 ? ' current' : '' %>" data-index="<%= index%>"><a href="#<%= item.slug %>"><%= item.title %></a></li>
+                    <%
+                    })
+                    %>
+                  </ul>
+                </div>
+                <% } %>
+              </div>
+            </main>
+          </div>
+          <%- include(`${global.path}/components/footer.ejs`, {
+            global,
+            footer
+          }) %>
         </div>
       </div>
-      <% if (navigation.length > 0 ) { %>
-      <div class="totonoo--about-nav" id="totonoo--nav">
-        <ul>
-          <%
-          navigation.forEach((item, index) => {
-          %>
-          <li class="<%= item.tag %><%= index == 0 ? ' current' : '' %>" data-index="<%= index%>"><a href="#<%= item.slug %>"><%= item.title %></a></li>
-          <%
-          })
-          %>
-        </ul>
-      </div>
-      <% } %>
-      <%- include(`${global.path}/components/footer.ejs`, {
-        global,
-        footer
-      }) %>
     </div>
     <%- include(`${global.path}/components/scripts.ejs`, {
       global,

@@ -271,6 +271,10 @@ const generateListsHtml = () => {
             header: {
               current: 1
             },
+            aside: {
+              categories: tree.list,
+              current: ''
+            },
             main: {
               list: list ? list.children : []
             },
@@ -295,6 +299,10 @@ const generateListsHtml = () => {
             },
             header: {
               current: 1
+            },
+            aside: {
+              categories: tree.list,
+              current: ''
             },
             main: {
               contents
@@ -329,6 +337,10 @@ const generateTagsHtml = () => {
     },
     header: {
       current: 2
+    },
+    aside: {
+      categories: tree.list,
+      current: ''
     },
     main: {
       list: tagsList
@@ -457,6 +469,10 @@ const generateArticleHtml = () => {
         },
         header: {
           current: 0
+        },
+        aside: {
+          categories: tree.list,
+          current: ''
         },
         main: {
           contents: item

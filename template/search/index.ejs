@@ -7,15 +7,20 @@
     }) %>
   </head>
   <body>
-    <div class="totonoo--layout">
+    <div class="totonoo--layout totonoo--search">
       <%- include(`${global.path}/components/header.ejs`, {
-        header
+        header,
+        aside
       }) %>
-      <div class="totonoo--search-main" id="search-box"></div>
-      <%- include(`${global.path}/components/footer.ejs`, {
-        global,
-        footer
-      }) %>
+      <div class="totonoo--main-box">
+        <div class="totonoo--main-scroll">
+          <div class="totonoo--search-main" id="search-box"></div>
+          <%- include(`${global.path}/components/footer.ejs`, {
+            global,
+            footer
+          }) %>
+        </div>
+      </div>
     </div>
     <%- include(`${global.path}/components/scripts.ejs`, {
       global,
