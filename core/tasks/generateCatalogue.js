@@ -28,7 +28,7 @@ const generateCatalogue = () => {
         keywords: [],
         desc: '',
         cover: '' // 头图
-      }, parseMarkdown(file))
+      }, parseMarkdown(file, true))
       const filepath = path.relative(docRoot, file.path)
       arr = filepath.split(/[/|\\]/)
       arr.pop()
