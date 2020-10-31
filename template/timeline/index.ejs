@@ -29,12 +29,18 @@
                 <% } else { %>
                 <small><%= global.formatDatetime(item.publishDate) %></small>
                 <% } %>
-                <span class="content">
-                  <%= item.title %>
-                  <% if (item.image) { %>
-                  <img src="<%= item.image %>">
-                  <% } %>
-                </span>
+                <% if (item.link) { %>
+                <a href="<%= item.link %>">
+                <% } %>
+                  <span class="content">
+                    <%= item.title %>
+                    <% if (item.image) { %>
+                    <img src="<%= item.image %>">
+                    <% } %>
+                  </span>
+                <% if (item.link) { %>
+                </a>
+                <% } %>
               </li>
               <%
               })
