@@ -12,6 +12,7 @@
     "order": 1,
     "mode": "collection",
     "body": "<p>封面</p>\n",
+    "navigation": [],
     "count": 5,
     "pageSize": 10,
     "list": [
