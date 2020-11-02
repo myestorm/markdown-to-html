@@ -1,83 +1,83 @@
 {
     "about.html": {
         "scripts": [
-            "scripts/vendor-822e96b3ba20bd0a260f.js",
-            "scripts/about-822e96b3ba20bd0a260f.js"
+            "scripts/vendor-3634bdb07cfbf88eeaad.js",
+            "scripts/about-3634bdb07cfbf88eeaad.js"
         ],
         "styles": [
-            "styles/vendor-9.822e96b3ba20bd0a260f.css"
+            "styles/vendor-9.3634bdb07cfbf88eeaad.css"
         ]
     },
     "categories.html": {
         "scripts": [
-            "scripts/vendor-822e96b3ba20bd0a260f.js",
-            "scripts/categories-822e96b3ba20bd0a260f.js"
+            "scripts/vendor-3634bdb07cfbf88eeaad.js",
+            "scripts/categories-3634bdb07cfbf88eeaad.js"
         ],
         "styles": [
-            "styles/vendor-9.822e96b3ba20bd0a260f.css"
+            "styles/vendor-9.3634bdb07cfbf88eeaad.css"
         ]
     },
     "collection_list.html": {
         "scripts": [
-            "scripts/vendor-822e96b3ba20bd0a260f.js",
-            "scripts/collection_list-822e96b3ba20bd0a260f.js"
+            "scripts/vendor-3634bdb07cfbf88eeaad.js",
+            "scripts/collection_list-3634bdb07cfbf88eeaad.js"
         ],
         "styles": [
-            "styles/vendor-9.822e96b3ba20bd0a260f.css"
+            "styles/vendor-9.3634bdb07cfbf88eeaad.css"
         ]
     },
     "collection.html": {
         "scripts": [
-            "scripts/vendor-822e96b3ba20bd0a260f.js",
-            "scripts/collection-822e96b3ba20bd0a260f.js"
+            "scripts/vendor-3634bdb07cfbf88eeaad.js",
+            "scripts/collection-3634bdb07cfbf88eeaad.js"
         ],
         "styles": [
-            "styles/vendor-9.822e96b3ba20bd0a260f.css"
+            "styles/vendor-9.3634bdb07cfbf88eeaad.css"
         ]
     },
     "detail.html": {
         "scripts": [
-            "scripts/vendor-822e96b3ba20bd0a260f.js",
-            "scripts/detail-822e96b3ba20bd0a260f.js"
+            "scripts/vendor-3634bdb07cfbf88eeaad.js",
+            "scripts/detail-3634bdb07cfbf88eeaad.js"
         ],
         "styles": [
-            "styles/vendor-9.822e96b3ba20bd0a260f.css"
+            "styles/vendor-9.3634bdb07cfbf88eeaad.css"
         ]
     },
     "index.html": {
         "scripts": [
-            "scripts/vendor-822e96b3ba20bd0a260f.js",
-            "scripts/index-822e96b3ba20bd0a260f.js"
+            "scripts/vendor-3634bdb07cfbf88eeaad.js",
+            "scripts/index-3634bdb07cfbf88eeaad.js"
         ],
         "styles": [
-            "styles/vendor-9.822e96b3ba20bd0a260f.css"
+            "styles/vendor-9.3634bdb07cfbf88eeaad.css"
         ]
     },
     "search.html": {
         "scripts": [
-            "scripts/vendor-822e96b3ba20bd0a260f.js",
-            "scripts/search-822e96b3ba20bd0a260f.js"
+            "scripts/vendor-3634bdb07cfbf88eeaad.js",
+            "scripts/search-3634bdb07cfbf88eeaad.js"
         ],
         "styles": [
-            "styles/vendor-9.822e96b3ba20bd0a260f.css"
+            "styles/vendor-9.3634bdb07cfbf88eeaad.css"
         ]
     },
     "tags.html": {
         "scripts": [
-            "scripts/vendor-822e96b3ba20bd0a260f.js",
-            "scripts/tags-822e96b3ba20bd0a260f.js"
+            "scripts/vendor-3634bdb07cfbf88eeaad.js",
+            "scripts/tags-3634bdb07cfbf88eeaad.js"
         ],
         "styles": [
-            "styles/vendor-9.822e96b3ba20bd0a260f.css"
+            "styles/vendor-9.3634bdb07cfbf88eeaad.css"
         ]
     },
     "timeline.html": {
         "scripts": [
-            "scripts/vendor-822e96b3ba20bd0a260f.js",
-            "scripts/timeline-822e96b3ba20bd0a260f.js"
+            "scripts/vendor-3634bdb07cfbf88eeaad.js",
+            "scripts/timeline-3634bdb07cfbf88eeaad.js"
         ],
         "styles": [
-            "styles/vendor-9.822e96b3ba20bd0a260f.css"
+            "styles/vendor-9.3634bdb07cfbf88eeaad.css"
         ]
     }
 }
