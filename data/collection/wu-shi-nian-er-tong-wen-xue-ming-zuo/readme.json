@@ -8,7 +8,7 @@
         "童话"
     ],
     "desc": "中国五十年儿童文学名家作品选",
-    "cover": "",
+    "cover": "/assets/resource/images/demo.jpg",
     "order": 1,
     "mode": "collection",
     "body": "<p>封面</p>\n",
