@@ -150,10 +150,31 @@ mode: 使用模型[collection | single] 默认为null
 ---
 ```
 
+## 关于一些实用的操作
+
+- 怎么修改LOGO和顶部网站名称？找到文件 `template\components\header.ejs` 修改2-7行就可以了。logo图片替换 `template\assets\images\logo_primary.471a2689efc22fb2f6c165afd424296b.png`。
+- 怎么修改底部信息？修改文件 `template\components\footer.ejs` 即可。
+- 怎么修改左侧公众号图片？ 替换文件 `template\assets\resource\images\qrcode.png`。
+- 顶部导航是否可以修改？ 可以。修改文件 `template\components\header.ejs`。当前高亮需要修改 `core\tasks\generateHtml.js` 和 `core\tasks\generateSingleHtml.js` 中的 header.current的值。
+- 怎么修改模板主题色？方法一：替换css中 `#009844` 为心仪的颜色就可以。方法二：自定义模板，包含布局都可以修改。
+- 备案号和站点名称怎么修改？ 在`core\config.js` 中。
+
+## 自己怎么做模板
+
+1. `git clone https://github.com/myestorm/traditional-web`
+1. 安装依赖 `npm install`
+1. `npm run serve` 起一个本地服务
+1. 修改对应的内容
+1. `npm run build` 打包压缩静态资源
+1. 将 `dist` 目录下的 font images resource scripts styles 文件夹复制到 `markdown-to-html` 项目的 `template\assets` 目录下
+1. 将 `dist` 目录下的 config.json favicon.ico 复制到 `markdown-to-html` 项目的 `template` 目录下
+1. 修改对应的模板文件即可
+
 ## 文件处理的小惊喜
 
 - 支持中文目录，生成对应的拼音作为目录
 - 文件名含有排序信息，如 `1. 学习的第一天` 中 `1.` 不会出现在标题中
+- html文件最终会mini一次
 
 ## 已知问题
 
@@ -162,3 +183,9 @@ mode: 使用模型[collection | single] 默认为null
 ## 演示站点
 
 [https://www.totonoo.com](https://www.totonoo.com)
+
+## 最后
+
+基本的流程就是，先把markdown文件转换成json文件，然后把json和模板结合起来。转换markdown用的是 `markdown-it`。其他跟多依赖包请查看 `package.json` 。
+
+开发这个原因是自己有一堆md文档笔记，想成弄一个网站，网上找了一圈，要么很难用懂，要么界面不喜欢，所以就自己动手了。其中有很多不足，但是“Done is better than perfect”。
