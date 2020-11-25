@@ -1,1 +1,2 @@
-/src/assets/plugins
+node_modules
+dist
