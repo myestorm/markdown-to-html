@@ -1,39 +1,57 @@
 import { series, src, dest } from 'gulp';
 import path from 'path';
 
-import Totonoo from './src/lib/Totonoo';
-import TreeModel from './src/lib/TreeModel';
-import Article from './src/models/Article';
+import { TreeNodeItem, MarkdownAttribute } from './src/lib/Interfaces';
+import MarkdownToHtml from './src/lib/MarkdownToHtml';
+import Tree from './src/lib/Tree';
+import Home from './src/models/Home';
 
-import { docConfig } from './src/config';
-
-const tree = new TreeModel(docConfig.root);
+const markdownToHtml = new MarkdownToHtml();
+const tree = new Tree(markdownToHtml.config.docConfig.listDoc);
 
 const readDocuments = () => {
-  const files = [`${path.join(__dirname, docConfig.root)}/*/**`, `${path.join(__dirname, docConfig.root)}/*.md`];
+  const docRoot = markdownToHtml.config.docConfig.root;
+  const files = [`${path.join(__dirname, docRoot)}/*/**`, `${path.join(__dirname, docRoot)}/*.md`];
   return src(files)
-    .pipe(Totonoo.transform((file) => {
-      // 只需要目录和md文件
+    .pipe(markdownToHtml.transform((file) => {
       if (file.isDirectory() || file.extname === '.md') {
-        tree.addTreeMap(file);
+        const paths = markdownToHtml.parseDir(file);
+        const content: MarkdownAttribute = markdownToHtml.parseMarkdown(file);
+        const parents = [...paths];
+        const isDirectory = file.isDirectory();
+        parents.pop();
+        const item: TreeNodeItem = {
+          path: paths.join('/'),
+          paths: paths,
+          parent: parents.join('/'),
+          parents: parents,
+          extname: file.extname,
+          isDirectory,
+          content,
+          children: []
+        };
+        tree.addMapItem(item);
       }
     }))
     .on('end', () => {
-      tree.mapToTree();
+      tree.generateTree();
     });
 };
 
 const generateHtml = () => {
-  const d = tree.list[2];
-  const a = new Article();
-  const tmp = a.render(d);
-  return Totonoo.addVinylFiles([{
+  const files = [{
     path: 'tree.json',
     contents: JSON.stringify(tree.list, null, 4)
   }, {
-    path: d.path,
-    contents: tmp
-  }])
+    path: 'maps.json',
+    contents: JSON.stringify(Object.fromEntries(tree.maps), null, 4)
+  }];
+  const home = new Home(tree, markdownToHtml);
+  files.push({
+    path: 'index.html',
+    contents: home.render()
+  });
+  return markdownToHtml.addVinylFiles(files)
     .pipe(dest('./html'));
 };
 

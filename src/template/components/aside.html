@@ -1,0 +1,126 @@
+<div class="totonoo--aside" id="totonoo--aside">
+  <h2><i class="iconfont icon-right-menu"></i>推荐内容</h2>
+  <div class="img-title">
+    <ul>
+      <%
+      const _list = [{
+        title: 'Typescript学习笔记',
+        cover: 'demo/1.jpg',
+        path: 'collection_detail.html'
+      }, {
+        title: '前端初级教程',
+        cover: 'demo/2.jpg',
+        path: 'collection_detail.html'
+      }];
+      %>
+      <% _list.forEach(item => { %>
+        <li>
+          <a href="<%=item.path%>">
+            <img src="<%=item.cover%>">
+            <div class="info">
+              <h3><%=item.title%></h3>
+            </div>
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+  <div class="text-list">
+    <ul>
+      <%
+      const _textList = [{
+        title: 'Javascript的并发模型与事件循环（Concurrency model and Event Loop）',
+        path: 'detail.html'
+      }, {
+        title: 'if和switch该如何选择',
+        path: 'detail.html'
+      }, {
+        title: 'Javascript的编码和解码',
+        path: 'detail.html'
+      }, {
+        title: '编写可维护的JavaScript',
+        path: 'detail.html'
+      }, {
+        title: '移动端1px问题产生原因和解决方法',
+        path: 'detail.html'
+      }];
+      %>
+      <% _textList.forEach(item => { %>
+        <li>
+          <a href="<%=item.path%>">
+            <span><%=item.title%></span>
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+  <div class="tags">
+    <h3><i class="iconfont icon-tags"></i>文章标签 <small>Tags</small></h3>
+    <%
+    const _tags = [{
+      title: 'typescript',
+      path: 'tags_list.html'
+    }, {
+      title: '笔记',
+      path: 'tags_list.html'
+    }, {
+      title: 'ts',
+      path: 'tags_list.html'
+    }, {
+      title: 'css',
+      path: 'tags_list.html'
+    }, {
+      title: 'html',
+      path: 'tags_list.html'
+    }, {
+      title: '博客模板',
+      path: 'tags_list.html'
+    }, {
+      title: '量子学派',
+      path: 'tags_list.html'
+    }, {
+      title: '前端框架',
+      path: 'tags_list.html'
+    }, {
+      title: 'vue',
+      path: 'tags_list.html'
+    }, {
+      title: 'react',
+      path: 'tags_list.html'
+    }, {
+      title: 'node',
+      path: 'tags_list.html'
+    }, {
+      title: 'JAVASCRIPT',
+      path: 'tags_list.html'
+    }, {
+      title: '布局',
+      path: 'tags_list.html'
+    }, {
+      title: '公式之美',
+      path: 'tags_list.html'
+    }, {
+      title: '数学与生活',
+      path: 'tags_list.html'
+    }, {
+      title: '设计',
+      path: 'tags_list.html'
+    }, {
+      title: '通用法则',
+      path: 'tags_list.html'
+    }, {
+      title: '项目准备',
+      path: 'tags_list.html'
+    }, {
+      title: 'ts类型',
+      path: 'tags_list.html'
+    }, {
+      title: '范例',
+      path: 'tags_list.html'
+    }]
+    %>
+    <% _tags.forEach(item => { %>
+      <a href="<%=item.path%>"><%=item.title%></a>
+    <% }); %>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+<div class="totonoo--page-tree-placeholder">
+  <div class="totonoo--page-tree" id="totonoo--page-tree">
+    <%
+    const _list = list ? list : [{
+      title: 'Typescript学习笔记',
+      icon: 'icon-book-1',
+      path: 'list.html',
+      children: [{
+        title: 'Typescript学习笔记',
+        icon: 'icon-book-1',
+        path: 'list.html',
+        children: [{
+          title: 'Typescript学习笔记',
+          icon: 'icon-book-1',
+          path: 'list.html',
+          children: []
+        }, {
+          title: '初探typescript',
+          icon: 'icon-book-1',
+          path: 'list.html',
+          children: []
+        }, {
+          title: '项目准备',
+          icon: 'icon-book-1',
+          path: 'list.html',
+          children: []
+        }, {
+          title: '梳理一下基本的思路',
+          icon: 'icon-book-1',
+          path: 'list.html',
+          children: []
+        }, {
+          title: '用TS来实现相关的功能',
+          icon: 'icon-book-1',
+          path: 'list.html',
+          children: []
+        }]
+      }, {
+        title: '初探typescript',
+        icon: 'icon-book-1',
+        path: 'list.html',
+        children: [{
+          title: 'Typescript学习笔记',
+          icon: 'icon-book-1',
+          path: 'list.html',
+          children: []
+        }, {
+          title: '初探typescript',
+          icon: 'icon-book-1',
+          path: 'list.html',
+          children: []
+        }, {
+          title: '项目准备',
+          icon: 'icon-book-1',
+          path: 'list.html',
+          children: []
+        }, {
+          title: '梳理一下基本的思路',
+          icon: 'icon-book-1',
+          path: 'list.html',
+          children: []
+        }, {
+          title: '用TS来实现相关的功能',
+          icon: 'icon-book-1',
+          path: 'list.html',
+          children: []
+        }]
+      }, {
+        title: '项目准备',
+        icon: 'icon-book-1',
+        path: 'list.html',
+        children: []
+      }, {
+        title: '梳理一下基本的思路',
+        icon: 'icon-book-1',
+        path: 'list.html',
+        children: []
+      }, {
+        title: '用TS来实现相关的功能',
+        icon: 'icon-book-1',
+        path: 'list.html',
+        children: []
+      }]
+    }, {
+      title: '初探typescript',
+      icon: '',
+      path: 'list.html',
+      children: []
+    }, {
+      title: '项目准备',
+      icon: '',
+      path: 'list.html',
+      children: []
+    }, {
+      title: '梳理一下基本的思路',
+      icon: '',
+      path: 'list.html',
+      children: []
+    }, {
+      title: '用TS来实现相关的功能',
+      icon: 'icon-book-2',
+      path: 'list.html',
+      children: []
+    }];
+    const current = 'Typescript学习笔记';
+    %>
+    <%
+    const html = []
+    const forEachTree = (data = [], level = 0) => {
+      html.push('<ul>')
+      data.forEach(item => {
+        html.push(`<li><a href="${item.path}" class="${level == 0 ? 'first-level' : ''} level-${level} ${item.title == current ? 'current' : ''}">${item.icon ? '<i class="iconfont '+ item.icon +'"></i>' : ''}${item.title}</a>`);
+        if (item.children && item.children.length > 0){
+          forEachTree(item.children, (level + 1));
+        }
+        html.push('</li>');
+      })
+      html.push('</ul>');
+    };
+    forEachTree(_list, 0);
+    %>
+    <%- html.join(''); %>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import { AnchorOptions } from 'markdown-it-anchor';
-import { SiteConfig, TemplateConfig, DocConfig } from '../lib/T';
+import { SiteConfig, TemplateConfig, DocConfig } from '../lib/Interfaces';
 
 export const markdownItAnchor: AnchorOptions = {
   level: 1,
@@ -9,8 +9,8 @@ export const markdownItAnchor: AnchorOptions = {
 };
 
 export const siteConfig: SiteConfig = {
-  hosts: '/',
-  siteName: 'totonoo 前端笔记',
+  hosts: '/', // 必须以/结尾
+  siteName: 'markdown-to-html',
   siteRoot: 'www',
   beian: '',
   logo: '',
@@ -28,7 +28,7 @@ export const docConfig: DocConfig = {
   root: 'documents',
   listDoc: 'readme.md',
   about: 'about.md',
-  timeline: 'timeline.md'
+  timeline: 'timeline'
 };
 
 export default {

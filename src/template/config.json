@@ -1,83 +1,92 @@
 {
     "about.html": {
         "scripts": [
-            "scripts/vendor-06a4468c0a381989513b.js",
-            "scripts/about-06a4468c0a381989513b.js"
+            "scripts/vendor-67e421.js",
+            "scripts/about-67e421.js"
         ],
         "styles": [
-            "styles/vendor-9.06a4468c0a381989513b.css"
+            "styles/about.67e421.css"
         ]
     },
-    "categories.html": {
+    "collection_detail.html": {
         "scripts": [
-            "scripts/vendor-06a4468c0a381989513b.js",
-            "scripts/categories-06a4468c0a381989513b.js"
+            "scripts/vendor-67e421.js",
+            "scripts/collection_detail-67e421.js"
         ],
         "styles": [
-            "styles/vendor-9.06a4468c0a381989513b.css"
-        ]
-    },
-    "collection_list.html": {
-        "scripts": [
-            "scripts/vendor-06a4468c0a381989513b.js",
-            "scripts/collection_list-06a4468c0a381989513b.js"
-        ],
-        "styles": [
-            "styles/vendor-9.06a4468c0a381989513b.css"
+            "styles/collection_detail.67e421.css"
         ]
     },
     "collection.html": {
         "scripts": [
-            "scripts/vendor-06a4468c0a381989513b.js",
-            "scripts/collection-06a4468c0a381989513b.js"
+            "scripts/vendor-67e421.js",
+            "scripts/collection-67e421.js"
         ],
         "styles": [
-            "styles/vendor-9.06a4468c0a381989513b.css"
+            "styles/collection.67e421.css"
         ]
     },
     "detail.html": {
         "scripts": [
-            "scripts/vendor-06a4468c0a381989513b.js",
-            "scripts/detail-06a4468c0a381989513b.js"
+            "scripts/vendor-67e421.js",
+            "scripts/detail-67e421.js"
         ],
         "styles": [
-            "styles/vendor-9.06a4468c0a381989513b.css"
+            "styles/detail.67e421.css"
         ]
     },
     "index.html": {
         "scripts": [
-            "scripts/vendor-06a4468c0a381989513b.js",
-            "scripts/index-06a4468c0a381989513b.js"
+            "scripts/vendor-67e421.js",
+            "scripts/index-67e421.js"
         ],
         "styles": [
-            "styles/vendor-9.06a4468c0a381989513b.css"
+            "styles/index.67e421.css"
+        ]
+    },
+    "list.html": {
+        "scripts": [
+            "scripts/vendor-67e421.js",
+            "scripts/list-67e421.js"
+        ],
+        "styles": [
+            "styles/list.67e421.css"
         ]
     },
     "search.html": {
         "scripts": [
-            "scripts/vendor-06a4468c0a381989513b.js",
-            "scripts/search-06a4468c0a381989513b.js"
+            "scripts/vendor-67e421.js",
+            "scripts/search-67e421.js"
         ],
         "styles": [
-            "styles/vendor-9.06a4468c0a381989513b.css"
+            "styles/search.67e421.css"
+        ]
+    },
+    "tags_list.html": {
+        "scripts": [
+            "scripts/vendor-67e421.js",
+            "scripts/tags_list-67e421.js"
+        ],
+        "styles": [
+            "styles/tags_list.67e421.css"
         ]
     },
     "tags.html": {
         "scripts": [
-            "scripts/vendor-06a4468c0a381989513b.js",
-            "scripts/tags-06a4468c0a381989513b.js"
+            "scripts/vendor-67e421.js",
+            "scripts/tags-67e421.js"
         ],
         "styles": [
-            "styles/vendor-9.06a4468c0a381989513b.css"
+            "styles/tags.67e421.css"
         ]
     },
     "timeline.html": {
         "scripts": [
-            "scripts/vendor-06a4468c0a381989513b.js",
-            "scripts/timeline-06a4468c0a381989513b.js"
+            "scripts/vendor-67e421.js",
+            "scripts/timeline-67e421.js"
         ],
         "styles": [
-            "styles/vendor-9.06a4468c0a381989513b.css"
+            "styles/timeline.67e421.css"
         ]
     }
 }

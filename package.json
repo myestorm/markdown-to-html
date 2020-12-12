@@ -1,7 +1,7 @@
 {
   "name": "markdown-to-html",
   "version": "1.0.0",
-  "description": "利用gulp，通过本地markdown文档生成静态网站。",
+  "description": "使用gulp、markdown-it、Typescript等，读取本地markdown文档生成静态网站。",
   "main": "index.js",
   "scripts": {
     "serve": "gulp serve",

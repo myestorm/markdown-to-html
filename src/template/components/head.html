@@ -1,15 +1,15 @@
 <head>
   <meta charset="utf-8">
   <title><%= head.title %></title>
-  <meta name="keywords" content="<%= head.keywords.join(',') %>"/>
+  <meta name="keywords" content="<%= head.keywords %>"/>
   <meta name="description" content="<%= head.desc %>">
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-  <meta name="generator" content="totonoo-markdown-to-html 0.0.2">
+  <meta name="generator" content="totonoo-markdown-to-html 1.0.0">
   <%
   const _styles = head.styles || []
   _styles.forEach(item => {
   %>
-  <link href="<%= global.mkAssetsLink(item) %>" rel="stylesheet">
+  <link href="<%= item %>" rel="stylesheet">
   <%
   })
   %>
