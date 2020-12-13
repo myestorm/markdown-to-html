@@ -1,0 +1,8 @@
+<%
+  const _scripts = foot.scripts || []
+  _scripts.forEach(item => {
+  %>
+  <script defer src="<%= item %>"></script>
+  <%
+  })
+  %>

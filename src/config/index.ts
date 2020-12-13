@@ -26,7 +26,7 @@ export const templateConfig: TemplateConfig = {
 
 export const docConfig: DocConfig = {
   root: 'documents',
-  listDoc: 'readme.md',
+  listDoc: 'readme.md', // 不能是中文
   about: 'about.md',
   timeline: 'timeline'
 };

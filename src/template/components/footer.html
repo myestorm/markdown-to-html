@@ -1,5 +1,10 @@
+<%
+const _copyright = footer.copyright;
+const _beian = footer.beian;
+const _hosts = footer.hosts || '/';
+%>
 <footer class="totonoo--footer">
-  Copyright &copy; <span id="copyright-years">2005 - 2020</span>
-  <a href="index.html">Totonoo.com</a>
-  <a href="http://beian.miit.gov.cn/" target="_balnk">粤ICP备12041241号</a>
+  Copyright &copy; <span id="copyright-years"><%= _copyright.join(' - ') %></span>
+  <a href="<%= _hosts %>">Totonoo.com</a>
+  <a href="http://beian.miit.gov.cn/" target="_balnk"><%= _beian %></a>
 </footer>

@@ -1,151 +1,15 @@
 <%
-const _list = [{
-  title: '初探typescript',
-  path: 'detail.html',
-  desc: 'Typescript出来很久了，也天天被人吹爆了，耳朵都快磨起茧子了。最近项目做的快，有点空闲时间，就打算学一下。学习之前先搜索了2个关键词“为什么要用Typescript”和“为什么不用Typescript”，看了一圈，挺有意思。',
-  publishDate: '2020-11-16 16:18',
-  categoryTitle: '初探typescript',
-  categoryPath: 'list.html',
-  tags: [{
-    title: 'typescript',
-    path: 'tags_list.html'
-  }, {
-    title: 'ts',
-    path: 'tags_list.html'
-  }, {
-    title: '笔记',
-    path: 'tags_list.html'
-  }]
-}, {
-  title: '项目准备',
-  path: 'detail.html',
-  desc: 'Typescript安装Koa，安装mongodb，安装typeorm',
-  publishDate: '2020-11-16 16:18',
-  categoryTitle: '初探typescript',
-  categoryPath: 'list.html',
-  tags: [{
-    title: 'typescript',
-    path: 'tags_list.html'
-  }, {
-    title: 'ts',
-    path: 'tags_list.html'
-  }, {
-    title: '笔记',
-    path: 'tags_list.html'
-  }]
-}, {
-  title: '初探typescript',
-  path: 'detail.html',
-  desc: 'Typescript出来很久了，也天天被人吹爆了，耳朵都快磨起茧子了。最近项目做的快，有点空闲时间，就打算学一下。学习之前先搜索了2个关键词“为什么要用Typescript”和“为什么不用Typescript”，看了一圈，挺有意思。',
-  publishDate: '2020-11-16 16:18',
-  categoryTitle: '初探typescript',
-  categoryPath: 'list.html',
-  tags: [{
-    title: 'typescript',
-    path: 'tags_list.html'
-  }, {
-    title: 'ts',
-    path: 'tags_list.html'
-  }, {
-    title: '笔记',
-    path: 'tags_list.html'
-  }]
-}, {
-  title: '项目准备',
-  path: 'detail.html',
-  desc: 'Typescript安装Koa，安装mongodb，安装typeorm',
-  publishDate: '2020-11-16 16:18',
-  categoryTitle: '初探typescript',
-  categoryPath: 'list.html',
-  tags: [{
-    title: 'typescript',
-    path: 'tags_list.html'
-  }, {
-    title: 'ts',
-    path: 'tags_list.html'
-  }, {
-    title: '笔记',
-    path: 'tags_list.html'
-  }]
-}, {
-  title: '初探typescript',
-  path: 'detail.html',
-  desc: 'Typescript出来很久了，也天天被人吹爆了，耳朵都快磨起茧子了。最近项目做的快，有点空闲时间，就打算学一下。学习之前先搜索了2个关键词“为什么要用Typescript”和“为什么不用Typescript”，看了一圈，挺有意思。',
-  publishDate: '2020-11-16 16:18',
-  categoryTitle: '初探typescript',
-  categoryPath: 'list.html',
-  tags: [{
-    title: 'typescript',
-    path: 'tags_list.html'
-  }, {
-    title: 'ts',
-    path: 'tags_list.html'
-  }, {
-    title: '笔记',
-    path: 'tags_list.html'
-  }]
-}, {
-  title: '项目准备',
-  path: 'detail.html',
-  desc: 'Typescript安装Koa，安装mongodb，安装typeorm',
-  publishDate: '2020-11-16 16:18',
-  categoryTitle: '初探typescript',
-  categoryPath: 'list.html',
-  tags: [{
-    title: 'typescript',
-    path: 'tags_list.html'
-  }, {
-    title: 'ts',
-    path: 'tags_list.html'
-  }, {
-    title: '笔记',
-    path: 'tags_list.html'
-  }]
-}, {
-  title: '初探typescript',
-  path: 'detail.html',
-  desc: 'Typescript出来很久了，也天天被人吹爆了，耳朵都快磨起茧子了。最近项目做的快，有点空闲时间，就打算学一下。学习之前先搜索了2个关键词“为什么要用Typescript”和“为什么不用Typescript”，看了一圈，挺有意思。',
-  publishDate: '2020-11-16 16:18',
-  categoryTitle: '初探typescript',
-  categoryPath: 'list.html',
-  tags: [{
-    title: 'typescript',
-    path: 'tags_list.html'
-  }, {
-    title: 'ts',
-    path: 'tags_list.html'
-  }, {
-    title: '笔记',
-    path: 'tags_list.html'
-  }]
-}, {
-  title: '项目准备',
-  path: 'detail.html',
-  desc: 'Typescript安装Koa，安装mongodb，安装typeorm',
-  publishDate: '2020-11-16 16:18',
-  categoryTitle: '初探typescript',
-  categoryPath: 'list.html',
-  tags: [{
-    title: 'typescript',
-    path: 'tags_list.html'
-  }, {
-    title: 'ts',
-    path: 'tags_list.html'
-  }, {
-    title: '笔记',
-    path: 'tags_list.html'
-  }]
-}];
+const _list = list || [];
 %>
 <div class="totonoo--post-list">
   <% _list.forEach(item => { %>
   <div class="item">
     <h3 class="title">
-      <a href="<%=item.path%>"><%=item.title%></a>
+      <a href="<%= item.path %>"><%= item.title %></a>
     </h3>
     <p class="desc">
-      <%=item.desc%>...
-      <a href="<%=item.path%>" class="more">
+      <%= item.desc %>...
+      <a href="<%= item.path %>" class="more">
         <i class="iconfont icon-search"></i>详细
       </a>
     </p>
@@ -153,13 +17,13 @@ const _list = [{
       <ul>
         <li class="a">
           <i class="iconfont icon-folder"></i>
-          <a href="<%=item.categoryPath%>"><%=item.categoryTitle%></a>
+          <a href="<%= item.parent %>"><%= item.parentName %></a>
         </li>
-        <li class="b"><i class="iconfont icon-time"></i><%=item.publishDate%></li>
+        <li class="b"><i class="iconfont icon-time"></i><%= item.publishDate %></li>
         <li class="c">
           <i class="iconfont icon-tags"></i>
-          <% item.tags.forEach(tag => { %>
-            <a href="<%=tag.path%>"><%=tag.title%></a>
+          <% item.keywordsPath.forEach(keyword => { %>
+            <a href="<%= keyword.path %>"><%= keyword.title %></a>
           <% }); %>
         </li>
       </ul>

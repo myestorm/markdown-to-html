@@ -82,3 +82,31 @@ export interface TreeNodeItem {
 export const getProperty = <T, K extends keyof T>(o: T, name: K): T[K] => {
   return o[name];
 };
+
+// 分页数据
+export interface PageItem {
+  title: string | number,
+  path: string,
+  disabled?: boolean,
+  isCurrent?: boolean,
+}
+
+// 关键字
+export interface KeywordsItem {
+  title: string,
+  path: string
+}
+
+// 列表数据
+export interface SearchListItem {
+  path: string,
+  parent: string,
+  parentName: string,
+  title: string,
+  keywords: string,
+  keywordsPath: KeywordsItem[],
+  desc: string,
+  publishDate: string,
+  recommend: number,
+  order: number
+}

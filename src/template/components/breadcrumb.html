@@ -1,7 +1,7 @@
 <div class="totonoo--breadcrumb">
   <ul>
-    <li><a href="index.html"><i class="iconfont icon-home"></i></a></li>
-    <% const _list = list || []; %>
+    <li><a href="<%= (breadcrumb.home || '/') %>"><i class="iconfont icon-home"></i></a></li>
+    <% const _list = breadcrumb.list || []; %>
     <% _list.forEach((item, index) => { %>
         <li class="separate"><i class="iconfont icon-right"></i></li>
       <% if (index == _list.length -1) { %>

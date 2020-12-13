@@ -1,26 +1,6 @@
 <%
-const _current = current || 0;
-const list = [{
-  title: '首页',
-  path: 'index.html',
-  icon: 'icon-home'
-}, {
-  title: '文集',
-  path: 'collection.html',
-  icon: 'icon-book-1'
-}, {
-  title: '标签',
-  path: 'tags.html',
-  icon: 'icon-tags'
-}, {
-  title: '时光轴',
-  path: 'timeline.html',
-  icon: 'icon-timeline'
-}, {
-  title: '关于我们',
-  path: 'about.html',
-  icon: 'icon-aboutus'
-}]
+const _current = header.current || 0;
+const _list = header.list;
 %>
 <div class="totonoo--header" id="totonoo--top-header">
   <div class="wrapper">
@@ -38,7 +18,7 @@ const list = [{
           <div class="top-nav">
             <nav class="top-nav-list">
               <ul>
-                <% list.forEach((item, index) => { %>
+                <% _list.forEach((item, index) => { %>
                   <li<%- (index == _current) ? ' class="current"' : '' %>><a href="<%=item.path%>"><i class="iconfont <%=item.icon%>"></i><%=item.title%></a></li>
                 <% }); %>
               </ul>

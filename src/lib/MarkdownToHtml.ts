@@ -43,11 +43,12 @@ class MarkdownToHtml {
     const contents = file.contents || '';
     const fmContents: FrontMatterResult<MarkdownAttribute> = FrontMatter(contents.toString());
     const attributes = fmContents.attributes;
+    const zoneOffset = new Date().getTimezoneOffset() * 1000 * 60;
     const data: MarkdownAttribute = {
       title: attributes.title,
       keywords: attributes.keywords || [],
       desc: attributes.desc || '',
-      publishDate: attributes.publishDate ?  new Date(attributes.publishDate).getTime() : new Date().getTime(),
+      publishDate: attributes.publishDate ?  (new Date(attributes.publishDate).getTime() + zoneOffset) : new Date().getTime(),
       order: attributes.order || 1,
       icon: attributes.icon || '',
       recommend: attributes.recommend || 0,
@@ -104,6 +105,11 @@ class MarkdownToHtml {
       str = str.replace(/\s+/g, ''); // 替换空格
       str = str.replace(/[,|.|，|。|<|>|《|》|‘|’|“|”|"|?|？|（|）|(|)]/g, ''); // 替换逗号句号
     }
+    // 如果有汉字添加随机字符串
+    // const reg = new RegExp('[\\u4E00-\\u9FFF]+', 'g');
+    // if (reg.test(str)){
+    //   str = `${str}${this.generateRandomString(6)}`;
+    // }
     let py: string = Pinyin(str, {
       style: Pinyin.STYLE_NORMAL
     }).join('-');

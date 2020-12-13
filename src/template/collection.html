@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include(`${g.$path}/components/head.html`, {
+    head
+  }) %>
+<body>
+  <%- include(`${g.$path}/components/header.html`, {
+    header
+  }) %>
+  <div class="totonoo--body">
+    <div class="wrapper">
+      <div class="totonoo--flying-wing">
+        <div class="green-dragon">
+          <%- include(`${g.$path}/components/tree.html`, {
+            tree
+          }) %>
+        </div>
+        <div class="old-ox">
+          <div class="totonoo--main">
+            <%- include(`${g.$path}/components/breadcrumb.html`, {
+              breadcrumb
+            }) %>
+            <div class="totonoo--collection">
+              <ul>
+                <% 
+                const _list = [{
+                  title: 'Typescript学习笔记',
+                  cover: 'demo/1.jpg',
+                  path: 'collection_detail.html',
+                  count: 4
+                }, {
+                  title: '前端初级教程',
+                  cover: 'demo/2.jpg',
+                  path: 'collection_detail.html',
+                  count: 20
+                }, {
+                  title: 'Typescript学习笔记',
+                  cover: 'demo/1.jpg',
+                  path: 'collection_detail.html',
+                  count: 4
+                }, {
+                  title: '前端初级教程',
+                  cover: 'demo/2.jpg',
+                  path: 'collection_detail.html',
+                  count: 20
+                }];
+                %>
+                <% _list.forEach(item => { %>
+                  <li>
+                    <a href="<%=item.path%>">
+                      <img src="<%=item.cover%>">
+                      <div class="info">
+                        <span class="title"><%=item.title%></span>
+                        <span class="num">共 <%= item.count%> 篇</span>
+                      </div>
+                    </a>
+                  </li>
+                <% }); %>
+              </ul>
+            </div>
+            <%- include(`${g.$path}/components/pagination.html`, {
+              pages: main.pages
+            }) %>
+          </div>
+          <%- include(`${g.$path}/components/footer.html`, {
+            footer
+          }) %>
+        </div>
+        <div class="white-tiger">
+          <%- include(`${g.$path}/components/aside.html`, {
+            aside
+          }) %>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
