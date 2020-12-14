@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include(`${g.$path}/components/head.html`, {
+    head
+  }) %>
+<body>
+  <%- include(`${g.$path}/components/header.html`, {
+    header
+  }) %>
+  <div class="totonoo--body">
+    <div class="wrapper">
+      <div class="totonoo--flying-wing">
+        <div class="green-dragon">
+          <%- include(`${g.$path}/components/tree.html`, {
+            tree
+          }) %>
+        </div>
+        <div class="old-ox">
+          <div class="totonoo--main">
+            <%- include(`${g.$path}/components/breadcrumb.html`, {
+              breadcrumb
+            }) %>
+            <div class="totonoo--timeline">
+              <button class="totonoo--right-menu"><i class="iconfont icon-right-menu"></i></button>
+              <div class="years">
+                <ul>
+                  <%
+                  const _years = main.list.years || [];
+                  _years.forEach(item => { 
+                  %>
+                  <li class="<%= (item - main.current < 0 ? 'passed': '') %> <%= (item - main.current == 0 ? ' current': '') %>"><a href="javascript:;"><%= item %></a></li>
+                  <% }); %>
+                  <%
+                  for (let i=1; i<7; i++) {
+                  %>
+                  <li><a href="javascript:;"><%= (_years[_years.length - 1] + i) %></a></li>
+                  <%
+                  }
+                  %>
+                </ul>
+              </div>
+              <%
+              const _list = main.list.list || [];
+              _list.forEach(item => { 
+              %>
+              <div class="items">
+                <ol>
+                  <% item.forEach(sub => { %>
+                  <li>
+                    <span class="datetime"><span class="d"><%= sub.publishDateDay %></span> <span class="t"><%= sub.publishDateTime %></span></span>
+                    <div class="content">
+                      <h2><a href="<%= sub.link || 'javascript:;' %>"><%= sub.title %></a></h2>
+                      <% if (sub.desc) { %>
+                      <p><%= sub.desc %></p>
+                      <% } %>
+                      <% if (sub.image) { %>
+                      <img src="<%= sub.image %>">
+                      <% } %>
+                      <% if (sub.link) { %>
+                      <a href="<%= sub.link %>" class="more">
+                        <i class="iconfont icon-search"></i>查看详细
+                      </a>
+                      <% } %>
+                    </div>
+                  </li>
+                  <% }); %>
+                </ol>
+              </div>
+              <% }); %>
+            </div>
+          </div>
+          <%- include(`${g.$path}/components/footer.html`, {
+            footer
+          }) %>
+        </div>
+        <div class="white-tiger">
+          <%- include(`${g.$path}/components/aside.html`, {
+            aside
+          }) %>
+        </div>
+    </div>
+  </div>
+  <%- include(`${g.$path}/components/foot.html`, {
+    foot
+  }) %>
+</body>
+</html>

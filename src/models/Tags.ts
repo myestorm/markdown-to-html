@@ -140,7 +140,7 @@ class Tags {
       const foot = {
         scripts
       };
-      const templatePath = this.baseModel.mergeTemplatePath(this.template);
+      const templatePath = this.baseModel.mergeTemplatePath(this.listTemplate);
       const template = ejs.fileLoader(templatePath).toString();
       const html = ejs.render(template, {
         g: this.baseModel.g,

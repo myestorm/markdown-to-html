@@ -8,7 +8,7 @@ import MarkdownItAnchor, { AnchorOptions } from 'markdown-it-anchor';
 import FrontMatter, { FrontMatterResult } from 'front-matter';
 import { Readable, Transform } from 'readable-stream';
 import { markdownItAnchor, siteConfig, templateConfig, docConfig } from '../config/index';
-import { MarkdownAttribute, MarkdownNavigation, ModelTypes, AddFileItem } from './Interfaces';
+import { MarkdownAttribute, MarkdownNavigation, ModelTypes, AddFileItem, TimelineItem } from './Interfaces';
 
 const markdownItAnchorConfig: AnchorOptions = Object.assign({}, {
   level: 1,
@@ -44,6 +44,18 @@ class MarkdownToHtml {
     const fmContents: FrontMatterResult<MarkdownAttribute> = FrontMatter(contents.toString());
     const attributes = fmContents.attributes;
     const zoneOffset = new Date().getTimezoneOffset() * 1000 * 60;
+    const timeline: TimelineItem[] = [];
+    if (attributes.timeline && attributes.timeline.length > 0) {
+      attributes.timeline.forEach(timelineItem => {
+        timeline.push({
+          publishDate: timelineItem.publishDate ?  (new Date(timelineItem.publishDate).getTime() + zoneOffset) : new Date().getTime(),
+          title: timelineItem.title || '',
+          image: timelineItem.image || '',
+          desc: timelineItem.desc || '',
+          link: timelineItem.link || '',
+        });
+      });
+    }
     const data: MarkdownAttribute = {
       title: attributes.title,
       keywords: attributes.keywords || [],
@@ -55,7 +67,8 @@ class MarkdownToHtml {
       mode: attributes.mode || ModelTypes.Normal,
       cover: attributes.cover || '',
       body: '',
-      navigation: []
+      navigation: [],
+      timeline: timeline
     };
     let markdownIt = new MarkdownIt();
     _markdownItAnchorConfig.callback = (token: Token, {

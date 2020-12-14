@@ -13,6 +13,7 @@ import CollectionList from './src/models/CollectionList';
 import Collection from './src/models/Collection';
 import Tags from './src/models/Tags';
 import Single from './src/models/Single';
+import Timeline from './src/models/Timeline';
 
 const markdownToHtml = new MarkdownToHtml();
 const tree = new Tree(markdownToHtml.config.docConfig.listDoc);
@@ -63,6 +64,7 @@ const generateHtml = () => {
   const collection = new Collection(baseModel);
   const tags = new Tags(baseModel);
   const single = new Single(baseModel);
+  const timeline = new Timeline(baseModel);
 
   // 遍历生成数据
   tree.maps.forEach(item => {
@@ -70,46 +72,85 @@ const generateHtml = () => {
       const mode = tree.getMode(item);
       if (item.paths.includes(tree.listDoc)) {
         const _path = item.path.replace(tree.listDoc, 'index.html');
-        if (mode === ModelTypes.Home) {
+        switch (mode) {
+        case ModelTypes.Home: {
           files.push({
             path: _path,
             contents: home.render()
           });
-        } else if (mode === ModelTypes.Collection) {
+          break;
+        }
+        case ModelTypes.Collection: {
           const listPage = collectionList.creatPages(item.path);
           listPage.forEach(item => {
             files.push(item);
           });
-        } else if (mode === ModelTypes.Normal) {
+          break;
+        }
+        case ModelTypes.Timeline: {
+          files.push({
+            path: _path,
+            contents: timeline.render(item.path)
+          });
+          break;
+        }
+        case ModelTypes.Tags: {
+          break;
+        }
+        case ModelTypes.Single: {
+          break;
+        }
+        case ModelTypes.Normal: {
           const listPage = normalList.creatPages(item.path);
           listPage.forEach(item => {
             files.push(item);
           });
+          break;
+        }
+        default: {
+          break;
+        }
         }
       } else {
-        if (mode === ModelTypes.Collection) {
+        switch (mode) {
+        case ModelTypes.Collection: {
           files.push({
             path: item.path,
             contents: collection.render(item.path)
           });
-        } else if (mode === ModelTypes.Timeline) {
-          return false;
-        } else if (mode === ModelTypes.Tags) {
+          break;
+        }
+        case ModelTypes.Timeline: {
+          break;
+        }
+        case ModelTypes.Tags: {
           files.push({
             path: item.path,
             contents: tags.render(item.path)
           });
-          tags.tagsList();
-        } else if (mode === ModelTypes.Single) {
+          const listPage = tags.tagsList(item.path);
+          listPage.forEach(item => {
+            files.push(item);
+          });
+          break;
+        }
+        case ModelTypes.Single: {
           files.push({
             path: item.path,
             contents: single.render(item.path)
           });
-        } else if (mode === ModelTypes.Normal) {
+          break;
+        }
+        case ModelTypes.Normal: {
           files.push({
             path: item.path,
             contents: normal.render(item.path)
           });
+          break;
+        }
+        default: {
+          break;
+        }
         }
       }
     }

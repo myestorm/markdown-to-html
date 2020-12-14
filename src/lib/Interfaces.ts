@@ -46,6 +46,17 @@ export interface MarkdownNavigation {
   title: string
 }
 
+// timeline item
+export interface TimelineItem {
+  publishDate: number,
+  publishDateDay?: string,
+  publishDateTime?: string,
+  title: string,
+  desc: string,
+  image: string,
+  link: string
+}
+
 // MD文档的属性
 export interface MarkdownAttribute {
   title: string,
@@ -59,6 +70,7 @@ export interface MarkdownAttribute {
   cover?: string,
   body: string,
   navigation?: MarkdownNavigation[]
+  timeline?: TimelineItem[]
 }
 
 // gulp插入文档格式

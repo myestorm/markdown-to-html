@@ -15,8 +15,7 @@ import {
   CollectionRecommendItem,
   TagsItem,
   BreadcrumbItem,
-  SortsItem,
-  MarkdownAttribute
+  SortsItem
 } from './Interfaces';
 
 class BaseModel {
@@ -36,6 +35,8 @@ class BaseModel {
     $path: '',
     $hosts: ''
   };
+
+  dayjs = dayjs;
 
   constructor (tree: Tree, markdownToHtml: MarkdownToHtml) {
     this.markdownToHtml = markdownToHtml;
