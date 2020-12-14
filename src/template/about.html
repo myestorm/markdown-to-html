@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include(`${g.$path}/components/head.html`, {
+    head
+  }) %>
+<body>
+  <%- include(`${g.$path}/components/header.html`, {
+    header
+  }) %>
+  <div class="totonoo--body">
+    <div class="wrapper">
+      <div class="totonoo--flying-wing">
+        <div class="green-dragon">
+          <%- include(`${g.$path}/components/tree.html`, {
+            tree
+          }) %>
+        </div>
+        <div class="old-ox">
+          <div class="totonoo--main">
+            <%- include(`${g.$path}/components/breadcrumb.html`, {
+              breadcrumb
+            }) %>
+            <div class="totonoo--about">
+              <button class="totonoo--right-menu"><i class="iconfont icon-right-menu"></i></button>
+              <div class="totonoo--markdown">
+                <h1><%- main.title %></h1>
+                <%- main.body %>
+              </div>
+            </div>
+          </div>
+          <%- include(`${g.$path}/components/footer.html`, {
+            footer
+          }) %>
+        </div>
+        <div class="white-tiger">
+          <%- include(`${g.$path}/components/articlenav.html`, {
+            list: main.nav
+          }) %>
+        </div>
+    </div>
+  </div>
+  <%- include(`${g.$path}/components/foot.html`, {
+    foot
+  }) %>
+</body>
+</html>

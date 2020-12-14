@@ -1,191 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= htmlWebpackPlugin.options.title %></title>
-  <link rel="icon" href="favicon.ico">
-</head>
+  <%- include(`${g.$path}/components/head.html`, {
+    head
+  }) %>
 <body>
-  <%- require('../../components/header.html')({
-    current: 1
-  })%>
+  <%- include(`${g.$path}/components/header.html`, {
+    header
+  }) %>
   <div class="totonoo--body">
     <div class="wrapper">
       <div class="totonoo--flying-wing">
         <div class="green-dragon totonoo--tree-one">
-          <%- require('../../components/tree.html')({
-            list: [{
-              title: '封面',
-              icon: '',
-              path: 'collection_detail.html',
-              children: []
-            }, {
-              title: 'Typescript学习笔记',
-              icon: '',
-              path: 'collection_detail.html',
-              children: []
-            }, {
-              title: '初探typescript',
-              icon: '',
-              path: 'collection_detail.html',
-              children: []
-            }, {
-              title: '项目准备',
-              icon: '',
-              path: 'collection_detail.html',
-              children: []
-            }, {
-              title: '梳理一下基本的思路',
-              icon: '',
-              path: 'collection_detail.html',
-              children: []
-            }, {
-              title: '用TS来实现相关的功能',
-              icon: '',
-              path: 'collection_detail.html',
-              children: []
-            }]
-          })%>
+          <%- include(`${g.$path}/components/tree.html`, {
+            tree
+          }) %>
         </div>
         <div class="old-ox">
           <div class="totonoo--main">
-            <%- require('../../components/breadcrumb.html')({
-              list: [{
-                title: '文集',
-                path: 'collection.html'
-              }, {
-                title: 'Typescript学习笔记',
-                path: 'collection.html'
-              }]
-            })%>
+            <%- include(`${g.$path}/components/breadcrumb.html`, {
+              breadcrumb
+            }) %>
             <div class="totonoo--collection-detail">
               <button class="totonoo--right-menu"><i class="iconfont icon-right-menu"></i></button>
               <article class="totonoo--markdown">
-                <h2 id="typescript%E7%AE%80%E4%BB%8B">
-                  <a class="header-anchor" href="#typescript%E7%AE%80%E4%BB%8B"
-                    >¶</a
-                  >
-                  TypeScript简介
-                </h2>
-                <p>
-                  TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6
-                  标准（ES6 教程）。
-                </p>
-                <p>TypeScript 由微软开发的自由和开源的编程语言。</p>
-                <p>
-                  TypeScript 设计目标是开发大型应用，它可以编译成纯
-                  JavaScript，编译出来的 JavaScript 可以运行在任何浏览器上。
-                </p>
-                <p>
-                  TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6
-                  标准（ES6 教程）。
-                </p>
-                <p>TypeScript 由微软开发的自由和开源的编程语言。</p>
-                <p>
-                  TypeScript 设计目标是开发大型应用，它可以编译成纯
-                  JavaScript，编译出来的 JavaScript 可以运行在任何浏览器上。
-                </p>
-                <h2
-                  id="%E5%A7%8B%E4%BA%8Ejavascript%EF%BC%8C%E5%BD%92%E4%BA%8Ejavascript"
-                >
-                  <a
-                    class="header-anchor"
-                    href="#%E5%A7%8B%E4%BA%8Ejavascript%EF%BC%8C%E5%BD%92%E4%BA%8Ejavascript"
-                    >¶</a
-                  >
-                  始于JavaScript，归于JavaScript
-                </h2>
-                <p>
-                  TypeScript从今天数以百万计的JavaScript开发者所熟悉的语法和语义开始。使用现有的JavaScript代码，包括流行的JavaScript库，并从JavaScript代码中调用TypeScript代码。
-                </p>
-                <p>
-                  TypeScript可以编译出纯净、
-                  简洁的JavaScript代码，并且可以运行在任何浏览器上、Node.js环境中和任何支持ECMAScript
-                  3（或更高版本）的JavaScript引擎中。
-                </p>
-                <p>
-                  TypeScript从今天数以百万计的JavaScript开发者所熟悉的语法和语义开始。使用现有的JavaScript代码，包括流行的JavaScript库，并从JavaScript代码中调用TypeScript代码。
-                </p>
-                <p>
-                  TypeScript可以编译出纯净、
-                  简洁的JavaScript代码，并且可以运行在任何浏览器上、Node.js环境中和任何支持ECMAScript
-                  3（或更高版本）的JavaScript引擎中。
-                </p>
-                <h2
-                  id="%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%B7%A5%E5%85%B7%E6%9E%84%E5%BB%BA-%E5%A4%A7%E5%9E%8B%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"
-                >
-                  <a
-                    class="header-anchor"
-                    href="#%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%B7%A5%E5%85%B7%E6%9E%84%E5%BB%BA-%E5%A4%A7%E5%9E%8B%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"
-                    >¶</a
-                  >
-                  强大的工具构建 大型应用程序
-                </h2>
-                <p>
-                  类型允许JavaScript开发者在开发JavaScript应用程序时使用高效的开发工具和常用操作比如静态检查和代码重构。
-                </p>
-                <p>
-                  类型是可选的，类型推断让一些类型的注释使你的代码的静态验证有很大的不同。类型让你定义软件组件之间的接口和洞察现有JavaScript库的行为。
-                </p>
-                <p>
-                  类型允许JavaScript开发者在开发JavaScript应用程序时使用高效的开发工具和常用操作比如静态检查和代码重构。
-                </p>
-                <p>
-                  类型是可选的，类型推断让一些类型的注释使你的代码的静态验证有很大的不同。类型让你定义软件组件之间的接口和洞察现有JavaScript库的行为。
-                </p>
-                <h2 id="%E5%85%88%E8%BF%9B%E7%9A%84-javascript">
-                  <a
-                    class="header-anchor"
-                    href="#%E5%85%88%E8%BF%9B%E7%9A%84-javascript"
-                    >¶</a
-                  >
-                  先进的 JavaScript
-                </h2>
-                <p>
-                  TypeScript提供最新的和不断发展的JavaScript特性，包括那些来自2015年的ECMAScript和未来的提案中的特性，比如异步功能和Decorators，以帮助建立健壮的组件。
-                </p>
-                <p>
-                  这些特性为高可信应用程序开发时是可用的，但是会被编译成简洁的ECMAScript3（或更新版本）的JavaScript。
-                </p>
-                <p>
-                  TypeScript提供最新的和不断发展的JavaScript特性，包括那些来自2015年的ECMAScript和未来的提案中的特性，比如异步功能和Decorators，以帮助建立健壮的组件。
-                </p>
-                <p>
-                  这些特性为高可信应用程序开发时是可用的，但是会被编译成简洁的ECMAScript3（或更新版本）的JavaScript。
-                </p>
+                <h1><%- main.title %></h1>
+                <%- main.body %>
               </article>
+              <div class="totonoo--article-related">
+                <ul>
+                  <%
+                  if (main.related.prev.path) {
+                  %>
+                  <li>
+                    <a href="<%= main.related.prev.path %>"><i class="iconfont icon-arrow-left"></i> <%= main.related.prev.title %></a>
+                  </li>
+                  <%
+                  }
+                  if (main.related.next.path) {
+                  %>
+                  <li>
+                    <a href="<%= main.related.next.path %>"><%= main.related.next.title %> <i class="iconfont icon-arrow-right"></i></a>
+                  </li>
+                  <%
+                  }
+                  %>
+                </ul>
+              </div>
             </div>
           </div>
-          <%- require('../../components/footer.html')()%>
+          <%- include(`${g.$path}/components/footer.html`, {
+            footer
+          }) %>
         </div>
         <div class="white-tiger">
-          <div class="totonoo--article-nav" id="totonoo--article-nav">
-            <ul>
-              <li class="h2 current" data-index="0">
-                <a href="#typescript%E7%AE%80%E4%BB%8B">TypeScript简介</a>
-              </li>
-              <li class="h2" data-index="1">
-                <a
-                  href="#%E5%A7%8B%E4%BA%8Ejavascript%EF%BC%8C%E5%BD%92%E4%BA%8Ejavascript"
-                  >始于JavaScript，归于JavaScript</a
-                >
-              </li>
-              <li class="h2" data-index="2">
-                <a
-                  href="#%E5%BC%BA%E5%A4%A7%E7%9A%84%E5%B7%A5%E5%85%B7%E6%9E%84%E5%BB%BA-%E5%A4%A7%E5%9E%8B%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"
-                  >强大的工具构建 大型应用程序</a
-                >
-              </li>
-              <li class="h2" data-index="3">
-                <a href="#%E5%85%88%E8%BF%9B%E7%9A%84-javascript"
-                  >先进的 JavaScript</a
-                >
-              </li>
-            </ul>
-          </div>
+          <%- include(`${g.$path}/components/articlenav.html`, {
+            list: main.nav
+          }) %>
         </div>
     </div>
   </div>
+  <%- include(`${g.$path}/components/foot.html`, {
+    foot
+  }) %>
 </body>
 </html>

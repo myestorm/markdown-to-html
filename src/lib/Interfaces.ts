@@ -110,3 +110,50 @@ export interface SearchListItem {
   recommend: number,
   order: number
 }
+
+// 文集列表属性
+export interface CollectionListItem {
+  id: string,
+  title: string,
+  cover: string,
+  path: string,
+  isLast: boolean,
+  count?: number
+}
+
+// 顶部菜单
+export interface TopNavItem {
+  path: string,
+  title: string,
+  icon?: string,
+  id?: string,
+  order?: number,
+  publishDate?: number,
+  children?: TopNavItem[]
+}
+
+// 右侧推荐文集
+export interface CollectionRecommendItem {
+  path: string,
+  title: string,
+  cover?: string
+}
+
+// 标签
+export interface TagsItem {
+  path: string,
+  title: string,
+  count: number
+}
+
+// 面包屑
+export interface BreadcrumbItem {
+  path: string,
+  title: string
+}
+
+// 排序
+export interface SortsItem {
+  order: number,
+  publishDate: number | string
+}

@@ -5,10 +5,14 @@ import browserSync from 'browser-sync';
 import { TreeNodeItem, MarkdownAttribute, ModelTypes } from './src/lib/Interfaces';
 import MarkdownToHtml from './src/lib/MarkdownToHtml';
 import Tree from './src/lib/Tree';
+import BaseModel from './src/lib/BaseModel';
 import Home from './src/models/Home';
 import NormalList from './src/models/NormalList';
 import Normal from './src/models/Normal';
 import CollectionList from './src/models/CollectionList';
+import Collection from './src/models/Collection';
+import Tags from './src/models/Tags';
+import Single from './src/models/Single';
 
 const markdownToHtml = new MarkdownToHtml();
 const tree = new Tree(markdownToHtml.config.docConfig.listDoc);
@@ -51,10 +55,14 @@ const generateHtml = () => {
     path: 'maps.json',
     contents: JSON.stringify(Object.fromEntries(tree.maps), null, 4)
   }];
-  const home = new Home(tree, markdownToHtml);
-  const normalList = new NormalList(tree, markdownToHtml);
-  const normal = new Normal(tree, markdownToHtml);
-  const collectionList = new CollectionList(tree, markdownToHtml);
+  const baseModel = new BaseModel(tree, markdownToHtml);
+  const home = new Home(baseModel);
+  const normalList = new NormalList(baseModel);
+  const normal = new Normal(baseModel);
+  const collectionList = new CollectionList(baseModel);
+  const collection = new Collection(baseModel);
+  const tags = new Tags(baseModel);
+  const single = new Single(baseModel);
 
   // 遍历生成数据
   tree.maps.forEach(item => {
@@ -80,13 +88,23 @@ const generateHtml = () => {
         }
       } else {
         if (mode === ModelTypes.Collection) {
-          console.log(123);
+          files.push({
+            path: item.path,
+            contents: collection.render(item.path)
+          });
         } else if (mode === ModelTypes.Timeline) {
-          console.log(456);
+          return false;
         } else if (mode === ModelTypes.Tags) {
-          console.log(789);
+          files.push({
+            path: item.path,
+            contents: tags.render(item.path)
+          });
+          tags.tagsList();
         } else if (mode === ModelTypes.Single) {
-          console.log(124);
+          files.push({
+            path: item.path,
+            contents: single.render(item.path)
+          });
         } else if (mode === ModelTypes.Normal) {
           files.push({
             path: item.path,

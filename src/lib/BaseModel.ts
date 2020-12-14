@@ -2,31 +2,22 @@ import path from 'path';
 import dayjs from 'dayjs';
 import MarkdownToHtml from './MarkdownToHtml';
 import Tree from './Tree';
-import { ModelTypes, TreeNodeItem, getProperty, AssetsItem, PageItem, KeywordsItem, SearchListItem } from './Interfaces';
-
-export interface TopNavItem {
-  path: string,
-  title: string,
-  icon: string,
-  children?: TopNavItem[]
-}
-
-export interface CollectionRecommendItem {
-  path: string,
-  title: string,
-  cover?: string
-}
-
-export interface TagsItem {
-  path: string,
-  title: string,
-  count: number
-}
-
-export interface BreadcrumbItem {
-  path: string,
-  title: string
-}
+import {
+  ModelTypes,
+  TreeNodeItem,
+  getProperty,
+  AssetsItem,
+  PageItem,
+  KeywordsItem,
+  SearchListItem,
+  CollectionListItem,
+  TopNavItem,
+  CollectionRecommendItem,
+  TagsItem,
+  BreadcrumbItem,
+  SortsItem,
+  MarkdownAttribute
+} from './Interfaces';
 
 class BaseModel {
   markdownToHtml: MarkdownToHtml;
@@ -38,6 +29,8 @@ class BaseModel {
   collectionRecommend: CollectionRecommendItem[] = [];
   normalRecommend: CollectionRecommendItem[] = [];
   tags: TagsItem[] = [];
+  collectionList: CollectionListItem[] = [];
+  collectionContents: TreeNodeItem[] = [];
 
   g = {
     $path: '',
@@ -58,7 +51,9 @@ class BaseModel {
     this.generateNormalRecommend();
     this.generateTags();
     this.generateNormalList();
-    // console.log(JSON.stringify(this.normalList, null, 4));
+    this.generateCollectionContents();
+    this.generateCollectionList();
+    // console.log(JSON.stringify(this.collectionList, null, 4));
   }
 
   // 格式化时间
@@ -148,12 +143,20 @@ class BaseModel {
         const content = this.tree.getContent(item);
         if (content) {
           res.push({
+            id: item.path,
             path: this.mergerHosts(item.path === this.tree.listDoc ? '' : item.path),
             title: item.path === this.tree.listDoc ? '首页' : content.title,
-            icon: content.icon || ''
+            icon: content.icon || '',
+            order: content.order
           });
         }
       }
+    });
+    // 排序
+    res.sort((a, b) => {
+      const _a = a.order || 1;
+      const _b = b.order || 1;
+      return _a - _b;
     });
     this.topNav = res;
   }
@@ -314,6 +317,54 @@ class BaseModel {
     });
   }
 
+  // collection的列表
+  generateCollectionList (): void {
+    const res: CollectionListItem[] = [];
+    this.tree.maps.forEach(item => {
+      if (item.isDirectory === false && item.content.mode === ModelTypes.Collection && item.paths.includes(this.tree.listDoc)) {
+        res.push({
+          id: item.parent,
+          title: item.content.title,
+          cover: item.content.cover,
+          path: this.mergerHosts(item.parent),
+          isLast: false,
+          count: 0
+        });
+      }
+    });
+    // 是否是最后一级
+    res.forEach(item => {
+      const subs = res.filter(sub => sub.path.indexOf(item.path) === 0);
+      item.isLast = subs.length <= 1;
+      if (item.isLast) { // 获取文章下文章的总数
+        const subCounts = this.collectionContents.filter(sun => sun.parent === item.id);
+        item.count = subCounts.length;
+      }
+    });
+    this.collectionList = res;
+  }
+
+  // collect
+  generateCollectionContents (): void {
+    this.tree.maps.forEach(item => {
+      if (item.isDirectory === false && item.content.mode === ModelTypes.Collection && item.paths.includes(this.tree.listDoc) === false) {
+        this.collectionContents.push(item);
+      }
+    });
+    // 排序
+    this.collectionContents.sort((a, b) => {
+      const _a = {
+        order: a.content.order || 1,
+        publishDate: a.content.publishDate || 0
+      };
+      const _b = {
+        order: b.content.order || 1,
+        publishDate: b.content.publishDate || 0
+      };
+      return this.sorts<{ order: number, publishDate: number}>(_a, _b);
+    });
+  }
+
   // 分页数据
   listPages (total = 0, pagesize = 10, filename = 'index', ext = '.html'): PageItem[][] {
     const pages: PageItem[][] = [];
@@ -381,13 +432,25 @@ class BaseModel {
     });
     // 排序
     res.sort((a, b) => {
-      let _res = a.order - b.order;
-      if (_res === 0) {
-        _res = new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime();
-      }
-      return _res;
+      return this.sorts<SearchListItem>(a, b);
     });
     return res;
+  }
+
+  // 排序
+  sorts<T extends SortsItem> (a: T, b: T): number {
+    let _res = a.order - b.order;
+    if (_res === 0) {
+      _res = new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime();
+    }
+    return _res;
+  }
+
+  // 查找顶部排序
+  findTopIndex (topPath: string): number {
+    let index = this.topNav.findIndex(item => item.id === topPath);
+    index = index < 0 ? 0 : index;
+    return index;
   }
 
 }

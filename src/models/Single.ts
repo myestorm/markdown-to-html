@@ -1,39 +1,17 @@
 import ejs from 'ejs';
 import BaseModel from '../lib/BaseModel';
-import { ModelTypes, TopNavItem } from '../lib/Interfaces';
+import { ModelTypes } from '../lib/Interfaces';
 
-class Collection {
-  mode = ModelTypes.Collection;
-  template = 'collection_detail.html';
+class Single {
+  mode = ModelTypes.Single;
+  template = 'about.html';
   baseModel: BaseModel;
 
   constructor (baseModel: BaseModel) {
     this.baseModel = baseModel;
   }
-  findRelated (parentPath: string): TopNavItem[] {
-    const collectionInfo = this.baseModel.collectionList.find(item => item.isLast && item.id === parentPath);
-    const res: TopNavItem[] = [];
-    if (collectionInfo) {
-      const _collectionInfo = Object.assign({}, collectionInfo);
-      _collectionInfo.title = `${collectionInfo.title}封面`;
-      _collectionInfo.path = `${collectionInfo.path}/index.html`;
-      res.push(_collectionInfo);
-      const list = this.baseModel.collectionContents.filter(item => item.parent === collectionInfo.id);
-      list.forEach(item => {
-        res.push({
-          id: item.path,
-          path: this.baseModel.mergerHosts(item.path),
-          title: item.content.title,
-          order: item.content.order,
-          publishDate: item.content.publishDate,
-          icon: item.content.icon
-        });
-      });
-    }
-    return res;
-  }
-  render (listPath: string): string {
-    const modelData = this.baseModel.tree.findByPath(listPath);
+  render (filepath: string): string {
+    const modelData = this.baseModel.tree.findByPath(filepath);
     const { styles, scripts} = this.baseModel.mergeAssets(this.template);
     if (modelData) {
       const content = modelData.content;
@@ -44,27 +22,21 @@ class Collection {
         styles
       };
       const header = {
-        current: 1,
+        current: this.baseModel.findTopIndex(modelData.paths[0]),
         list: this.baseModel.topNav
       };
-      const treeList = this.findRelated(modelData.parent);
       const tree = {
-        list: treeList,
+        list: this.baseModel.normalTree,
         current: this.baseModel.mergerHosts(modelData.path)
       };
       const breadcrumb = {
         home: this.baseModel.g.$hosts,
         list: this.baseModel.getBreadcrumb(modelData.paths)
       };
-      const index = treeList.findIndex(item => item.id === modelData.path);
       const main = {
         title: content.title,
         body: content.body,
-        nav: content.navigation,
-        related: {
-          prev: index <= 0 ? {} : treeList[index - 1],
-          next: index >= treeList.length - 1 ? {} : treeList[index + 1]
-        }
+        nav: content.navigation
       };
       const footer = {
         copyright: this.baseModel.markdownToHtml.config.siteConfig.copyright,
@@ -94,9 +66,9 @@ class Collection {
       });
       return html;
     } else {
-      throw new Error(`${listPath} 封面配置错误！`);
+      throw new Error(`${filepath} 文件错误！`);
     }
   }
 }
 
-export default Collection;
+export default Single;
