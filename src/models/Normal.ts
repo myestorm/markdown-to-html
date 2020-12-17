@@ -33,11 +33,11 @@ class Normal {
     const _next = normalList[_index + 1];
     const prev: TempTextLink = {
       title: _prev ? _prev.title : '',
-      path: _prev ? this.baseModel.mergerHosts(this.baseModel.replaceFileExt(_prev.title)) : '',
+      path: _prev ? this.baseModel.mergerHosts(this.baseModel.replaceFileExt(_prev.path)) : '',
     };
     const next: TempTextLink = {
       title: _next ? _next.title : '',
-      path: _next ? this.baseModel.mergerHosts(this.baseModel.replaceFileExt(_next.title)) : '',
+      path: _next ? this.baseModel.mergerHosts(this.baseModel.replaceFileExt(_next.path)) : '',
     };
     return {
       prev,
@@ -64,7 +64,8 @@ class Normal {
       };
       const tree: TempTree = {
         list: this.baseModel.normalTree,
-        current: ''
+        current: this.baseModel.mergerHosts(this.baseModel.replaceFileExt(modelData.path)),
+        level: 2
       };
       const breadcrumb: TempBreadcrumb = {
         home: this.baseModel.g.$hosts,
@@ -146,7 +147,8 @@ class Normal {
       };
       const tree: TempTree = {
         list: this.baseModel.normalTree,
-        current: this.baseModel.mergerHosts(this.baseModel.replaceFileExt(modelData.path))
+        current: this.baseModel.mergerHosts(this.baseModel.replaceFileExt(modelData.path)),
+        level: 2
       };
       const breadcrumb: TempBreadcrumb = {
         home: this.baseModel.g.$hosts,

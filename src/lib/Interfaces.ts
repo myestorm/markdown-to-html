@@ -25,6 +25,7 @@ export interface DocConfig {
 // 模型
 export enum ModelTypes {
   Home = 'home', // 首页
+  Search = 'search', // 搜索
   Normal = 'normal', // 文章
   Single = 'single', // 单页: 如关于我们
   Tags = 'tags', // 标签
@@ -155,11 +156,12 @@ export interface TempHeader {
   list: TempTextLink[]
 }
 export interface TempTreeItem extends TempTextLink {
-  children: TempTreeItem[]
+  children?: TempTreeItem[]
 }
 export interface TempTree {
   current: string,
-  list: TempTreeItem[]
+  list: TempTreeItem[],
+  level?: number
 }
 export interface TempBreadcrumb {
   home: string,

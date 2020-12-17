@@ -46,10 +46,14 @@
               <div class="totonoo--article-related">
                 <ul>
                   <li>
+                    <% if (main.related.prev.title) { %>
                     <a href="<%= main.related.prev.path %>"><i class="iconfont icon-arrow-left"></i> <%= main.related.prev.title %></a>
+                    <% } %>
                   </li>
                   <li>
+                    <% if (main.related.next.title) { %>
                     <a href="<%= main.related.next.path %>"><%= main.related.next.title %> <i class="iconfont icon-arrow-right"></i></a>
+                    <% } %>
                   </li>
                 </ul>
               </div>

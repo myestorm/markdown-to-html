@@ -1,92 +1,92 @@
 {
     "about.html": {
         "scripts": [
-            "scripts/vendor-3867db.js",
-            "scripts/about-3867db.js"
+            "scripts/vendor-2684c0.js",
+            "scripts/about-2684c0.js"
         ],
         "styles": [
-            "styles/about.3867db.css"
+            "styles/about.2684c0.css"
         ]
     },
     "collection_detail.html": {
         "scripts": [
-            "scripts/vendor-3867db.js",
-            "scripts/collection_detail-3867db.js"
+            "scripts/vendor-2684c0.js",
+            "scripts/collection_detail-2684c0.js"
         ],
         "styles": [
-            "styles/collection_detail.3867db.css"
+            "styles/collection_detail.2684c0.css"
         ]
     },
     "collection.html": {
         "scripts": [
-            "scripts/vendor-3867db.js",
-            "scripts/collection-3867db.js"
+            "scripts/vendor-2684c0.js",
+            "scripts/collection-2684c0.js"
         ],
         "styles": [
-            "styles/collection.3867db.css"
+            "styles/collection.2684c0.css"
         ]
     },
     "detail.html": {
         "scripts": [
-            "scripts/vendor-3867db.js",
-            "scripts/detail-3867db.js"
+            "scripts/vendor-2684c0.js",
+            "scripts/detail-2684c0.js"
         ],
         "styles": [
-            "styles/detail.3867db.css"
+            "styles/detail.2684c0.css"
         ]
     },
     "index.html": {
         "scripts": [
-            "scripts/vendor-3867db.js",
-            "scripts/index-3867db.js"
+            "scripts/vendor-2684c0.js",
+            "scripts/index-2684c0.js"
         ],
         "styles": [
-            "styles/index.3867db.css"
+            "styles/index.2684c0.css"
         ]
     },
     "list.html": {
         "scripts": [
-            "scripts/vendor-3867db.js",
-            "scripts/list-3867db.js"
+            "scripts/vendor-2684c0.js",
+            "scripts/list-2684c0.js"
         ],
         "styles": [
-            "styles/list.3867db.css"
+            "styles/list.2684c0.css"
         ]
     },
     "search.html": {
         "scripts": [
-            "scripts/vendor-3867db.js",
-            "scripts/search-3867db.js"
+            "scripts/vendor-2684c0.js",
+            "scripts/search-2684c0.js"
         ],
         "styles": [
-            "styles/search.3867db.css"
+            "styles/search.2684c0.css"
         ]
     },
     "tags_list.html": {
         "scripts": [
-            "scripts/vendor-3867db.js",
-            "scripts/tags_list-3867db.js"
+            "scripts/vendor-2684c0.js",
+            "scripts/tags_list-2684c0.js"
         ],
         "styles": [
-            "styles/tags_list.3867db.css"
+            "styles/tags_list.2684c0.css"
         ]
     },
     "tags.html": {
         "scripts": [
-            "scripts/vendor-3867db.js",
-            "scripts/tags-3867db.js"
+            "scripts/vendor-2684c0.js",
+            "scripts/tags-2684c0.js"
         ],
         "styles": [
-            "styles/tags.3867db.css"
+            "styles/tags.2684c0.css"
         ]
     },
     "timeline.html": {
         "scripts": [
-            "scripts/vendor-3867db.js",
-            "scripts/timeline-3867db.js"
+            "scripts/vendor-2684c0.js",
+            "scripts/timeline-2684c0.js"
         ],
         "styles": [
-            "styles/timeline.3867db.css"
+            "styles/timeline.2684c0.css"
         ]
     }
 }

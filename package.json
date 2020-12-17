@@ -4,7 +4,7 @@
   "description": "使用gulp、markdown-it、Typescript等，读取本地markdown文档生成静态网站。",
   "main": "index.js",
   "scripts": {
-    "serve": "gulp serve",
+    "serve": "gulp && gulp serve",
     "build": "gulp",
     "lint": "eslint . --ext .ts",
     "test": "mocha -r ts-node/register test/**/*.spec.ts"
@@ -42,6 +42,7 @@
     "chai": "^4.2.0",
     "crypto-js": "^4.0.0",
     "dayjs": "^1.9.6",
+    "del": "^6.0.0",
     "ejs": "^3.1.5",
     "eslint": "^7.14.0",
     "front-matter": "^4.0.2",

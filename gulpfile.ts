@@ -1,8 +1,9 @@
-import { series, src, dest, watch } from 'gulp';
+import { series, parallel, src, dest, watch } from 'gulp';
+import del from 'del';
 import path from 'path';
 import browserSync from 'browser-sync';
 
-import { ModelTypes } from './src/lib/Interfaces';
+import { ModelTypes, GulpFileItem } from './src/lib/Interfaces';
 import MarkdownToHtml from './src/lib/MarkdownToHtml';
 import Tree from './src/lib/Tree';
 import BaseModel from './src/lib/BaseModel';
@@ -12,11 +13,14 @@ import Timeline from './src/models/Timeline';
 import Collection from './src/models/Collection';
 import Normal from './src/models/Normal';
 import Single from './src/models/Single';
+import Search from './src/models/Search';
 
 const markdownToHtml = new MarkdownToHtml();
 const tree = new Tree();
 
 const siteRoot = path.resolve(__dirname, markdownToHtml.config.siteConfig.siteRoot);
+const docRoot = path.resolve(__dirname, markdownToHtml.config.docConfig.root);
+const templateDir = path.resolve(__dirname, markdownToHtml.config.templateConfig.root);
 
 const readDocuments = () => {
   const docRoot = markdownToHtml.config.docConfig.root;
@@ -33,13 +37,7 @@ const readDocuments = () => {
 };
 
 const generateHtml = () => {
-  let files = [{
-    path: 'tree.json',
-    contents: JSON.stringify(tree.list, null, 4)
-  }, {
-    path: 'maps.json',
-    contents: JSON.stringify(Object.fromEntries(tree.dataMaps), null, 4)
-  }];
+  let files: GulpFileItem[] = [];
 
   const baseModel = new BaseModel(tree, markdownToHtml);
   const home = new Home(baseModel);
@@ -48,6 +46,7 @@ const generateHtml = () => {
   const collection = new Collection(baseModel);
   const normal = new Normal(baseModel);
   const single = new Single(baseModel);
+  const search = new Search(baseModel);
 
   // 生成列表
   tree.directoryList.forEach(item => {
@@ -89,9 +88,41 @@ const generateHtml = () => {
       files.push(single.render(item.id));
     }
   });
+  // 生成搜索
+  files.push(search.render());
+  files.push({
+    path: 'search.json',
+    contents: JSON.stringify(search.getSeachData(), null, 4)
+  });
 
   return markdownToHtml.addVinylFiles(files)
     .pipe(dest(siteRoot));
+};
+
+const copyAssets = () => {
+  return src([`${templateDir}/assets/**/*.*`])
+    .pipe(dest(`${siteRoot}/assets`));
+};
+
+const copyFavicon = () => {
+  return src([`${templateDir}/favicon.ico`])
+    .pipe(dest(siteRoot));
+};
+
+const delDirTask = () => {
+  return del([`./${path.relative(__dirname, siteRoot)}/**/*`], {
+    force: true
+  });
+};
+
+const copyContentResource = () => {
+  return src([`${docRoot}/**/*.{jpg, jpeg, gif, png, svg, .mp4, .mp3, html, json, txt, webp, htm}`])
+    .pipe(dest(siteRoot));
+};
+
+const copyPublic = () => {
+  return src(['./public/**/*'])
+    .pipe(dest(`${siteRoot}/img`));
 };
 
 /**
@@ -110,7 +141,6 @@ const serve = () => {
     open: false,
     notify: false
   });
-  // 监听ejs文件的修改
   watch([`./${siteRoot}/**/*.*`], () => {
     return src(`./${siteRoot}/**/*.*`)
       .pipe(reload({ stream: true }));
@@ -120,6 +150,15 @@ const serve = () => {
 exports.serve = serve;
 
 exports.default = series(
-  readDocuments,
-  generateHtml
+  delDirTask,
+  parallel(
+    copyAssets,
+    copyFavicon,
+    copyContentResource,
+    copyPublic,
+    series(
+      readDocuments,
+      generateHtml
+    )
+  )
 );

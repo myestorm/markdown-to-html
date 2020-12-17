@@ -28,22 +28,16 @@
               </article>
               <div class="totonoo--article-related">
                 <ul>
-                  <%
-                  if (main.related.prev.path) {
-                  %>
                   <li>
+                    <% if (main.related.prev.path) { %>
                     <a href="<%= main.related.prev.path %>"><i class="iconfont icon-arrow-left"></i> <%= main.related.prev.title %></a>
+                    <% } %>
                   </li>
-                  <%
-                  }
-                  if (main.related.next.path) {
-                  %>
                   <li>
+                    <% if (main.related.next.path) { %>
                     <a href="<%= main.related.next.path %>"><%= main.related.next.title %> <i class="iconfont icon-arrow-right"></i></a>
+                    <% } %>
                   </li>
-                  <%
-                  }
-                  %>
                 </ul>
               </div>
             </div>

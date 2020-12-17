@@ -90,9 +90,10 @@ class Home {
       current: this.baseModel.findIndexTopNav(topId),
       list: this.baseModel.topNav
     };
-    const tree = {
+    const tree: TempTree = {
       list: treeList,
-      current: this.baseModel.mergerHosts(this.baseModel.replaceFileExt(modelData.path))
+      current: this.baseModel.mergerHosts(this.baseModel.replaceFileExt(modelData.path)),
+      level: 1
     };
     const breadcrumb: TempBreadcrumb = {
       home: this.baseModel.g.$hosts,

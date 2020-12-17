@@ -44,6 +44,7 @@ class Tree {
   checkIsReadme (data: MarkdownParseAttribute): boolean {
     return data.paths.includes(docConfig.listDoc);
   }
+
   separatedData (): void {
     this.dataMaps.forEach(item => {
       if(this.checkIsReadme(item) === false) {

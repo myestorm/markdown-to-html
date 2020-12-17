@@ -9,7 +9,7 @@
     const forEachTree = (data = [], level = 0) => {
       html.push('<ul>')
       data.forEach(item => {
-        const _path = item.path.replace('/index.html', '');
+        const _path = tree.level === 1 ? item.path : item.path.replace('/index.html', '');
         const currentClass = _current.indexOf(_path) === 0 ? 'current' : '';
         html.push(`<li><a href="${item.path}" class="${level == 0 ? 'first-level' : ''} level-${level} ${currentClass}">${item.icon ? '<i class="iconfont '+ item.icon +'"></i>' : ''}${item.title}</a>`);
         if (item.children && item.children.length > 0){
