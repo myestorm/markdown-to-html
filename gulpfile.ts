@@ -1,4 +1,5 @@
 import { series, parallel, src, dest, watch } from 'gulp';
+import htmlmin from 'gulp-htmlmin';
 import del from 'del';
 import path from 'path';
 import browserSync from 'browser-sync';
@@ -96,6 +97,7 @@ const generateHtml = () => {
   });
 
   return markdownToHtml.addVinylFiles(files)
+    .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(dest(siteRoot));
 };
 
