@@ -4,57 +4,50 @@ import MarkdownToHtml from './MarkdownToHtml';
 import Tree from './Tree';
 import {
   ModelTypes,
-  TreeNodeItem,
-  getProperty,
   AssetsItem,
-  PageItem,
-  KeywordsItem,
-  SearchListItem,
-  CollectionListItem,
-  TopNavItem,
-  CollectionRecommendItem,
+  MarkdownParseAttribute,
   TagsItem,
-  BreadcrumbItem,
-  SortsItem
+  getProperty,
+  PageItem,
+  TempTextLink,
+  TempImageLink,
+  TempListItem,
+  TempTreeItem
 } from './Interfaces';
 
 class BaseModel {
-  markdownToHtml: MarkdownToHtml;
-  tree: Tree;
-  topNav: TopNavItem[] = [];
-  normalTree: TopNavItem[] = [];
-  normalList: SearchListItem[] = [];
-  searchList: SearchListItem[] = [];
-  collectionRecommend: CollectionRecommendItem[] = [];
-  normalRecommend: CollectionRecommendItem[] = [];
-  tags: TagsItem[] = [];
-  collectionList: CollectionListItem[] = [];
-  collectionContents: TreeNodeItem[] = [];
-
+  $t: Tree;
+  $m: MarkdownToHtml;
   g = {
     $path: '',
     $hosts: ''
   };
 
-  dayjs = dayjs;
+  topNav: TempTextLink[] = [];
+  normalTree: TempTreeItem[] = [];
+  collectionRecommend: TempImageLink[] = [];
+  normalRecommend: TempTextLink[] = [];
+  tagsList: TagsItem[] = [];
+  collectionBooks: MarkdownParseAttribute[][] = [];
 
   constructor (tree: Tree, markdownToHtml: MarkdownToHtml) {
-    this.markdownToHtml = markdownToHtml;
-    this.tree = tree;
+    this.$t = tree;
+    this.$m = markdownToHtml;
     this.g = {
-      $path: path.resolve(__dirname, `../../${this.markdownToHtml.config.templateConfig.root}`),
-      $hosts: this.markdownToHtml.config.siteConfig.hosts
+      $path: path.resolve(__dirname, `../../${this.$m.config.templateConfig.root}`),
+      $hosts: this.$m.config.siteConfig.hosts
     };
     this.generateTopNav();
-    this.generateNormalTree();
-    this.generateSearchList();
-    this.generateCollectionRecommend();
-    this.generateNormalRecommend();
+    this.getNormalTree();
     this.generateTags();
-    this.generateNormalList();
-    this.generateCollectionContents();
-    this.generateCollectionList();
-    // console.log(JSON.stringify(this.collectionList, null, 4));
+    this.generateNormalRecommend();
+    this.generateCollectionGroup();
+    this.generateCollectionRecommend();
+  }
+
+  // 获取dayjs对象
+  getDayjs (d: string | number): dayjs.Dayjs {
+    return dayjs(d);
   }
 
   // 格式化时间
@@ -62,308 +55,72 @@ class BaseModel {
     return dayjs(t).format('YYYY-MM-DD HH:mm');
   }
 
-  // 面包屑
-  getBreadcrumb (paths: string[]): BreadcrumbItem[] {
-    const _paths = [ ... paths];
-    if (paths.includes(this.tree.listDoc)) {
-      _paths.pop();
+  // 格式keywords
+  formatKeywords (keywords: string[]): { title: string, path: string}[] {
+    const res: { title: string, path: string}[] = [];
+    keywords.forEach(keyword => {
+      res.push({
+        title: keyword,
+        path: this.mergerHosts(`tags/${this.$m.pinYin(keyword)}.html`)
+      });
+    });
+    return res;
+  }
+
+  // 格式化列表数据
+  formatTempListItem (data: MarkdownParseAttribute[]): TempListItem[] {
+    const res: TempListItem[] = [];
+    data.forEach(item => {
+      const parentInfo = this.$t.find(item.pid);
+      res.push({
+        title: item.title,
+        path: this.mergerHosts(this.replaceFileExt(item.path)),
+        desc: item.desc || '',
+        parent: {
+          title: parentInfo?.title || '',
+          path: this.mergerHosts(this.replaceFileExt(parentInfo?.path || ''))
+        },
+        publishDate: this.formatDatetime(item.publishDate),
+        keywords: this.formatKeywords(item?.keywords || []),
+        cover: item.cover || ''
+      });
+    });
+    return res;
+  }
+
+  // 将md后缀替换成html
+  replaceFileExt (filepath: string): string {
+    const listDoc = this.$m.config.docConfig.listDoc;
+    const o = path.parse(filepath);
+    o.ext = '.html';
+    if (o.base === listDoc) {
+      o.name = 'index';
     }
-    const res: BreadcrumbItem[] = [];
+    return `${o.dir ? o.dir + '/' : ''}${o.name}${o.ext}`;
+  }
+
+  // 查找当前顶级目录
+  findIndexTopNav (str: string): number {
+    const index = this.topNav.findIndex(item => this.mergerHosts(str).indexOf(item.path) === 0);
+    return index > -1 ? index : 0;
+  }
+
+  // 面包屑
+  getBreadcrumb (paths: string[]): TempTextLink[] {
+    const _paths = [ ... paths];
+    const res: TempTextLink[] = [];
     _paths.reduce((prev: string[], current) => {
       prev.push(current);
-      const pItem = this.tree.findByPath(prev.join('/'));
-      if (pItem) {
-        const item = this.tree.getContent(pItem);
+      const item = this.$t.find(prev.join('/'));
+      if (item) {
         res.push({
-          path: this.mergerHosts(pItem.path),
-          title: item ? (item.title || '') : ''
+          path: this.mergerHosts(this.replaceFileExt(item.path)),
+          title: item.title || ''
         });
       }
       return prev;
     }, []);
     return res;
-  }
-
-  // 拼接网站地址
-  mergerHosts (path: string): string {
-    return `${this.markdownToHtml.config.siteConfig.hosts}${path}`;
-  }
-
-  // 拼接模板地址
-  mergeTemplatePath (template: string): string {
-    return path.join(this.g.$path, template);
-  }
-
-  // 拼接网站标题
-  mergeSiteTitle (title: string): string {
-    const siteName = this.markdownToHtml.config.siteConfig.siteName;
-    return title ? `${title} - ${siteName}` : siteName;
-  }
-
-  // 拼接assets
-  mergeAssets (template: string): AssetsItem {
-    const assets: AssetsItem = { ...this.markdownToHtml.config.templateConfigData[template] };
-    const _assets: AssetsItem = {
-      styles: [],
-      scripts: []
-    };
-    assets.styles.forEach((item, index) => {
-      item = `assets/${item}`;
-      _assets.styles[index] = this.mergerHosts(item);
-    });
-    assets.scripts.forEach((item, index) => {
-      item = `assets/${item}`;
-      _assets.scripts[index] = this.mergerHosts(item);
-    });
-    return _assets;
-  }
-
-  checkIsNormalArticle (data: TreeNodeItem): boolean {
-    let res = false;
-    if (data.isDirectory === false && data.content.mode === ModelTypes.Normal && data.paths.includes(this.tree.listDoc) === false) {
-      res = true;
-    }
-    return res;
-  }
-
-  checkIsArticle (data: TreeNodeItem): boolean {
-    let res = false;
-    if (data.isDirectory === false && data.paths.includes(this.tree.listDoc) === false) {
-      res = true;
-    }
-    return res;
-  }
-
-  // 顶部导航菜单
-  generateTopNav (): void {
-    const list = this.tree.list;
-    const res: TopNavItem[] = [];
-    list.forEach(item => {
-      const mode = this.tree.getMode(item);
-      if (mode !== ModelTypes.Normal) {
-        const content = this.tree.getContent(item);
-        if (content) {
-          res.push({
-            id: item.path,
-            path: this.mergerHosts(item.path === this.tree.listDoc ? '' : item.path),
-            title: item.path === this.tree.listDoc ? '首页' : content.title,
-            icon: content.icon || '',
-            order: content.order
-          });
-        }
-      }
-    });
-    // 排序
-    res.sort((a, b) => {
-      const _a = a.order || 1;
-      const _b = b.order || 1;
-      return _a - _b;
-    });
-    this.topNav = res;
-  }
-
-  // 左侧菜单
-  generateNormalTree (): void {
-    const tree: TopNavItem[] = [];
-    const findChildren = (list: TreeNodeItem[], arr: TopNavItem[] = tree) => {
-      list.forEach(item => {
-        const mode = this.tree.getMode(item);
-        const content = this.tree.getContent(item);
-        if (item.isDirectory && mode === ModelTypes.Normal && content) {
-          const _item = {
-            path: this.mergerHosts(item.path === this.tree.listDoc ? '' : item.path),
-            title: content.title,
-            icon: content.icon || '',
-            children: []
-          };
-          if (item.children && item.children.length > 0) {
-            findChildren(item.children, _item.children);
-          }
-          arr.push(_item);
-        }
-      });
-    };
-    findChildren(this.tree.list, tree);
-    this.normalTree = tree;
-  }
-
-  // 搜索数据所有的文章
-  generateSearchList (): void {
-    for (const [key, value] of this.tree.maps.entries()) {
-      const mode = this.tree.getMode(value);
-      if (this.checkIsArticle(value) && (mode === ModelTypes.Normal || mode === ModelTypes.Collection)) {
-        let parentName = '';
-        const parentItem = this.tree.findByPath(value.parent);
-        if (parentItem) {
-          const content = this.tree.getContent(parentItem);
-          if (content?.title) {
-            parentName = content.title;
-          }
-        }
-
-        const keywordsPath: KeywordsItem[] = [];
-        value.content.keywords.forEach((keyword: string) => {
-          keywordsPath.push({
-            title: keyword,
-            path: this.markdownToHtml.pinYin(keyword)
-          });
-        });
-
-        this.searchList.push({
-          path: this.mergerHosts(key),
-          parent: this.mergerHosts(value.parent),
-          parentName,
-          title: value.content.title,
-          keywords: value.content.keywords.join(', '),
-          keywordsPath,
-          desc: value.content.desc,
-          publishDate: this.formatDatetime(value.content.publishDate),
-          recommend: value.content.recommend,
-          order: value.content.order
-        });
-      }
-    }
-  }
-
-  // 右侧文集推荐 Collection list && Recommend = 1
-  generateCollectionRecommend (): void {
-    this.tree.maps.forEach(value => {
-      if (!value.isDirectory && value.paths.includes(this.tree.listDoc) && value.content.mode === ModelTypes.Collection && value.content.recommend === 1) {
-        this.collectionRecommend.push({
-          path: this.mergerHosts(value.parent),
-          title: value.content.title,
-          cover: value.content.cover
-        });
-      }
-    });
-  }
-
-  // 右侧文章推荐 normal && Recommend = 2
-  generateNormalRecommend (): void {
-    this.tree.maps.forEach(value => {
-      if (this.checkIsNormalArticle(value) && value.content.recommend === 2) {
-        this.normalRecommend.push({
-          path: this.mergerHosts(value.path),
-          title: value.content.title
-        });
-      }
-    });
-  }
-
-  // 所有的tags
-  generateTags (): void {
-    interface TOB {
-      [index: string]: TagsItem
-    }
-    const tags: TOB = {};
-    this.tree.maps.forEach(value => {
-      if (this.checkIsArticle(value)) {
-        const keywords: string [] = value.content.keywords;
-        keywords.forEach(keyword => {
-          const key = this.markdownToHtml.pinYin(keyword);
-          const _key = getProperty<TOB, string>(tags, key);
-          if (_key) {
-            _key.count ++;
-          } else {
-            tags[key] = {
-              path: this.mergerHosts(`tags/${key}.html`),
-              title: keyword,
-              count: 1
-            };
-          }
-        });
-      }
-    });
-    Object.keys(tags).forEach(tag => {
-      this.tags.push(tags[tag]);
-    });
-    // 排序
-    this.tags.sort((a, b) => {
-      return b.count - a.count;
-    });
-  }
-
-  // 所有normal文章
-  generateNormalList (): void {
-    this.tree.maps.forEach(value => {
-      if (this.checkIsNormalArticle(value)) {
-        let parentName = '';
-        const parentItem = this.tree.findByPath(value.parent);
-        if (parentItem) {
-          const content = this.tree.getContent(parentItem);
-          if (content?.title) {
-            parentName = content.title;
-          }
-        }
-        const keywordsPath: KeywordsItem[] = [];
-        value.content.keywords.forEach((keyword: string) => {
-          keywordsPath.push({
-            title: keyword,
-            path: this.markdownToHtml.pinYin(keyword)
-          });
-        });
-        this.normalList.push({
-          title: value.content.title,
-          path: this.mergerHosts(value.path),
-          parent: this.mergerHosts(value.parent),
-          parentName,
-          keywords: value.content.keywords.join(', '),
-          keywordsPath,
-          desc: value.content.desc,
-          publishDate: this.formatDatetime(value.content.publishDate),
-          recommend: value.content.recommend,
-          order: value.content.order
-        });
-      }
-    });
-  }
-
-  // collection的列表
-  generateCollectionList (): void {
-    const res: CollectionListItem[] = [];
-    this.tree.maps.forEach(item => {
-      if (item.isDirectory === false && item.content.mode === ModelTypes.Collection && item.paths.includes(this.tree.listDoc)) {
-        res.push({
-          id: item.parent,
-          title: item.content.title,
-          cover: item.content.cover,
-          path: this.mergerHosts(item.parent),
-          isLast: false,
-          count: 0
-        });
-      }
-    });
-    // 是否是最后一级
-    res.forEach(item => {
-      const subs = res.filter(sub => sub.path.indexOf(item.path) === 0);
-      item.isLast = subs.length <= 1;
-      if (item.isLast) { // 获取文章下文章的总数
-        const subCounts = this.collectionContents.filter(sun => sun.parent === item.id);
-        item.count = subCounts.length;
-      }
-    });
-    this.collectionList = res;
-  }
-
-  // collect
-  generateCollectionContents (): void {
-    this.tree.maps.forEach(item => {
-      if (item.isDirectory === false && item.content.mode === ModelTypes.Collection && item.paths.includes(this.tree.listDoc) === false) {
-        this.collectionContents.push(item);
-      }
-    });
-    // 排序
-    this.collectionContents.sort((a, b) => {
-      const _a = {
-        order: a.content.order || 1,
-        publishDate: a.content.publishDate || 0
-      };
-      const _b = {
-        order: b.content.order || 1,
-        publishDate: b.content.publishDate || 0
-      };
-      return this.sorts<{ order: number, publishDate: number}>(_a, _b);
-    });
   }
 
   // 分页数据
@@ -426,34 +183,189 @@ class BaseModel {
     return pages;
   }
 
-  // 根据path查找所有的文档
-  findNormalListByPath (filepath: string): SearchListItem[] {
-    const res = this.normalList.filter(item => {
-      return item.path.indexOf(filepath) === 0;
+  // 拼接网站地址
+  mergerHosts (path: string): string {
+    return `${this.$m.config.siteConfig.hosts}${path}`;
+  }
+
+  // 拼接模板地址
+  mergeTemplatePath (template: string): string {
+    return path.join(this.g.$path, template);
+  }
+
+  // 拼接网站标题
+  mergeSiteTitle (title: string): string {
+    const siteName = this.$m.config.siteConfig.siteName;
+    return title ? `${title} - ${siteName}` : siteName;
+  }
+
+  // 拼接assets
+  mergeAssets (template: string): AssetsItem {
+    const assets: AssetsItem = JSON.parse(JSON.stringify(this.$m.config.templateConfigData[template]));
+    assets.styles.forEach((item, index) => {
+      item = `assets/${item}`;
+      assets.styles[index] = this.mergerHosts(item);
+    });
+    assets.scripts.forEach((item, index) => {
+      item = `assets/${item}`;
+      assets.scripts[index] = this.mergerHosts(item);
+    });
+    return assets;
+  }
+
+  // 获取topNav
+  generateTopNav (): void {
+    const d = this.$t.directoryList.filter(item => item.pid === '' && item.mode !== ModelTypes.Normal);
+    const s = [...this.$t.singleList];
+    const topNav = d.concat(s);
+    topNav.sort((a, b) => {
+      return a.order - b.order;
+    });
+    topNav.forEach(item => {
+      this.topNav.push({
+        title: item.title,
+        path: this.mergerHosts(this.replaceFileExt(item.path)),
+        icon: item.icon
+      });
+    });
+  }
+
+  // 获取普通文档目录树
+  getNormalTree (): void {
+    const res: TempTreeItem[] = [];
+    const normalTree = this.$t.directoryListTree.filter(item => item.mode === ModelTypes.Normal);
+    // 排序
+    normalTree.sort((a, b) => {
+      return this.$t.sorts(a, b);
+    });
+    // 组织模板格式
+    const findChildren = (data: MarkdownParseAttribute[], arr = res) => {
+      data.forEach(item => {
+        const _item = {
+          title: item.title,
+          path: this.mergerHosts(this.replaceFileExt(item.path)),
+          icon: item.icon,
+          children: []
+        };
+        if (item.children && item.children.length > 0) {
+          findChildren(item.children, _item.children);
+        }
+        arr.push(_item);
+      });
+    };
+    findChildren(normalTree);
+    this.normalTree = res;
+  }
+
+  // 检查目录是否是最后的文集目录
+  checkIsLastCollection (id: string): boolean {
+    const data = this.collectionBooks.filter(item => item[0].id === id);
+    return data.length > 0;
+  }
+
+  // 所有的tags
+  generateTags (): void {
+    interface TOB {
+      [index: string]: TagsItem
+    }
+    const tags: TOB = {};
+    this.$t.normalList.forEach(item => {
+      const keywords: string [] = item.keywords || [];
+      keywords.forEach(keyword => {
+        const key = this.$m.pinYin(keyword);
+        const _key = getProperty<TOB, string>(tags, key);
+        if (_key) {
+          _key.count ++;
+        } else {
+          tags[key] = {
+            path: this.mergerHosts(`tags/${key}.html`),
+            title: keyword,
+            count: 1
+          };
+        }
+      });
+    });
+    this.$t.collectionList.forEach(item => {
+      const keywords: string [] = item.keywords || [];
+      keywords.forEach(keyword => {
+        const key = this.$m.pinYin(keyword);
+        const _key = getProperty<TOB, string>(tags, key);
+        if (_key) {
+          _key.count ++;
+        } else {
+          tags[key] = {
+            path: this.mergerHosts(`tags/${key}.html`),
+            title: keyword,
+            count: 1
+          };
+        }
+      });
+    });
+    Object.keys(tags).forEach(tag => {
+      this.tagsList.push(tags[tag]);
     });
     // 排序
-    res.sort((a, b) => {
-      return this.sorts<SearchListItem>(a, b);
+    this.tagsList.sort((a, b) => {
+      return b.count - a.count;
     });
-    return res;
   }
 
-  // 排序
-  sorts<T extends SortsItem> (a: T, b: T): number {
-    let _res = a.order - b.order;
-    if (_res === 0) {
-      _res = new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime();
+  // 获取普通推荐文档
+  generateNormalRecommend (): void {
+    const res = this.$t.normalList.filter(item => item.recommend === 2);
+    const list: TempTextLink[] = [];
+    res.forEach(item => {
+      list.push({
+        title: item.title,
+        path: this.mergerHosts(this.replaceFileExt(item.path))
+      });
+    });
+    this.normalRecommend = list;
+  }
+
+  // 获取推荐文集
+  generateCollectionGroup(): void {
+    interface TOB {
+      [index: string]: {
+        group: string,
+        list: MarkdownParseAttribute[]
+      }
     }
-    return _res;
+    const books: TOB = {};
+    this.$t.collectionList.forEach(item => {
+      const pitem = getProperty<TOB, string>(books, item.pid);
+      if (pitem) {
+        pitem.list.push(item);
+      } else {
+        books[item.pid] = {
+          group: item.pid,
+          list: [item]
+        };
+      }
+    });
+    Object.keys(books).forEach(key => {
+      const item = getProperty(books, key);
+      const indexInfo = this.$t.find(item.group);
+      if (indexInfo) {
+        const a = [indexInfo].concat(item.list);
+        this.collectionBooks.push(a);
+      }
+    });
   }
 
-  // 查找顶部排序
-  findTopIndex (topPath: string): number {
-    let index = this.topNav.findIndex(item => item.id === topPath);
-    index = index < 0 ? 0 : index;
-    return index;
+  // 获取推荐文集
+  generateCollectionRecommend(): void {
+    const res = this.collectionBooks.filter(item => item[0].recommend === 1);
+    res.forEach(item => {
+      const cover = item[0];
+      const _path = this.mergerHosts(this.replaceFileExt(cover.path));
+      this.collectionRecommend.push({
+        title: cover.title,
+        path: _path,
+        cover: cover.cover || ''
+      });
+    });
   }
-
 }
 
 export default BaseModel;

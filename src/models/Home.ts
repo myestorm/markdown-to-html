@@ -1,6 +1,16 @@
 import ejs from 'ejs';
 import BaseModel from '../lib/BaseModel';
-import { ModelTypes, SearchListItem } from '../lib/Interfaces';
+import {
+  ModelTypes,
+  TempListItem,
+  TempHead,
+  TempHeader,
+  TempTree,
+  TempFooter,
+  TempAside,
+  TempFoot,
+  GulpFileItem
+} from '../lib/Interfaces';
 
 class Home {
   mode = ModelTypes.Home;
@@ -12,32 +22,34 @@ class Home {
   }
 
   // 最新数据
-  getNewest (len = 20): SearchListItem[] {
-    return this.baseModel.normalList.slice(0, len);
+  getNewest (len = 20): TempListItem[] {
+    const res = this.baseModel.$t.normalList.slice(0, len);
+    return this.baseModel.formatTempListItem(res);
   }
 
   // 推荐数据 Recommend = 1
-  getRecommend (len = 20): SearchListItem[] {
-    const arr = this.baseModel.normalList.filter(item => item.recommend === 1);
-    return arr.slice(0, len);
+  getRecommend (len = 20): TempListItem[] {
+    const arr = this.baseModel.$t.normalList.filter(item => item.recommend === 1);
+    return this.baseModel.formatTempListItem(arr.slice(0, len));
   }
 
-  render (): string {
-    const modelData = this.baseModel.tree.findByPath(this.baseModel.tree.listDoc);
+  render (): GulpFileItem {
+    const filepath = 'index.html';
+    let html = '';
+    const modelData = this.baseModel.$t.find('index');
     const { styles, scripts} = this.baseModel.mergeAssets(this.template);
     if (modelData) {
-      const content = modelData.content;
-      const head = {
-        title: this.baseModel.mergeSiteTitle(content.title),
-        keywords: content.keywords,
-        desc: content.desc,
+      const head: TempHead = {
+        title: this.baseModel.mergeSiteTitle(modelData.title),
+        keywords: modelData.keywords ? modelData.keywords.join(', ') : '',
+        desc: modelData.desc || '',
         styles
       };
-      const header = {
+      const header: TempHeader = {
         current: 0,
         list: this.baseModel.topNav
       };
-      const tree = {
+      const tree: TempTree = {
         list: this.baseModel.normalTree,
         current: ''
       };
@@ -45,22 +57,22 @@ class Home {
         newest: this.getNewest(),
         recommend: this.getRecommend()
       };
-      const footer = {
-        copyright: this.baseModel.markdownToHtml.config.siteConfig.copyright,
-        hosts: this.baseModel.markdownToHtml.config.siteConfig.hosts,
-        beian: this.baseModel.markdownToHtml.config.siteConfig.beian
+      const footer: TempFooter = {
+        copyright: this.baseModel.$m.config.siteConfig.copyright,
+        hosts: this.baseModel.$m.config.siteConfig.hosts,
+        beian: this.baseModel.$m.config.siteConfig.beian || ''
       };
-      const aside = {
+      const aside: TempAside = {
         list: this.baseModel.collectionRecommend,
         textList: this.baseModel.normalRecommend,
-        tags: this.baseModel.tags.slice(0, 20)
+        tags: this.baseModel.tagsList.slice(0, 20)
       };
-      const foot = {
+      const foot: TempFoot = {
         scripts
       };
       const templatePath = this.baseModel.mergeTemplatePath(this.template);
       const template = ejs.fileLoader(templatePath).toString();
-      const html = ejs.render(template, {
+      html = ejs.render(template, {
         g: this.baseModel.g,
         head: head,
         header: header,
@@ -70,10 +82,11 @@ class Home {
         aside: aside,
         foot: foot
       });
-      return html;
-    } else {
-      throw new Error('首页配置文件不存在');
     }
+    return {
+      path: filepath,
+      contents: html
+    };
   }
 }
 

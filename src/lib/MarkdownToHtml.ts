@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import File from 'vinyl';
+import md5 from 'crypto-js/md5';
 import Pinyin from 'pinyin';
 import MarkdownIt from 'markdown-it';
 import Token from 'markdown-it/lib/token';
@@ -8,7 +9,15 @@ import MarkdownItAnchor, { AnchorOptions } from 'markdown-it-anchor';
 import FrontMatter, { FrontMatterResult } from 'front-matter';
 import { Readable, Transform } from 'readable-stream';
 import { markdownItAnchor, siteConfig, templateConfig, docConfig } from '../config/index';
-import { MarkdownAttribute, MarkdownNavigation, ModelTypes, AddFileItem, TimelineItem } from './Interfaces';
+import {
+  ModelTypes,
+  GulpFileItem,
+  MarkdownAttribute,
+  MarkdownParseAttribute,
+  MarkdownNavigation,
+  TimelineItem,
+  recommendTypes
+} from './Interfaces';
 
 const markdownItAnchorConfig: AnchorOptions = Object.assign({}, {
   level: 1,
@@ -35,7 +44,7 @@ class MarkdownToHtml {
    * 解析markdown文档
    * @param file File
    */
-  parseMarkdown (file: File): MarkdownAttribute {
+  parseMarkdown (file: File): MarkdownParseAttribute {
     const nav: MarkdownNavigation[] = [];
     const _markdownItAnchorConfig = {
       ...this.config.markdownItAnchorConfig
@@ -56,20 +65,6 @@ class MarkdownToHtml {
         });
       });
     }
-    const data: MarkdownAttribute = {
-      title: attributes.title,
-      keywords: attributes.keywords || [],
-      desc: attributes.desc || '',
-      publishDate: attributes.publishDate ?  (new Date(attributes.publishDate).getTime() + zoneOffset) : new Date().getTime(),
-      order: attributes.order || 1,
-      icon: attributes.icon || '',
-      recommend: attributes.recommend || 0,
-      mode: attributes.mode || ModelTypes.Normal,
-      cover: attributes.cover || '',
-      body: '',
-      navigation: [],
-      timeline: timeline
-    };
     let markdownIt = new MarkdownIt();
     _markdownItAnchorConfig.callback = (token: Token, {
       slug,
@@ -83,8 +78,28 @@ class MarkdownToHtml {
     };
     markdownIt = markdownIt.use(MarkdownItAnchor, _markdownItAnchorConfig);
     const body = markdownIt.render(fmContents.body);
-    data.body = body;
-    data.navigation = nav;
+
+    const paths = this.parseDir(file);
+
+    const data: MarkdownParseAttribute = {
+      id: attributes.mode === ModelTypes.Home ? 'index' : this.createId(paths),
+      pid: this.createPid(paths),
+      path: this.createPath(paths),
+      paths: paths,
+      body: body,
+      navigation: nav,
+      mode: attributes.mode || ModelTypes.Normal,
+      title: attributes.title || '',
+      publishDate: attributes.publishDate ?  (new Date(attributes.publishDate).getTime() + zoneOffset) : new Date().getTime(),
+      icon: attributes.icon || '',
+      keywords: attributes.keywords || [],
+      desc: attributes.desc || '',
+      order: attributes.order || 1,
+      recommend: attributes.recommend || recommendTypes.Default,
+      cover: attributes.cover || '',
+      timeline: timeline,
+      children: []
+    };
     return data;
   }
 
@@ -94,17 +109,55 @@ class MarkdownToHtml {
    * @param root string
    */
   parseDir (file: File): string[] {
-    const rootDir = path.join(file.cwd, this.config.docConfig.root);
-    const filePath = file.path.replace(file.extname, '');
-    const dir = path.relative(rootDir, filePath);
+    const rootDir = path.resolve(__dirname, `../../${this.config.docConfig.root}`);
+    const dir = path.relative(rootDir, file.path);
     const arr = dir.split(path.sep);
-    arr.forEach((val, key) => {
-      arr[key] = this.pinYin(val);
-      if (key === arr.length - 1 && !file.isDirectory()) {
-        arr[key] += '.html';
-      }
-    });
     return arr;
+  }
+
+  /**
+   * 创建文档唯一索引
+   * @param paths string[]
+   */
+  createId (paths: string[]): string {
+    const _paths = Object.assign([], paths);
+    if (_paths.includes(this.config.docConfig.listDoc)) {
+      _paths.pop();
+    }
+    return _paths.join('/');
+  }
+
+  /**
+   * 创建文档的父ID
+   * @param paths string[]
+   */
+  createPid (paths: string[]): string {
+    const _paths = Object.assign([], paths);
+    if (_paths.includes(this.config.docConfig.listDoc)) {
+      _paths.pop();
+    }
+    _paths.pop();
+    return _paths.join('/');
+  }
+
+  /**
+   * 创建文档路径
+   * @param paths string[]
+   */
+  createPath (paths: string[]): string {
+    const _paths: string[] = [];
+    paths.forEach(item => {
+      const o = path.parse(item);
+      let _item = '';
+      if (o.ext) {
+        _item = this.pinYin(o.name);
+        _item = _item + o.ext;
+      } else {
+        _item = this.pinYin(item);
+      }
+      _paths.push(_item);
+    });
+    return _paths.join('/');
   }
 
   /**
@@ -112,20 +165,24 @@ class MarkdownToHtml {
    * @param str string
    * @param needClear boolean
    */
-  pinYin (str: string, needClear = true): string {
+  pinYin (str: string, needClear = true, needMd5 = false): string {
     if (needClear) {
       str = str.replace(/^[0-9]+\./, ''); // 替换开头的 1.等
       str = str.replace(/\s+/g, ''); // 替换空格
       str = str.replace(/[,|.|，|。|<|>|《|》|‘|’|“|”|"|?|？|（|）|(|)]/g, ''); // 替换逗号句号
     }
-    // 如果有汉字添加随机字符串
-    // const reg = new RegExp('[\\u4E00-\\u9FFF]+', 'g');
-    // if (reg.test(str)){
-    //   str = `${str}${this.generateRandomString(6)}`;
-    // }
+    // 如果有汉字添加汉字的MD5的前6位
+    let md5Str = '';
+    const reg = new RegExp('[\\u4E00-\\u9FFF]+', 'g');
+    if (needMd5 && reg.test(str)){
+      md5Str = md5(str).toString().substr(0, 6);
+    }
     let py: string = Pinyin(str, {
       style: Pinyin.STYLE_NORMAL
     }).join('-');
+    if (md5Str) {
+      py = py + '-' + md5Str;
+    }
     py = py.toLowerCase();
     return py;
   }
@@ -146,7 +203,7 @@ class MarkdownToHtml {
    * 在gulp中加入文件
    * @param files AddFileItem[]
    */
-  addVinylFiles (files: AddFileItem[] = []): Readable {
+  addVinylFiles (files: GulpFileItem[] = []): Readable {
     const src = new Readable({
       objectMode: true
     });

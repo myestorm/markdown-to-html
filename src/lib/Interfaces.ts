@@ -5,7 +5,7 @@ export interface SiteConfig {
   siteRoot: string, // 站点根目录
   beian?: string, // 备案号
   logo?: string, // 网站logo
-  copyright: [string, string],
+  copyright: [string, string], // [start, end]
   favicon?: string // favicon
 }
 
@@ -16,27 +16,42 @@ export interface TemplateConfig {
   pageSize: number
 }
 
-// asset config
-export interface AssetsItem {
-  scripts: string[],
-  styles: string[],
-}
-
 // 文档配置
 export interface DocConfig {
   root: string, // 文档 根目录
-  listDoc: string, // 目录说明文档
-  about: string, // 关于我们
-  timeline: string // 时光轴
+  listDoc: string // 目录说明文档
 }
 
+// 模型
 export enum ModelTypes {
   Home = 'home', // 首页
   Normal = 'normal', // 文章
-  Single = 'single', // 关于我们或单页
+  Single = 'single', // 单页: 如关于我们
   Tags = 'tags', // 标签
   Collection = 'collection', // 文集
   Timeline = 'timeline' // 时光轴
+}
+
+// gulp插入文档格式
+export interface GulpFileItem {
+  path: string,
+  contents: string
+}
+
+// 时间轴配置
+export interface TimelineItem {
+  publishDate: number,
+  title: string,
+  desc: string,
+  link: string,
+  image: string
+}
+
+// 推荐类型
+export enum recommendTypes {
+  Default = 0,
+  Home = 1,
+  Aside = 2
 }
 
 // 文档标签导航
@@ -46,54 +61,56 @@ export interface MarkdownNavigation {
   title: string
 }
 
-// timeline item
-export interface TimelineItem {
-  publishDate: number,
-  publishDateDay?: string,
-  publishDateTime?: string,
-  title: string,
-  desc: string,
-  image: string,
-  link: string
-}
-
-// MD文档的属性
+// Markdown文档配置
 export interface MarkdownAttribute {
-  title: string,
-  keywords: string[]
-  desc: string,
-  publishDate: number,
-  order?: number | undefined,
-  icon?: string,
-  recommend: number | boolean,
   mode: ModelTypes,
+  title: string,
+  publishDate: number,
+  order: number,
+  icon?: string,
+  keywords?: string[],
+  desc?: string,
+  recommend?: recommendTypes,
   cover?: string,
-  body: string,
-  navigation?: MarkdownNavigation[]
   timeline?: TimelineItem[]
 }
 
-// gulp插入文档格式
-export interface AddFileItem {
-  path: string,
-  contents: string
-}
-
-// 文档树
-export interface TreeNodeItem {
+// 解析后的数据
+export interface MarkdownParseAttribute extends MarkdownAttribute {
+  id: string,
+  pid: string,
   path: string,
   paths: string[],
-  parent: string,
-  parents: string[],
-  extname: string,
-  isDirectory: boolean,
-  children: TreeNodeItem[],
-  content: MarkdownAttribute
+  body: string,
+  navigation: MarkdownNavigation[],
+  children?: MarkdownParseAttribute[]
 }
 
+// 排序字段
+export interface SortsItem {
+  order: number,
+  publishDate: number
+}
+
+// 下标取值
 export const getProperty = <T, K extends keyof T>(o: T, name: K): T[K] => {
   return o[name];
 };
+
+// 文字链接
+export interface TempTextLink {
+  title: string,
+  path: string,
+  icon?: string
+}
+
+// 图片链接
+export interface TempImageLink {
+  title: string,
+  path: string,
+  cover: string,
+  count?: number
+}
 
 // 分页数据
 export interface PageItem {
@@ -103,69 +120,67 @@ export interface PageItem {
   isCurrent?: boolean,
 }
 
-// 关键字
-export interface KeywordsItem {
+// 文章列表
+export interface TempListItem {
   title: string,
-  path: string
-}
-
-// 列表数据
-export interface SearchListItem {
   path: string,
-  parent: string,
-  parentName: string,
-  title: string,
-  keywords: string,
-  keywordsPath: KeywordsItem[],
   desc: string,
+  parent: {
+    title: string,
+    path: string
+  },
   publishDate: string,
-  recommend: number,
-  order: number
-}
-
-// 文集列表属性
-export interface CollectionListItem {
-  id: string,
-  title: string,
-  cover: string,
-  path: string,
-  isLast: boolean,
-  count?: number
-}
-
-// 顶部菜单
-export interface TopNavItem {
-  path: string,
-  title: string,
-  icon?: string,
-  id?: string,
-  order?: number,
-  publishDate?: number,
-  children?: TopNavItem[]
-}
-
-// 右侧推荐文集
-export interface CollectionRecommendItem {
-  path: string,
-  title: string,
+  keywords: {
+    title: string,
+    path: string
+  }[],
   cover?: string
 }
 
-// 标签
-export interface TagsItem {
-  path: string,
+// 静态资源格式
+export interface AssetsItem {
+  scripts: string[],
+  styles: string[],
+}
+
+// 模板变量
+export interface TempHead {
   title: string,
-  count: number
+  keywords: string,
+  desc: string,
+  styles: string[]
 }
-
-// 面包屑
-export interface BreadcrumbItem {
+export interface TempHeader {
+  current: number,
+  list: TempTextLink[]
+}
+export interface TempTreeItem extends TempTextLink {
+  children: TempTreeItem[]
+}
+export interface TempTree {
+  current: string,
+  list: TempTreeItem[]
+}
+export interface TempBreadcrumb {
+  home: string,
+  list: TempTextLink[]
+}
+export interface TempFooter {
+  copyright: [string, string],
+  hosts: string,
+  beian: string
+}
+export interface TempAside {
+  list: TempImageLink[],
+  textList: TempTextLink[],
+  tags: TempTextLink[]
+}
+export interface TempFoot {
+  scripts: string[]
+}
+// 关键字
+export interface TagsItem {
+  title: string,
   path: string,
-  title: string
-}
-
-// 排序
-export interface SortsItem {
-  order: number,
-  publishDate: number | string
+  count: number
 }

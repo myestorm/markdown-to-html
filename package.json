@@ -28,6 +28,7 @@
   "devDependencies": {
     "@types/browser-sync": "^2.26.1",
     "@types/chai": "^4.2.14",
+    "@types/crypto-js": "^4.0.1",
     "@types/ejs": "^3.0.5",
     "@types/gulp": "^4.0.7",
     "@types/markdown-it": "^10.0.3",
@@ -39,6 +40,7 @@
     "@typescript-eslint/parser": "^4.8.2",
     "browser-sync": "^2.26.13",
     "chai": "^4.2.0",
+    "crypto-js": "^4.0.0",
     "dayjs": "^1.9.6",
     "ejs": "^3.1.5",
     "eslint": "^7.14.0",

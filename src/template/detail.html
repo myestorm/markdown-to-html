@@ -28,12 +28,12 @@
                   <ul>
                     <li class="a">
                       <i class="iconfont icon-folder"></i>
-                      <a href="<%= main.info.parent %>"><%= main.info.parentName %></a>
+                      <a href="<%= main.info.parent.path %>"><%= main.info.parent.title %></a>
                     </li>
                     <li class="b"><i class="iconfont icon-time"></i><%= main.info.publishDate %></li>
                     <li class="c">
                       <i class="iconfont icon-tags"></i>
-                      <% main.info.keywordsPath.forEach(keyword => { %>
+                      <% main.info.keywords.forEach(keyword => { %>
                         <a href="<%= keyword.path %>"><%= keyword.title %></a>
                       <% }); %>
                     </li>

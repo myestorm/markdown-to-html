@@ -12,23 +12,21 @@ export const siteConfig: SiteConfig = {
   hosts: '/', // 必须以/结尾
   siteName: 'markdown-to-html',
   siteRoot: 'www',
-  beian: '',
+  beian: '粤ICP备12041241号',
   logo: '',
-  favicon: '',
+  favicon: '/favicon.ico',
   copyright: ['2005', new Date().getFullYear() + '']
 };
 
 export const templateConfig: TemplateConfig = {
   root: './src/template',
   config: 'config.json',
-  pageSize: 10 // 列表分页大小
+  pageSize: 20 // 列表分页大小
 };
 
 export const docConfig: DocConfig = {
   root: 'documents',
-  listDoc: 'readme.md', // 不能是中文
-  about: 'about.md',
-  timeline: 'timeline'
+  listDoc: 'readme.md' // 不能是中文
 };
 
 export default {

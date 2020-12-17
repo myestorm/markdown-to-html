@@ -2,157 +2,91 @@ import { series, src, dest, watch } from 'gulp';
 import path from 'path';
 import browserSync from 'browser-sync';
 
-import { TreeNodeItem, MarkdownAttribute, ModelTypes } from './src/lib/Interfaces';
+import { ModelTypes } from './src/lib/Interfaces';
 import MarkdownToHtml from './src/lib/MarkdownToHtml';
 import Tree from './src/lib/Tree';
 import BaseModel from './src/lib/BaseModel';
 import Home from './src/models/Home';
-import NormalList from './src/models/NormalList';
-import Normal from './src/models/Normal';
-import CollectionList from './src/models/CollectionList';
-import Collection from './src/models/Collection';
 import Tags from './src/models/Tags';
-import Single from './src/models/Single';
 import Timeline from './src/models/Timeline';
+import Collection from './src/models/Collection';
+import Normal from './src/models/Normal';
+import Single from './src/models/Single';
 
 const markdownToHtml = new MarkdownToHtml();
-const tree = new Tree(markdownToHtml.config.docConfig.listDoc);
+const tree = new Tree();
+
 const siteRoot = path.resolve(__dirname, markdownToHtml.config.siteConfig.siteRoot);
 
 const readDocuments = () => {
   const docRoot = markdownToHtml.config.docConfig.root;
-  const files = [`${path.join(__dirname, docRoot)}/*/**`, `${path.join(__dirname, docRoot)}/*.md`];
+  const files = [`${path.join(__dirname, docRoot)}/**/*.md`];
   return src(files)
     .pipe(markdownToHtml.transform((file) => {
-      if (file.isDirectory() || file.extname === '.md') {
-        const paths = markdownToHtml.parseDir(file);
-        const content: MarkdownAttribute = markdownToHtml.parseMarkdown(file);
-        const parents = [...paths];
-        const isDirectory = file.isDirectory();
-        parents.pop();
-        const item: TreeNodeItem = {
-          path: paths.join('/'),
-          paths: paths,
-          parent: parents.join('/'),
-          parents: parents,
-          extname: file.extname,
-          isDirectory,
-          content,
-          children: []
-        };
-        tree.addMapItem(item);
-      }
+      const data = markdownToHtml.parseMarkdown(file);
+      tree.addMapItem(data);
     }))
     .on('end', () => {
       tree.generateTree();
+      tree.separatedData();
     });
 };
 
 const generateHtml = () => {
-  const files = [{
+  let files = [{
     path: 'tree.json',
     contents: JSON.stringify(tree.list, null, 4)
   }, {
     path: 'maps.json',
-    contents: JSON.stringify(Object.fromEntries(tree.maps), null, 4)
+    contents: JSON.stringify(Object.fromEntries(tree.dataMaps), null, 4)
   }];
+
   const baseModel = new BaseModel(tree, markdownToHtml);
   const home = new Home(baseModel);
-  const normalList = new NormalList(baseModel);
-  const normal = new Normal(baseModel);
-  const collectionList = new CollectionList(baseModel);
-  const collection = new Collection(baseModel);
   const tags = new Tags(baseModel);
-  const single = new Single(baseModel);
   const timeline = new Timeline(baseModel);
+  const collection = new Collection(baseModel);
+  const normal = new Normal(baseModel);
+  const single = new Single(baseModel);
 
-  // 遍历生成数据
-  tree.maps.forEach(item => {
-    if (item.isDirectory === false) {
-      const mode = tree.getMode(item);
-      if (item.paths.includes(tree.listDoc)) {
-        const _path = item.path.replace(tree.listDoc, 'index.html');
-        switch (mode) {
-        case ModelTypes.Home: {
-          files.push({
-            path: _path,
-            contents: home.render()
-          });
-          break;
-        }
-        case ModelTypes.Collection: {
-          const listPage = collectionList.creatPages(item.path);
-          listPage.forEach(item => {
-            files.push(item);
-          });
-          break;
-        }
-        case ModelTypes.Timeline: {
-          files.push({
-            path: _path,
-            contents: timeline.render(item.path)
-          });
-          break;
-        }
-        case ModelTypes.Tags: {
-          break;
-        }
-        case ModelTypes.Single: {
-          break;
-        }
-        case ModelTypes.Normal: {
-          const listPage = normalList.creatPages(item.path);
-          listPage.forEach(item => {
-            files.push(item);
-          });
-          break;
-        }
-        default: {
-          break;
-        }
-        }
-      } else {
-        switch (mode) {
-        case ModelTypes.Collection: {
-          files.push({
-            path: item.path,
-            contents: collection.render(item.path)
-          });
-          break;
-        }
-        case ModelTypes.Timeline: {
-          break;
-        }
-        case ModelTypes.Tags: {
-          files.push({
-            path: item.path,
-            contents: tags.render(item.path)
-          });
-          const listPage = tags.tagsList(item.path);
-          listPage.forEach(item => {
-            files.push(item);
-          });
-          break;
-        }
-        case ModelTypes.Single: {
-          files.push({
-            path: item.path,
-            contents: single.render(item.path)
-          });
-          break;
-        }
-        case ModelTypes.Normal: {
-          files.push({
-            path: item.path,
-            contents: normal.render(item.path)
-          });
-          break;
-        }
-        default: {
-          break;
-        }
-        }
+  // 生成列表
+  tree.directoryList.forEach(item => {
+    if (item.id === 'index') {
+      files.push(home.render());
+    } else {
+      const mode = item.mode;
+      switch (mode) {
+      case ModelTypes.Collection: {
+        files = files.concat(collection.getPageList(item.id));
+        break;
       }
+      case ModelTypes.Timeline: {
+        files.push(timeline.render(item.id));
+        break;
+      }
+      case ModelTypes.Normal: {
+        files = files.concat(normal.getPageList(item.id));
+        break;
+      }
+      default: {
+        break;
+      }
+      }
+    }
+  });
+  // 生成文件
+  tree.normalList.forEach(item => {
+    files.push(normal.render(item.id));
+  });
+  // 生成文集
+  files = files.concat(collection.getBooks());
+  // 生成单页
+  tree.singleList.forEach(item => {
+    const mode = item.mode;
+    if (mode === ModelTypes.Tags) {
+      files = files.concat(tags.render(item.id));
+    } else {
+      files.push(single.render(item.id));
     }
   });
 

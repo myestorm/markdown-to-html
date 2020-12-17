@@ -1,7 +1,19 @@
 import ejs from 'ejs';
-import path from 'path';
 import BaseModel from '../lib/BaseModel';
-import { ModelTypes, PageItem, SearchListItem, TagsItem, AddFileItem } from '../lib/Interfaces';
+import {
+  ModelTypes,
+  TempListItem,
+  TempHead,
+  TempHeader,
+  TempTree,
+  TempBreadcrumb,
+  TempFooter,
+  TempAside,
+  TempFoot,
+  GulpFileItem,
+  PageItem,
+  TagsItem
+} from '../lib/Interfaces';
 
 class Tags {
   mode = ModelTypes.Tags;
@@ -13,48 +25,50 @@ class Tags {
     this.baseModel = baseModel;
   }
 
-  render (filepath: string): string {
-    const modelData = this.baseModel.tree.findByPath(filepath);
+  render (id: string): GulpFileItem[] {
+    let filepath = '';
+    let html = '';
+    const modelData = this.baseModel.$t.find(id);
     const { styles, scripts} = this.baseModel.mergeAssets(this.template);
     if (modelData) {
-      const content = modelData.content;
-      const head = {
-        title: this.baseModel.mergeSiteTitle(content.title),
-        keywords: content.keywords,
-        desc: content.desc,
+      filepath = this.baseModel.replaceFileExt(modelData.path);
+      const head: TempHead = {
+        title: this.baseModel.mergeSiteTitle(modelData.title),
+        keywords: modelData.keywords ? modelData.keywords.join(', ') : '',
+        desc: modelData.desc || '',
         styles
       };
-      const header = {
-        current: this.baseModel.findTopIndex(modelData.paths[0]),
+      const header: TempHeader = {
+        current: this.baseModel.findIndexTopNav(filepath),
         list: this.baseModel.topNav
       };
-      const tree = {
+      const tree: TempTree = {
         list: this.baseModel.normalTree,
         current: ''
       };
-      const breadcrumb = {
+      const breadcrumb: TempBreadcrumb = {
         home: this.baseModel.g.$hosts,
         list: this.baseModel.getBreadcrumb(modelData.paths)
       };
       const main = {
-        list: this.baseModel.tags || []
+        list: this.baseModel.tagsList || []
       };
-      const footer = {
-        copyright: this.baseModel.markdownToHtml.config.siteConfig.copyright,
-        hosts: this.baseModel.markdownToHtml.config.siteConfig.hosts,
-        beian: this.baseModel.markdownToHtml.config.siteConfig.beian
+      const footer: TempFooter = {
+        copyright: this.baseModel.$m.config.siteConfig.copyright,
+        hosts: this.baseModel.$m.config.siteConfig.hosts,
+        beian: this.baseModel.$m.config.siteConfig.beian || ''
       };
-      const aside = {
+      const aside: TempAside = {
         list: this.baseModel.collectionRecommend,
         textList: this.baseModel.normalRecommend,
-        tags: this.baseModel.tags.slice(0, 20)
+        tags: this.baseModel.tagsList.slice(0, 20)
       };
-      const foot = {
+      const foot: TempFoot = {
         scripts
       };
       const templatePath = this.baseModel.mergeTemplatePath(this.template);
       const template = ejs.fileLoader(templatePath).toString();
-      const html = ejs.render(template, {
+      html = ejs.render(template, {
         g: this.baseModel.g,
         head: head,
         header: header,
@@ -65,52 +79,63 @@ class Tags {
         aside: aside,
         foot: foot
       });
-      return html;
-    } else {
-      throw new Error('标签配置文件不正确');
     }
+    const res = [{
+      path: filepath,
+      contents: html
+    }];
+    const fileList = this.tagsList(id);
+    return res.concat(fileList);
   }
 
-  tagsList (filepath: string): AddFileItem[] {
-    const tags = this.baseModel.tags;
-    const files: AddFileItem[] = [];
+  tagsList (id: string): GulpFileItem[] {
+    const tags = this.baseModel.tagsList;
+    const files: GulpFileItem[] = [];
     tags.forEach(item => {
-      const paths = path.parse(item.path);
-      const filename = `${paths.dir}/${paths.name}`;
-      const ext = paths.ext;
-      const pageSize = this.baseModel.markdownToHtml.config.templateConfig.pageSize;
-      const list = this.baseModel.searchList.filter(sub => {
-        return sub.keywords.indexOf(item.title) > -1;
+      const filename = `tags/${this.baseModel.$m.pinYin(item.title)}`;
+      const ext = '.html';
+      const pageSize = this.baseModel.$m.config.templateConfig.pageSize;
+      const listNormal = this.baseModel.$t.normalList.filter(sub => {
+        const keywords = sub.keywords || [];
+        return keywords.includes(item.title);
       });
-      const pages: PageItem[][] = this.baseModel.listPages(list.length, pageSize, filename, ext);
+      const listCollection = this.baseModel.$t.collectionList.filter(sub => {
+        const keywords = sub.keywords || [];
+        return keywords.includes(item.title);
+      });
+      const mergrList = listNormal.concat(listCollection);
+      const list = this.baseModel.formatTempListItem(mergrList);
+      const pages: PageItem[][] = this.baseModel.listPages(list.length, pageSize, this.baseModel.mergerHosts(filename), ext);
       pages.forEach((sub, index) => {
         const _list = list.splice(0, pageSize);
-        const _path = index === 0 ? `tags/${paths.name}${ext}` : `tags/${paths.name}_${index + 1}${ext}`;
+        const _path = index === 0 ? `${filename}${ext}` : `${filename}_${index + 1}${ext}`;
         files.push({
           path: _path,
-          contents: this.renderList(filepath, _list, item, sub)
+          contents: this.renderList(id, _list, item, sub)
         });
       });
     });
     return files;
   }
 
-  renderList (filepath: string, list: SearchListItem[], data: TagsItem, pages: PageItem[]): string {
-    const modelData = this.baseModel.tree.findByPath(filepath);
+  renderList (id: string, list: TempListItem[], data: TagsItem, pages: PageItem[]): string {
     const { styles, scripts} = this.baseModel.mergeAssets(this.listTemplate);
+    const modelData = this.baseModel.$t.find(id);
+    let html = '';
     if (modelData) {
       const pageTitle = `与${data.title}相关的内容`;
-      const head = {
+      const filepath = this.baseModel.replaceFileExt(modelData.path);
+      const head: TempHead = {
         title: this.baseModel.mergeSiteTitle(pageTitle),
         keywords: data.title,
         desc: `${pageTitle}。`,
         styles
       };
-      const header = {
-        current: this.baseModel.findTopIndex(modelData.paths[0]),
+      const header: TempHeader = {
+        current: this.baseModel.findIndexTopNav(filepath),
         list: this.baseModel.topNav
       };
-      const tree = {
+      const tree: TempTree = {
         list: this.baseModel.normalTree,
         current: ''
       };
@@ -119,7 +144,7 @@ class Tags {
         title: pageTitle,
         path: ''
       });
-      const breadcrumb = {
+      const breadcrumb: TempBreadcrumb = {
         home: this.baseModel.g.$hosts,
         list: breadcrumbList
       };
@@ -127,22 +152,22 @@ class Tags {
         list: list,
         pages: pages
       };
-      const footer = {
-        copyright: this.baseModel.markdownToHtml.config.siteConfig.copyright,
-        hosts: this.baseModel.markdownToHtml.config.siteConfig.hosts,
-        beian: this.baseModel.markdownToHtml.config.siteConfig.beian
+      const footer: TempFooter = {
+        copyright: this.baseModel.$m.config.siteConfig.copyright,
+        hosts: this.baseModel.$m.config.siteConfig.hosts,
+        beian: this.baseModel.$m.config.siteConfig.beian || ''
       };
-      const aside = {
+      const aside: TempAside = {
         list: this.baseModel.collectionRecommend,
         textList: this.baseModel.normalRecommend,
-        tags: this.baseModel.tags.slice(0, 20)
+        tags: this.baseModel.tagsList.slice(0, 20)
       };
-      const foot = {
+      const foot: TempFoot = {
         scripts
       };
       const templatePath = this.baseModel.mergeTemplatePath(this.listTemplate);
       const template = ejs.fileLoader(templatePath).toString();
-      const html = ejs.render(template, {
+      html = ejs.render(template, {
         g: this.baseModel.g,
         head: head,
         header: header,
@@ -153,10 +178,8 @@ class Tags {
         aside: aside,
         foot: foot
       });
-      return html;
-    } else {
-      throw new Error('标签配置文件不正确');
     }
+    return html;
   }
 }
 

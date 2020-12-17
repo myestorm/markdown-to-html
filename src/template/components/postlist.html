@@ -17,12 +17,12 @@ const _list = list || [];
       <ul>
         <li class="a">
           <i class="iconfont icon-folder"></i>
-          <a href="<%= item.parent %>"><%= item.parentName %></a>
+          <a href="<%= item.parent.path %>"><%= item.parent.title %></a>
         </li>
         <li class="b"><i class="iconfont icon-time"></i><%= item.publishDate %></li>
         <li class="c">
           <i class="iconfont icon-tags"></i>
-          <% item.keywordsPath.forEach(keyword => { %>
+          <% item.keywords.forEach(keyword => { %>
             <a href="<%= keyword.path %>"><%= keyword.title %></a>
           <% }); %>
         </li>

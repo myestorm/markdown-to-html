@@ -1,109 +1,126 @@
-import { TreeNodeItem, MarkdownAttribute, ModelTypes } from './Interfaces';
+import { docConfig } from '../config/index';
+import { ModelTypes, MarkdownParseAttribute, SortsItem } from './Interfaces';
 
 class Tree {
-  listDoc = 'readme';
-  list: TreeNodeItem[] = [];
-  maps = new Map();
+  dataMaps = new Map();
   tmpMaps = new Map();
 
-  constructor (listDoc: string) {
-    this.listDoc = listDoc.replace('.md', '.html');
-  }
+  list: MarkdownParseAttribute[] = [];
+  directoryList: MarkdownParseAttribute[] = [];
+  directoryListTree: MarkdownParseAttribute[] = [];
+  normalList: MarkdownParseAttribute[] = [];
+  collectionList: MarkdownParseAttribute[] = [];
+  timelineList: MarkdownParseAttribute[] = [];
+  singleList: MarkdownParseAttribute[] = [];
 
-  // 添加数据
-  addMapItem (data: TreeNodeItem): void {
-    this.maps.set(data.path, data);
-    this.tmpMaps.set(data.path, data);
-    if (data.paths.length === 1) {
+  addMapItem (data: MarkdownParseAttribute): void {
+    this.dataMaps.set(data.id, data);
+    if (data.pid === '') {
       this.list.push(data);
+    } else {
+      this.tmpMaps.set(data.id, data);
     }
   }
 
-  // 获取排序数据
-  getOrder (data: TreeNodeItem): number {
-    const listDoc = this.listDoc;
-    const path = data.isDirectory ? `${data.path}/${listDoc}` : data.path;
-    const item = this.findByPath(path);
-    let order = 1;
-    if (item && item.content && item.content.order) {
-      order = item.content.order;
-    }
-    return order;
-  }
-
-  getMode (data: TreeNodeItem): ModelTypes {
-    const listDoc = this.listDoc;
-    const path = data.isDirectory ? `${data.path}/${listDoc}` : data.path;
-    const item = this.findByPath(path);
-    let mode = ModelTypes.Normal;
-    if (item && item.content && item.content.mode) {
-      mode = item.content.mode;
-    }
-    return mode;
-  }
-
-  getPublishDate (data: TreeNodeItem): number {
-    const listDoc = this.listDoc;
-    const path = data.isDirectory ? `${data.path}/${listDoc}` : data.path;
-    const item = this.findByPath(path);
-    let publishDate = 0;
-    if (item && item.content && item.content.publishDate) {
-      publishDate = item.content.publishDate;
-    }
-    return publishDate;
-  }
-
-  getContent (data: TreeNodeItem): MarkdownAttribute | undefined {
-    const listDoc = this.listDoc;
-    const path = data.isDirectory ? `${data.path}/${listDoc}` : data.path;
-    const item = this.findByPath(path);
-    let res;
-    if (item && item.content) {
-      res = item.content;
-    }
-    return res;
-  }
-
-  sorts (a: TreeNodeItem, b: TreeNodeItem): number {
-    let res = this.getOrder(a) - this.getOrder(b);
-    if (res === 0) {
-      res = this.getPublishDate(a) - this.getPublishDate(b);
-    }
-    return res;
-  }
-
-  // 创建文档和目录的层级关系
-  generateTree (): TreeNodeItem[] {
-    const findChildren = (path: string) => {
+  // 整棵目录文档树
+  generateTree (): MarkdownParseAttribute[] {
+    const findChildren = (id: string) => {
       const res = [];
       for (const [key, value] of this.tmpMaps.entries()) {
-        if (value.parent === path) {
-          value.children = findChildren(value.path);
+        if (value.pid === id) {
+          value.children = findChildren(value.id);
           res.push(value);
           this.tmpMaps.delete(key);
         }
       }
-      // 排序
-      res.sort((a, b) => {
-        return this.sorts(a, b);
-      });
       return res;
     };
-    // 排序
-    this.list.sort((a, b) => {
-      return this.sorts(a, b);
-    });
     this.list.forEach(item => {
-      item.children = findChildren(item.path);
+      item.children = findChildren(item.id);
     });
-
     return this.list;
   }
 
-  // 通过path查找数据
-  findByPath (filepath: string): TreeNodeItem | undefined {
-    return this.maps.get(filepath);
+  checkIsReadme (data: MarkdownParseAttribute): boolean {
+    return data.paths.includes(docConfig.listDoc);
+  }
+  separatedData (): void {
+    this.dataMaps.forEach(item => {
+      if(this.checkIsReadme(item) === false) {
+        const mode = item.mode;
+        switch (mode) {
+        case ModelTypes.Home: {
+          break;
+        }
+        case ModelTypes.Collection: {
+          this.collectionList.push(item);
+          break;
+        }
+        case ModelTypes.Timeline: {
+          this.timelineList.push(item);
+          break;
+        }
+        case ModelTypes.Tags: {
+          this.singleList.push(item);
+          break;
+        }
+        case ModelTypes.Single: {
+          this.singleList.push(item);
+          break;
+        }
+        case ModelTypes.Normal: {
+          this.normalList.push(item);
+          break;
+        }
+        default: {
+          break;
+        }
+        }
+      } else {
+        this.directoryList.push(item);
+      }
+    });
+    const findChildren = (id: string) => {
+      const res = this.directoryList.filter(item => item.pid === id);
+      if (res.length > 0) {
+        res.forEach(item => {
+          item.children = findChildren(item.id);
+        });
+      }
+      return res;
+    };
+    this.directoryListTree = findChildren('');
+
+    // 排序
+    this.directoryList.sort((a, b) => {
+      return this.sorts<MarkdownParseAttribute>(a, b);
+    });
+    this.normalList.sort((a, b) => {
+      return this.sorts<MarkdownParseAttribute>(a, b);
+    });
+    this.collectionList.sort((a, b) => {
+      return this.sorts<MarkdownParseAttribute>(a, b);
+    });
+    this.timelineList.sort((a, b) => {
+      return (+a.title) - (+b.title);
+    });
+    this.singleList.sort((a, b) => {
+      return this.sorts<MarkdownParseAttribute>(a, b);
+    });
+  }
+
+  sorts<T extends SortsItem> (a: T, b: T): number {
+    let res = a.order - b.order;
+    if (res === 0) {
+      res = a.publishDate - b.publishDate;
+    }
+    return res;
+  }
+
+  find (id: string): MarkdownParseAttribute | undefined {
+    return this.dataMaps.get(id);
   }
 
 }
+
 export default Tree;

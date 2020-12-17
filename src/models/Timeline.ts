@@ -1,6 +1,17 @@
 import ejs from 'ejs';
 import BaseModel from '../lib/BaseModel';
-import { ModelTypes, TimelineItem } from '../lib/Interfaces';
+import {
+  ModelTypes,
+  TempHead,
+  TempHeader,
+  TempTree,
+  TempBreadcrumb,
+  TempFooter,
+  TempAside,
+  TempFoot,
+  GulpFileItem,
+  TimelineItem
+} from '../lib/Interfaces';
 
 interface TimelinePageList {
   years: number[],
@@ -14,87 +25,62 @@ class Timeline {
   constructor (baseModel: BaseModel) {
     this.baseModel = baseModel;
   }
-  getTimelines (parenttPath: string): TimelinePageList {
+  getTimelines (): TimelinePageList {
     const res: TimelinePageList = {
       years: [],
       list: []
     };
-    const _list: { year: number, list: TimelineItem[] }[] = [];
-    this.baseModel.tree.maps.forEach(item => {
-      if (item.isDirectory === false && item.parent === parenttPath && item.paths.includes(this.baseModel.tree.listDoc) === false) {
-        const _timeline: TimelineItem[] = [];
-        if (item.content.timeline) {
-          const timeline: TimelineItem[] = item.content.timeline || [];
-          timeline.forEach(sub => {
-            _timeline.push({
-              publishDate: sub.publishDate,
-              publishDateDay: this.baseModel.dayjs(sub.publishDate).format('YYYY年MM月DD日'),
-              publishDateTime: this.baseModel.dayjs(sub.publishDate).format('HH:mm'),
-              title: sub.title,
-              desc: sub.desc,
-              image: sub.image,
-              link: sub.link
-            });
-          });
-        }
-        _list.push({
-          year: item.content.title,
-          list: _timeline
-        });
-      }
-    });
-    _list.sort((a, b) => {
-      return a.year - b.year;
-    });
-    _list.forEach(item => {
-      res.years.push(item.year);
-      res.list.push(item.list);
+    this.baseModel.$t.timelineList.forEach(item => {
+      res.years.push(+item.title);
+      res.list.push(item.timeline || []);
     });
     return res;
   }
-  render (listPath: string): string {
-    const modelData = this.baseModel.tree.findByPath(listPath);
+  render (id: string): GulpFileItem {
+    let filepath = '';
+    let html = '';
+    const modelData = this.baseModel.$t.find(id);
     const { styles, scripts} = this.baseModel.mergeAssets(this.template);
     if (modelData) {
-      const content = modelData.content;
-      const head = {
-        title: this.baseModel.mergeSiteTitle(content.title),
-        keywords: content.keywords,
-        desc: content.desc,
+      filepath = this.baseModel.replaceFileExt(modelData.path);
+      const head: TempHead = {
+        title: this.baseModel.mergeSiteTitle(modelData.title),
+        keywords: modelData.keywords ? modelData.keywords.join(', ') : '',
+        desc: modelData.desc || '',
         styles
       };
-      const header = {
-        current: this.baseModel.findTopIndex(modelData.paths[0]),
+      const header: TempHeader = {
+        current: this.baseModel.findIndexTopNav(filepath),
         list: this.baseModel.topNav
       };
-      const tree = {
+      const tree: TempTree = {
         list: this.baseModel.normalTree,
-        current: this.baseModel.mergerHosts(modelData.path)
+        current: ''
       };
-      const breadcrumb = {
+      const breadcrumb: TempBreadcrumb = {
         home: this.baseModel.g.$hosts,
         list: this.baseModel.getBreadcrumb(modelData.paths)
       };
       const main = {
-        list: this.getTimelines(modelData.parent),
+        list: this.getTimelines(),
         current: new Date().getFullYear()
       };
-      const footer = {
-        copyright: this.baseModel.markdownToHtml.config.siteConfig.copyright,
-        hosts: this.baseModel.markdownToHtml.config.siteConfig.hosts,
-        beian: this.baseModel.markdownToHtml.config.siteConfig.beian
+      const footer: TempFooter = {
+        copyright: this.baseModel.$m.config.siteConfig.copyright,
+        hosts: this.baseModel.$m.config.siteConfig.hosts,
+        beian: this.baseModel.$m.config.siteConfig.beian || ''
       };
-      const aside = {
+      const aside: TempAside = {
         list: this.baseModel.collectionRecommend,
         textList: this.baseModel.normalRecommend,
-        tags: this.baseModel.tags.slice(0, 20)
+        tags: this.baseModel.tagsList.slice(0, 20)
       };
-      const foot = {
+      const foot: TempFoot = {
         scripts
       };
       const templatePath = this.baseModel.mergeTemplatePath(this.template);
       const template = ejs.fileLoader(templatePath).toString();
-      const html = ejs.render(template, {
+      html = ejs.render(template, {
         g: this.baseModel.g,
         head: head,
         header: header,
@@ -105,10 +91,11 @@ class Timeline {
         aside: aside,
         foot: foot
       });
-      return html;
-    } else {
-      throw new Error(`${listPath} 目录配置错误！`);
     }
+    return {
+      path: filepath,
+      contents: html
+    };
   }
 }
 
