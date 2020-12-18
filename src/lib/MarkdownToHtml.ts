@@ -8,7 +8,7 @@ import Token from 'markdown-it/lib/token';
 import MarkdownItAnchor, { AnchorOptions } from 'markdown-it-anchor';
 import FrontMatter, { FrontMatterResult } from 'front-matter';
 import { Readable, Transform } from 'readable-stream';
-import { markdownItAnchor, siteConfig, templateConfig, docConfig } from '../config/index';
+import { markdownItOptions, markdownItAnchor, siteConfig, templateConfig, docConfig } from '../config/index';
 import {
   ModelTypes,
   GulpFileItem,
@@ -33,6 +33,7 @@ const templateConfigData = JSON.parse(templateConfigString);
 
 class MarkdownToHtml {
   config = {
+    markdownItOptions,
     markdownItAnchorConfig,
     siteConfig,
     templateConfig,
@@ -70,7 +71,7 @@ class MarkdownToHtml {
         });
       });
     }
-    let markdownIt = new MarkdownIt();
+    let markdownIt = new MarkdownIt(markdownItOptions);
     _markdownItAnchorConfig.callback = (token: Token, {
       slug,
       title

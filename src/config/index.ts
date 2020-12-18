@@ -1,5 +1,15 @@
+import MarkdownIt from 'markdown-it';
 import { AnchorOptions } from 'markdown-it-anchor';
 import { SiteConfig, TemplateConfig, DocConfig } from '../lib/Interfaces';
+
+export const markdownItOptions: MarkdownIt.Options = {
+  html: true,
+  xhtmlOut: false,
+  breaks: false,
+  langPrefix: 'language-',
+  linkify: false,
+  typographer: false
+};
 
 export const markdownItAnchor: AnchorOptions = {
   level: 1,
@@ -32,6 +42,7 @@ export const docConfig: DocConfig = {
 };
 
 export default {
+  markdownItOptions,
   markdownItAnchor,
   siteConfig,
   docConfig

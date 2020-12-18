@@ -366,6 +366,9 @@ class BaseModel {
         this.collectionBooks.push(a);
       }
     });
+    this.collectionBooks.sort((a, b) => {
+      return a[0].order - b[0].order;
+    });
   }
 
   // 获取推荐文集

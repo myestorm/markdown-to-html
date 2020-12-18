@@ -86,6 +86,9 @@ class Tree {
       if (res.length > 0) {
         res.forEach(item => {
           item.children = findChildren(item.id);
+          item.children.sort((a, b) => {
+            return this.sorts<MarkdownParseAttribute>(a, b);
+          });
         });
       }
       return res;
@@ -108,12 +111,15 @@ class Tree {
     this.singleList.sort((a, b) => {
       return this.sorts<MarkdownParseAttribute>(a, b);
     });
+    this.directoryListTree.sort((a, b) => {
+      return this.sorts<MarkdownParseAttribute>(a, b);
+    });
   }
 
   sorts<T extends SortsItem> (a: T, b: T): number {
     let res = a.order - b.order;
     if (res === 0) {
-      res = a.publishDate - b.publishDate;
+      res = b.publishDate - a.publishDate;
     }
     return res;
   }
