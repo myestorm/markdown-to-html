@@ -31,8 +31,23 @@ class Timeline {
       list: []
     };
     this.baseModel.$t.timelineList.forEach(item => {
+      interface SubsItem extends TimelineItem {
+        publishDateDay: string,
+        publishDateTime: string
+      }
+      const subs: SubsItem[] = [];
+      if (item.timeline) {
+        item.timeline.forEach(sub => {
+          const _sub: SubsItem = {
+            ...sub,
+            publishDateDay: this.baseModel.getDayjs(sub.publishDate).format('YYYY年MM月DD日'),
+            publishDateTime: this.baseModel.getDayjs(sub.publishDate).format('HH:mm')
+          };
+          subs.push(_sub);
+        });
+      }
       res.years.push(+item.title);
-      res.list.push(item.timeline || []);
+      res.list.push(subs);
     });
     return res;
   }
@@ -50,6 +65,7 @@ class Timeline {
         styles
       };
       const header: TempHeader = {
+        logo: this.baseModel.$logo,
         current: this.baseModel.findIndexTopNav(filepath),
         list: this.baseModel.topNav
       };

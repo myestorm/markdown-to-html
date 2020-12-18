@@ -87,6 +87,7 @@ class Home {
       styles
     };
     const header: TempHeader = {
+      logo: this.baseModel.$logo,
       current: this.baseModel.findIndexTopNav(topId),
       list: this.baseModel.topNav
     };
@@ -149,6 +150,7 @@ class Home {
         styles
       };
       const header: TempHeader = {
+        logo: this.baseModel.$logo,
         current: this.baseModel.findIndexTopNav(filepath),
         list: this.baseModel.topNav
       };

@@ -1,6 +1,7 @@
 <%
 const _current = header.current || 0;
 const _list = header.list;
+const _logo = header.logo
 %>
 <div class="totonoo--header" id="totonoo--top-header">
   <div class="wrapper">
@@ -9,8 +10,8 @@ const _list = header.list;
         <div class="green-dragon">
           <div class="top-logo">
             <a href="/">
-              <i class="logo-icon"></i>
-              <h1>Totonoo<small>.com</small></h1>
+              <i class="logo-icon"<%- (_logo.logo ? ` style="background-image: url(${_logo.logo});"` : '') %>></i>
+              <h1><%= _logo.logoTxt %><small><%= _logo.logoSuffix %></small></h1>
             </a>
           </div>
         </div>

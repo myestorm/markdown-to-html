@@ -5,6 +5,8 @@ export interface SiteConfig {
   siteRoot: string, // 站点根目录
   beian?: string, // 备案号
   logo?: string, // 网站logo
+  logoTxt?: string,
+  logoSuffix?: string,
   copyright: [string, string], // [start, end]
   favicon?: string // favicon
 }
@@ -152,6 +154,11 @@ export interface TempHead {
   styles: string[]
 }
 export interface TempHeader {
+  logo: {
+    logo: string,
+    logoTxt: string,
+    logoSuffix: string,
+  },
   current: number,
   list: TempTextLink[]
 }

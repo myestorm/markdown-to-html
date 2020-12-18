@@ -12,8 +12,10 @@ export const siteConfig: SiteConfig = {
   hosts: '/', // 必须以/结尾
   siteName: 'markdown-to-html',
   siteRoot: 'www',
+  logo: '/img/logo_primary.png',
+  logoTxt: 'Totonoo',
+  logoSuffix: '.com',
   beian: '粤ICP备12041241号',
-  logo: '',
   favicon: '/favicon.ico',
   copyright: ['2005', new Date().getFullYear() + '']
 };

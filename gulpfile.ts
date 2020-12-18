@@ -118,7 +118,16 @@ const delDirTask = () => {
 };
 
 const copyContentResource = () => {
-  return src([`${docRoot}/**/*.{jpg, jpeg, gif, png, svg, .mp4, .mp3, html, json, txt, webp, htm}`])
+  return src([`${docRoot}/**/*.{jpg,jpeg,gif,png,svg,.mp4,.mp3,html,json,txt,webp,htm}`])
+    .pipe(markdownToHtml.transform((file) => {
+      const dirname = path.relative(__dirname, file.dirname);
+      const _arr = dirname.split(path.sep);
+      const arr: string[] = [];
+      _arr.forEach(item => {
+        arr.push(markdownToHtml.pinYin(item));
+      });
+      file.dirname = arr.join('/');
+    }))
     .pipe(dest(siteRoot));
 };
 

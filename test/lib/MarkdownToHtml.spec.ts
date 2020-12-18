@@ -82,7 +82,7 @@ describe('MarkdownToHtml.createPid', () => {
 
 });
 describe('MarkdownToHtml.pinYin', () => {
-  it('should return dong-fang-b7b800', () => {
+  it('should return dong-fang', () => {
     const r1 = markdownToHtml.pinYin('东方', true, false);
     expect(r1).to.equal('dong-fang');
   });
@@ -141,5 +141,19 @@ recommend: 0
       timeline: [],
       children: []
     }));
+  });
+});
+describe('MarkdownToHtml.parseCover', () => {
+  it('should return /', () => {
+    const r1 = markdownToHtml.parseCover('/', '/');
+    expect(r1).to.equal('/');
+  });
+  it('should return /collection/cover/2.jpg', () => {
+    const r1 = markdownToHtml.parseCover('C:\\root\\git\\github\\markdown-to-html\\documents\\collection\\南腔北调\\readme.md', '../cover/2.jpg');
+    expect(r1).to.equal('/collection/cover/2.jpg');
+  });
+  it('should return /collection/cover/2.jpg', () => {
+    const r1 = markdownToHtml.parseCover('documents/collection/', '/cover/2.jpg');
+    expect(r1).to.equal('/cover/2.jpg');
   });
 });

@@ -80,6 +80,7 @@ class MarkdownToHtml {
     const body = markdownIt.render(fmContents.body);
 
     const paths = this.parseDir(file);
+    const cover = attributes.cover ? this.parseCover(file.path, attributes.cover) : '';
 
     const data: MarkdownParseAttribute = {
       id: attributes.mode === ModelTypes.Home ? 'index' : this.createId(paths),
@@ -96,7 +97,7 @@ class MarkdownToHtml {
       desc: attributes.desc || '',
       order: attributes.order || 1,
       recommend: attributes.recommend || recommendTypes.Default,
-      cover: attributes.cover || '',
+      cover: cover,
       timeline: timeline,
       children: []
     };
@@ -113,6 +114,26 @@ class MarkdownToHtml {
     const dir = path.relative(rootDir, file.path);
     const arr = dir.split(path.sep);
     return arr;
+  }
+
+  /**
+   * 处理cover的路径
+   * @param paths
+   */
+  parseCover (filePath: string, coverPath: string): string {
+    if (path.isAbsolute(coverPath)) {
+      return coverPath;
+    }
+    const rootDir = path.resolve(__dirname, `../../${this.config.docConfig.root}`);
+    const p = path.relative(rootDir, filePath);
+    const o = path.parse(p);
+    const c = path.join(o.dir, coverPath);
+    const _arr = c.split(path.sep);
+    const arr: string[] = [];
+    _arr.forEach(item => {
+      arr.push(this.pinYin(item, false, false));
+    });
+    return this.config.siteConfig.hosts + arr.join('/');
   }
 
   /**

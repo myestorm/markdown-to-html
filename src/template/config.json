@@ -1,92 +1,102 @@
 {
     "about.html": {
         "scripts": [
-            "scripts/vendor-2684c0.js",
-            "scripts/about-2684c0.js"
+            "scripts/vendor-52b57d.js",
+            "scripts/about-52b57d.js"
         ],
         "styles": [
-            "styles/about.2684c0.css"
+            "styles/vendor.52b57d.css",
+            "styles/about.52b57d.css"
         ]
     },
     "collection_detail.html": {
         "scripts": [
-            "scripts/vendor-2684c0.js",
-            "scripts/collection_detail-2684c0.js"
+            "scripts/vendor-52b57d.js",
+            "scripts/collection_detail-52b57d.js"
         ],
         "styles": [
-            "styles/collection_detail.2684c0.css"
+            "styles/vendor.52b57d.css",
+            "styles/collection_detail.52b57d.css"
         ]
     },
     "collection.html": {
         "scripts": [
-            "scripts/vendor-2684c0.js",
-            "scripts/collection-2684c0.js"
+            "scripts/vendor-52b57d.js",
+            "scripts/collection-52b57d.js"
         ],
         "styles": [
-            "styles/collection.2684c0.css"
+            "styles/vendor.52b57d.css",
+            "styles/collection.52b57d.css"
         ]
     },
     "detail.html": {
         "scripts": [
-            "scripts/vendor-2684c0.js",
-            "scripts/detail-2684c0.js"
+            "scripts/vendor-52b57d.js",
+            "scripts/detail-52b57d.js"
         ],
         "styles": [
-            "styles/detail.2684c0.css"
+            "styles/vendor.52b57d.css",
+            "styles/detail.52b57d.css"
         ]
     },
     "index.html": {
         "scripts": [
-            "scripts/vendor-2684c0.js",
-            "scripts/index-2684c0.js"
+            "scripts/vendor-52b57d.js",
+            "scripts/index-52b57d.js"
         ],
         "styles": [
-            "styles/index.2684c0.css"
+            "styles/vendor.52b57d.css",
+            "styles/index.52b57d.css"
         ]
     },
     "list.html": {
         "scripts": [
-            "scripts/vendor-2684c0.js",
-            "scripts/list-2684c0.js"
+            "scripts/vendor-52b57d.js",
+            "scripts/list-52b57d.js"
         ],
         "styles": [
-            "styles/list.2684c0.css"
+            "styles/vendor.52b57d.css",
+            "styles/list.52b57d.css"
         ]
     },
     "search.html": {
         "scripts": [
-            "scripts/vendor-2684c0.js",
-            "scripts/search-2684c0.js"
+            "scripts/vendor-52b57d.js",
+            "scripts/search-52b57d.js"
         ],
         "styles": [
-            "styles/search.2684c0.css"
+            "styles/vendor.52b57d.css",
+            "styles/search.52b57d.css"
         ]
     },
     "tags_list.html": {
         "scripts": [
-            "scripts/vendor-2684c0.js",
-            "scripts/tags_list-2684c0.js"
+            "scripts/vendor-52b57d.js",
+            "scripts/tags_list-52b57d.js"
         ],
         "styles": [
-            "styles/tags_list.2684c0.css"
+            "styles/vendor.52b57d.css",
+            "styles/tags_list.52b57d.css"
         ]
     },
     "tags.html": {
         "scripts": [
-            "scripts/vendor-2684c0.js",
-            "scripts/tags-2684c0.js"
+            "scripts/vendor-52b57d.js",
+            "scripts/tags-52b57d.js"
         ],
         "styles": [
-            "styles/tags.2684c0.css"
+            "styles/vendor.52b57d.css",
+            "styles/tags.52b57d.css"
         ]
     },
     "timeline.html": {
         "scripts": [
-            "scripts/vendor-2684c0.js",
-            "scripts/timeline-2684c0.js"
+            "scripts/vendor-52b57d.js",
+            "scripts/timeline-52b57d.js"
         ],
         "styles": [
-            "styles/timeline.2684c0.css"
+            "styles/vendor.52b57d.css",
+            "styles/timeline.52b57d.css"
         ]
     }
 }

@@ -46,6 +46,7 @@ class Home {
         styles
       };
       const header: TempHeader = {
+        logo: this.baseModel.$logo,
         current: 0,
         list: this.baseModel.topNav
       };

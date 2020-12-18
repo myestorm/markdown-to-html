@@ -39,6 +39,7 @@ class Tags {
         styles
       };
       const header: TempHeader = {
+        logo: this.baseModel.$logo,
         current: this.baseModel.findIndexTopNav(filepath),
         list: this.baseModel.topNav
       };
@@ -132,6 +133,7 @@ class Tags {
         styles
       };
       const header: TempHeader = {
+        logo: this.baseModel.$logo,
         current: this.baseModel.findIndexTopNav(filepath),
         list: this.baseModel.topNav
       };

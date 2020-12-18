@@ -1,11 +1,13 @@
 ---
+mode: collection
 title: 而已集
 keywords: [而已集, 鲁迅]
 desc: 《而已集》是1927年人民文学出版社出版的杂文集，作者是鲁迅，面对反动军阀大肆屠杀革命党人和进步人士，鲁迅先生既愤恨，又无能为力，“这半年我又看见了许多血和许多泪，然而我只有杂感而已。
-cover: /assets/resource/images/demo.jpg
+publishDate: 
 order: 1
+icon: 
 recommend: 1
-mode: collection
+cover: ../cover/1.jpg
 ---
 
 ## 题辞

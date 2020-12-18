@@ -59,6 +59,7 @@ class Normal {
         styles
       };
       const header: TempHeader = {
+        logo: this.baseModel.$logo,
         current: this.baseModel.findIndexTopNav(filepath),
         list: this.baseModel.topNav
       };
@@ -142,6 +143,7 @@ class Normal {
         styles
       };
       const header: TempHeader = {
+        logo: this.baseModel.$logo,
         current: 0,
         list: this.baseModel.topNav
       };

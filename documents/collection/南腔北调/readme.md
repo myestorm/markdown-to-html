@@ -1,10 +1,13 @@
 ---
+mode: collection
 title: 南腔北调
 keywords: [南腔北调, 鲁迅]
-desc: 《南腔北调集》是鲁迅的一部杂文集，收录了鲁迅在1927年—1929年间所写的杂文五十一篇。当时上海有一署名“美子”的文人在《作家素描》一文中攻击鲁迅:“鲁迅很喜欢演说,只是有些口吃,而且是‘南腔北调'。”
-cover: /assets/resource/images/demo.jpg
+desc: 南腔北调集》是鲁迅的一部杂文集，收录了鲁迅在1927年—1929年间所写的杂文五十一篇。当时上海有一署名“美子”的文人在《作家素描》一文中攻击鲁迅:“鲁迅很喜欢演说,只是有些口吃,而且是‘南腔北调'。”
+publishDate: 
 order: 2
-mode: collection
+icon: 
+recommend: 0
+cover: ../cover/2.jpg
 ---
 
 ## 简介

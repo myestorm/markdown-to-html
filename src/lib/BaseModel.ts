@@ -18,6 +18,11 @@ import {
 class BaseModel {
   $t: Tree;
   $m: MarkdownToHtml;
+  $logo = {
+    logo: '',
+    logoTxt: 'Totonoo',
+    logoSuffix: '.com',
+  };
   g = {
     $path: '',
     $hosts: ''
@@ -31,12 +36,22 @@ class BaseModel {
   collectionBooks: MarkdownParseAttribute[][] = [];
 
   constructor (tree: Tree, markdownToHtml: MarkdownToHtml) {
+    const logoConfig = markdownToHtml.config.siteConfig;
     this.$t = tree;
     this.$m = markdownToHtml;
     this.g = {
       $path: path.resolve(__dirname, `../../${this.$m.config.templateConfig.root}`),
       $hosts: this.$m.config.siteConfig.hosts
     };
+    if (logoConfig.logo) {
+      this.$logo.logo = logoConfig.logo;
+    }
+    if (logoConfig.logoTxt) {
+      this.$logo.logoTxt = logoConfig.logoTxt;
+    }
+    if (logoConfig.logoSuffix) {
+      this.$logo.logoSuffix = logoConfig.logoSuffix;
+    }
     this.generateTopNav();
     this.getNormalTree();
     this.generateTags();
