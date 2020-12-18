@@ -55,6 +55,42 @@ npm run serve
 - [x] 精简配置文件
 - [x] 其他
 
+## 配置文件地址
+
+src/config/index.ts
+配置说明：
+
+```typescript
+export const siteConfig: SiteConfig = {
+  hosts: '/', // 网址，必须以/结尾
+  siteName: 'markdown-to-html', // 站点名称 将出现在页面title标签内
+  siteRoot: 'www', // 站点根目录
+  logo: '/img/logo_primary.png', // 标志
+  logoTxt: 'Totonoo',
+  logoSuffix: '.com',
+  beian: '粤ICP备12041241号',
+  favicon: '/favicon.ico',
+  copyright: ['2005', new Date().getFullYear() + ''] // 底部copyright的年限
+};
+
+export const templateConfig: TemplateConfig = {
+  root: './src/template',
+  config: 'config.json',
+  pageSize: 20 // 列表分页大小
+};
+
+export const docConfig: DocConfig = {
+  root: 'documents', // 文档目录
+  listDoc: 'readme.md' // 不能是中文
+};
+```
+
+## 几点说明
+
+- cover 可以是相对路径也可以是绝对路径，相对路径会自动转换，绝对路径不会处理。
+- 图片的目录和文件名必须是英文字母，符号或数字。
+- 如果同目录两个中文转出来的拼音是一致的会被覆盖。
+
 ## 演示站点
 
 [https://www.totonoo.com](https://www.totonoo.com)
