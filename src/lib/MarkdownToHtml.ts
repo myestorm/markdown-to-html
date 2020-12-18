@@ -50,7 +50,12 @@ class MarkdownToHtml {
       ...this.config.markdownItAnchorConfig
     };
     const contents = file.contents || '';
-    const fmContents: FrontMatterResult<MarkdownAttribute> = FrontMatter(contents.toString());
+    let fmContents: FrontMatterResult<MarkdownAttribute>;
+    try {
+      fmContents = FrontMatter(contents.toString());
+    } catch (err) {
+      throw new Error(`${file.path} 文件解析错误：${err.message}`);
+    }
     const attributes = fmContents.attributes;
     const zoneOffset = new Date().getTimezoneOffset() * 1000 * 60;
     const timeline: TimelineItem[] = [];
