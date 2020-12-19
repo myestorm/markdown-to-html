@@ -5,7 +5,7 @@
     <% _list.forEach((item, index) => { %>
         <li class="separate"><i class="iconfont icon-right"></i></li>
       <% if (index == _list.length -1) { %>
-        <li><%=item.title%></li>
+        <li><strong><%=item.title%></strong></li>
       <% } else { %>
         <li><a href="<%=item.path%>"><%=item.title%></a></li>
       <% } %>

@@ -1,102 +1,102 @@
 {
     "about.html": {
         "scripts": [
-            "scripts/vendor-d20e2c.js",
-            "scripts/about-d20e2c.js"
+            "scripts/vendor-35d11f.js",
+            "scripts/about-35d11f.js"
         ],
         "styles": [
-            "styles/vendor.d20e2c.css",
-            "styles/about.d20e2c.css"
+            "styles/vendor.35d11f.css",
+            "styles/about.35d11f.css"
         ]
     },
     "collection_detail.html": {
         "scripts": [
-            "scripts/vendor-d20e2c.js",
-            "scripts/collection_detail-d20e2c.js"
+            "scripts/vendor-35d11f.js",
+            "scripts/collection_detail-35d11f.js"
         ],
         "styles": [
-            "styles/vendor.d20e2c.css",
-            "styles/collection_detail.d20e2c.css"
+            "styles/vendor.35d11f.css",
+            "styles/collection_detail.35d11f.css"
         ]
     },
     "collection.html": {
         "scripts": [
-            "scripts/vendor-d20e2c.js",
-            "scripts/collection-d20e2c.js"
+            "scripts/vendor-35d11f.js",
+            "scripts/collection-35d11f.js"
         ],
         "styles": [
-            "styles/vendor.d20e2c.css",
-            "styles/collection.d20e2c.css"
+            "styles/vendor.35d11f.css",
+            "styles/collection.35d11f.css"
         ]
     },
     "detail.html": {
         "scripts": [
-            "scripts/vendor-d20e2c.js",
-            "scripts/detail-d20e2c.js"
+            "scripts/vendor-35d11f.js",
+            "scripts/detail-35d11f.js"
         ],
         "styles": [
-            "styles/vendor.d20e2c.css",
-            "styles/detail.d20e2c.css"
+            "styles/vendor.35d11f.css",
+            "styles/detail.35d11f.css"
         ]
     },
     "index.html": {
         "scripts": [
-            "scripts/vendor-d20e2c.js",
-            "scripts/index-d20e2c.js"
+            "scripts/vendor-35d11f.js",
+            "scripts/index-35d11f.js"
         ],
         "styles": [
-            "styles/vendor.d20e2c.css",
-            "styles/index.d20e2c.css"
+            "styles/vendor.35d11f.css",
+            "styles/index.35d11f.css"
         ]
     },
     "list.html": {
         "scripts": [
-            "scripts/vendor-d20e2c.js",
-            "scripts/list-d20e2c.js"
+            "scripts/vendor-35d11f.js",
+            "scripts/list-35d11f.js"
         ],
         "styles": [
-            "styles/vendor.d20e2c.css",
-            "styles/list.d20e2c.css"
+            "styles/vendor.35d11f.css",
+            "styles/list.35d11f.css"
         ]
     },
     "search.html": {
         "scripts": [
-            "scripts/vendor-d20e2c.js",
-            "scripts/search-d20e2c.js"
+            "scripts/vendor-35d11f.js",
+            "scripts/search-35d11f.js"
         ],
         "styles": [
-            "styles/vendor.d20e2c.css",
-            "styles/search.d20e2c.css"
+            "styles/vendor.35d11f.css",
+            "styles/search.35d11f.css"
         ]
     },
     "tags_list.html": {
         "scripts": [
-            "scripts/vendor-d20e2c.js",
-            "scripts/tags_list-d20e2c.js"
+            "scripts/vendor-35d11f.js",
+            "scripts/tags_list-35d11f.js"
         ],
         "styles": [
-            "styles/vendor.d20e2c.css",
-            "styles/tags_list.d20e2c.css"
+            "styles/vendor.35d11f.css",
+            "styles/tags_list.35d11f.css"
         ]
     },
     "tags.html": {
         "scripts": [
-            "scripts/vendor-d20e2c.js",
-            "scripts/tags-d20e2c.js"
+            "scripts/vendor-35d11f.js",
+            "scripts/tags-35d11f.js"
         ],
         "styles": [
-            "styles/vendor.d20e2c.css",
-            "styles/tags.d20e2c.css"
+            "styles/vendor.35d11f.css",
+            "styles/tags.35d11f.css"
         ]
     },
     "timeline.html": {
         "scripts": [
-            "scripts/vendor-d20e2c.js",
-            "scripts/timeline-d20e2c.js"
+            "scripts/vendor-35d11f.js",
+            "scripts/timeline-35d11f.js"
         ],
         "styles": [
-            "styles/vendor.d20e2c.css",
-            "styles/timeline.d20e2c.css"
+            "styles/vendor.35d11f.css",
+            "styles/timeline.35d11f.css"
         ]
     }
 }
