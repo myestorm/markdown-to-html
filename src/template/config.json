@@ -1,102 +1,102 @@
 {
     "about.html": {
         "scripts": [
-            "scripts/vendor-bb370b.js",
-            "scripts/about-bb370b.js"
+            "scripts/vendor-f7e887.js",
+            "scripts/about-f7e887.js"
         ],
         "styles": [
-            "styles/vendor.bb370b.css",
-            "styles/about.bb370b.css"
+            "styles/vendor.f7e887.css",
+            "styles/about.f7e887.css"
         ]
     },
     "collection_detail.html": {
         "scripts": [
-            "scripts/vendor-bb370b.js",
-            "scripts/collection_detail-bb370b.js"
+            "scripts/vendor-f7e887.js",
+            "scripts/collection_detail-f7e887.js"
         ],
         "styles": [
-            "styles/vendor.bb370b.css",
-            "styles/collection_detail.bb370b.css"
+            "styles/vendor.f7e887.css",
+            "styles/collection_detail.f7e887.css"
         ]
     },
     "collection.html": {
         "scripts": [
-            "scripts/vendor-bb370b.js",
-            "scripts/collection-bb370b.js"
+            "scripts/vendor-f7e887.js",
+            "scripts/collection-f7e887.js"
         ],
         "styles": [
-            "styles/vendor.bb370b.css",
-            "styles/collection.bb370b.css"
+            "styles/vendor.f7e887.css",
+            "styles/collection.f7e887.css"
         ]
     },
     "detail.html": {
         "scripts": [
-            "scripts/vendor-bb370b.js",
-            "scripts/detail-bb370b.js"
+            "scripts/vendor-f7e887.js",
+            "scripts/detail-f7e887.js"
         ],
         "styles": [
-            "styles/vendor.bb370b.css",
-            "styles/detail.bb370b.css"
+            "styles/vendor.f7e887.css",
+            "styles/detail.f7e887.css"
         ]
     },
     "index.html": {
         "scripts": [
-            "scripts/vendor-bb370b.js",
-            "scripts/index-bb370b.js"
+            "scripts/vendor-f7e887.js",
+            "scripts/index-f7e887.js"
         ],
         "styles": [
-            "styles/vendor.bb370b.css",
-            "styles/index.bb370b.css"
+            "styles/vendor.f7e887.css",
+            "styles/index.f7e887.css"
         ]
     },
     "list.html": {
         "scripts": [
-            "scripts/vendor-bb370b.js",
-            "scripts/list-bb370b.js"
+            "scripts/vendor-f7e887.js",
+            "scripts/list-f7e887.js"
         ],
         "styles": [
-            "styles/vendor.bb370b.css",
-            "styles/list.bb370b.css"
+            "styles/vendor.f7e887.css",
+            "styles/list.f7e887.css"
         ]
     },
     "search.html": {
         "scripts": [
-            "scripts/vendor-bb370b.js",
-            "scripts/search-bb370b.js"
+            "scripts/vendor-f7e887.js",
+            "scripts/search-f7e887.js"
         ],
         "styles": [
-            "styles/vendor.bb370b.css",
-            "styles/search.bb370b.css"
+            "styles/vendor.f7e887.css",
+            "styles/search.f7e887.css"
         ]
     },
     "tags_list.html": {
         "scripts": [
-            "scripts/vendor-bb370b.js",
-            "scripts/tags_list-bb370b.js"
+            "scripts/vendor-f7e887.js",
+            "scripts/tags_list-f7e887.js"
         ],
         "styles": [
-            "styles/vendor.bb370b.css",
-            "styles/tags_list.bb370b.css"
+            "styles/vendor.f7e887.css",
+            "styles/tags_list.f7e887.css"
         ]
     },
     "tags.html": {
         "scripts": [
-            "scripts/vendor-bb370b.js",
-            "scripts/tags-bb370b.js"
+            "scripts/vendor-f7e887.js",
+            "scripts/tags-f7e887.js"
         ],
         "styles": [
-            "styles/vendor.bb370b.css",
-            "styles/tags.bb370b.css"
+            "styles/vendor.f7e887.css",
+            "styles/tags.f7e887.css"
         ]
     },
     "timeline.html": {
         "scripts": [
-            "scripts/vendor-bb370b.js",
-            "scripts/timeline-bb370b.js"
+            "scripts/vendor-f7e887.js",
+            "scripts/timeline-f7e887.js"
         ],
         "styles": [
-            "styles/vendor.bb370b.css",
-            "styles/timeline.bb370b.css"
+            "styles/vendor.f7e887.css",
+            "styles/timeline.f7e887.css"
         ]
     }
 }
