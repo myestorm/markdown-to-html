@@ -42,6 +42,23 @@ npm run serve
 
 [演示文档](./documents)
 
+## 1.0.1版本更新
+
+- [x] 增加配置字段
+- [x] 内容页图片支持相册模式查看
+- [x] 支持checkbox list
+- [x] 支持本地视频和音频 ![text](1.mp4) ![text](1.mp3)
+- [x] 非本站链接新窗口打开
+
+更新文件列表(** 代表全部)：
+
+- src/config/index.ts [注意：siteConfig增加字段copyrightText，其他未修改]
+- src/lib/**
+- src/models/**
+- src/template/assets/**
+- src/template/components/footer.html
+- src/template/config.json
+
 ## 1.0.0版本更新
 
 - [x] 更换了模板，能更好的兼容手机
@@ -70,7 +87,8 @@ export const siteConfig: SiteConfig = {
   logoSuffix: '.com',
   beian: '粤ICP备12041241号',
   favicon: '/favicon.ico',
-  copyright: ['2005', new Date().getFullYear() + ''] // 底部copyright的年限
+  copyright: ['2005', new Date().getFullYear() + ''], // 底部copyright的年限
+  copyrightText: 'Totonoo.com'
 };
 
 export const templateConfig: TemplateConfig = {
