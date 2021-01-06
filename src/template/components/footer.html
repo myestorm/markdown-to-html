@@ -1,10 +1,11 @@
 <%
 const _copyright = footer.copyright;
+const _copyrightText = footer.copyrightText || '';
 const _beian = footer.beian;
 const _hosts = footer.hosts || '/';
 %>
 <footer class="totonoo--footer">
   Copyright &copy; <span id="copyright-years"><%= _copyright.join(' - ') %></span>
-  <a href="<%= _hosts %>">Totonoo.com</a>
+  <a href="<%= _hosts %>"><%= _copyrightText %></a>
   <a href="http://beian.miit.gov.cn/" target="_balnk"><%= _beian %></a>
 </footer>

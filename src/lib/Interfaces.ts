@@ -8,6 +8,7 @@ export interface SiteConfig {
   logoTxt?: string,
   logoSuffix?: string,
   copyright: [string, string], // [start, end]
+  copyrightText: string,
   favicon?: string // favicon
 }
 
@@ -176,6 +177,7 @@ export interface TempBreadcrumb {
 }
 export interface TempFooter {
   copyright: [string, string],
+  copyrightText: string,
   hosts: string,
   beian: string
 }

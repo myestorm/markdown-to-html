@@ -27,7 +27,8 @@ export const siteConfig: SiteConfig = {
   logoSuffix: '.com',
   beian: '粤ICP备12041241号',
   favicon: '/favicon.ico',
-  copyright: ['2005', new Date().getFullYear() + '']
+  copyright: ['2005', new Date().getFullYear() + ''],
+  copyrightText: 'Totonoo.com'
 };
 
 export const templateConfig: TemplateConfig = {

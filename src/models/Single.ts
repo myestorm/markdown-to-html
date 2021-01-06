@@ -54,6 +54,7 @@ class Home {
       };
       const footer: TempFooter = {
         copyright: this.baseModel.$m.config.siteConfig.copyright,
+        copyrightText: this.baseModel.$m.config.siteConfig.copyrightText,
         hosts: this.baseModel.$m.config.siteConfig.hosts,
         beian: this.baseModel.$m.config.siteConfig.beian || ''
       };

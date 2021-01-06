@@ -8,6 +8,8 @@ import Token from 'markdown-it/lib/token';
 import MarkdownItAnchor, { AnchorOptions } from 'markdown-it-anchor';
 import FrontMatter, { FrontMatterResult } from 'front-matter';
 import { Readable, Transform } from 'readable-stream';
+import MarkdownItTaskLists from './MarkdownItTaskLists';
+import { html5Media } from './MarkdownItMedia';
 import { markdownItOptions, markdownItAnchor, siteConfig, templateConfig, docConfig } from '../config/index';
 import {
   ModelTypes,
@@ -82,7 +84,7 @@ class MarkdownToHtml {
         title
       });
     };
-    markdownIt = markdownIt.use(MarkdownItAnchor, _markdownItAnchorConfig);
+    markdownIt = markdownIt.use(MarkdownItAnchor, _markdownItAnchorConfig).use(MarkdownItTaskLists).use(html5Media);
     const body = markdownIt.render(fmContents.body);
 
     const paths = this.parseDir(file);
