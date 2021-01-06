@@ -1,102 +1,102 @@
 {
     "about.html": {
         "scripts": [
-            "scripts/vendor-5e4170.js",
-            "scripts/about-5e4170.js"
+            "scripts/vendor-add17d.js",
+            "scripts/about-add17d.js"
         ],
         "styles": [
-            "styles/vendor.5e4170.css",
-            "styles/about.5e4170.css"
+            "styles/vendor.add17d.css",
+            "styles/about.add17d.css"
         ]
     },
     "collection_detail.html": {
         "scripts": [
-            "scripts/vendor-5e4170.js",
-            "scripts/collection_detail-5e4170.js"
+            "scripts/vendor-add17d.js",
+            "scripts/collection_detail-add17d.js"
         ],
         "styles": [
-            "styles/vendor.5e4170.css",
-            "styles/collection_detail.5e4170.css"
+            "styles/vendor.add17d.css",
+            "styles/collection_detail.add17d.css"
         ]
     },
     "collection.html": {
         "scripts": [
-            "scripts/vendor-5e4170.js",
-            "scripts/collection-5e4170.js"
+            "scripts/vendor-add17d.js",
+            "scripts/collection-add17d.js"
         ],
         "styles": [
-            "styles/vendor.5e4170.css",
-            "styles/collection.5e4170.css"
+            "styles/vendor.add17d.css",
+            "styles/collection.add17d.css"
         ]
     },
     "detail.html": {
         "scripts": [
-            "scripts/vendor-5e4170.js",
-            "scripts/detail-5e4170.js"
+            "scripts/vendor-add17d.js",
+            "scripts/detail-add17d.js"
         ],
         "styles": [
-            "styles/vendor.5e4170.css",
-            "styles/detail.5e4170.css"
+            "styles/vendor.add17d.css",
+            "styles/detail.add17d.css"
         ]
     },
     "index.html": {
         "scripts": [
-            "scripts/vendor-5e4170.js",
-            "scripts/index-5e4170.js"
+            "scripts/vendor-add17d.js",
+            "scripts/index-add17d.js"
         ],
         "styles": [
-            "styles/vendor.5e4170.css",
-            "styles/index.5e4170.css"
+            "styles/vendor.add17d.css",
+            "styles/index.add17d.css"
         ]
     },
     "list.html": {
         "scripts": [
-            "scripts/vendor-5e4170.js",
-            "scripts/list-5e4170.js"
+            "scripts/vendor-add17d.js",
+            "scripts/list-add17d.js"
         ],
         "styles": [
-            "styles/vendor.5e4170.css",
-            "styles/list.5e4170.css"
+            "styles/vendor.add17d.css",
+            "styles/list.add17d.css"
         ]
     },
     "search.html": {
         "scripts": [
-            "scripts/vendor-5e4170.js",
-            "scripts/search-5e4170.js"
+            "scripts/vendor-add17d.js",
+            "scripts/search-add17d.js"
         ],
         "styles": [
-            "styles/vendor.5e4170.css",
-            "styles/search.5e4170.css"
+            "styles/vendor.add17d.css",
+            "styles/search.add17d.css"
         ]
     },
     "tags_list.html": {
         "scripts": [
-            "scripts/vendor-5e4170.js",
-            "scripts/tags_list-5e4170.js"
+            "scripts/vendor-add17d.js",
+            "scripts/tags_list-add17d.js"
         ],
         "styles": [
-            "styles/vendor.5e4170.css",
-            "styles/tags_list.5e4170.css"
+            "styles/vendor.add17d.css",
+            "styles/tags_list.add17d.css"
         ]
     },
     "tags.html": {
         "scripts": [
-            "scripts/vendor-5e4170.js",
-            "scripts/tags-5e4170.js"
+            "scripts/vendor-add17d.js",
+            "scripts/tags-add17d.js"
         ],
         "styles": [
-            "styles/vendor.5e4170.css",
-            "styles/tags.5e4170.css"
+            "styles/vendor.add17d.css",
+            "styles/tags.add17d.css"
         ]
     },
     "timeline.html": {
         "scripts": [
-            "scripts/vendor-5e4170.js",
-            "scripts/timeline-5e4170.js"
+            "scripts/vendor-add17d.js",
+            "scripts/timeline-add17d.js"
         ],
         "styles": [
-            "styles/vendor.5e4170.css",
-            "styles/timeline.5e4170.css"
+            "styles/vendor.add17d.css",
+            "styles/timeline.add17d.css"
         ]
     }
 }

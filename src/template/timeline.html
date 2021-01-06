@@ -53,7 +53,18 @@
                   <ol>
                     <% item.forEach(sub => { %>
                     <li>
-                      <span class="datetime"><span class="d"><%= sub.publishDateDay %></span> <span class="t"><%= sub.publishDateTime %></span></span>
+                      <span class="datetime">
+                        <span class="d"><%= sub.publishDateDay %></span> <span class="t"><%= sub.publishDateTime %></span>
+                        <span class="i">
+                          <% if (sub.image) { %>
+                            <i class="iconfont icon-image"></i>
+                          <% } else if(sub.link) { %>
+                            <i class="iconfont icon-local"></i>
+                          <% } else { %>
+                            <i class="iconfont icon-file"></i>
+                          <% } %>
+                        </span>
+                      </span>
                       <div class="content">
                         <h2><a href="<%= sub.link || 'javascript:;' %>"><%= sub.title %></a></h2>
                         <% if (sub.desc) { %>

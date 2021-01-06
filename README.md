@@ -49,6 +49,7 @@ npm run serve
 - [x] 支持checkbox list
 - [x] 支持本地视频和音频 `![text](1.mp4)` `![text](1.mp3)`
 - [x] 非本站链接新窗口打开
+- [x] 更新timeline样式
 
 更新文件列表(** 代表全部)：
 
@@ -58,6 +59,7 @@ npm run serve
 - src/template/assets/**
 - src/template/components/footer.html
 - src/template/config.json
+- src/template/timeline.html
 
 ## 1.0.0版本更新
 
